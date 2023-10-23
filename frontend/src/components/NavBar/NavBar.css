@@ -19,8 +19,12 @@
 
 .signup-link{
     margin: 1vw;
+    text-decoration: none;
+    color: orange;
 }
 
 .login-link{
     margin: 1vw;
+    text-decoration: none;
+    color: orange;
 }
