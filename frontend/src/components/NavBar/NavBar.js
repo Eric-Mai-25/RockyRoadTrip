@@ -28,8 +28,8 @@ function NavBar () {
     } else {
       return (
         <div className="links-auth">
-          <NavLink to={'/signup'}>Signup</NavLink>
-          <NavLink to={'/login'}>Login</NavLink>
+          <NavLink to={'/signup'} className="signup-link">Signup</NavLink>
+          <NavLink to={'/login'} className="login-link">Login</NavLink>
         </div>
       );
     }
@@ -39,8 +39,8 @@ function NavBar () {
     <>
       <div className='title-div'>
         <NavLink to={'/'} className="navlink-title"><h1 className='title'>Rocky Road Trip</h1></NavLink>
+        { getLinks() }
       </div>
-      { getLinks() }
     </>
   );
 }
