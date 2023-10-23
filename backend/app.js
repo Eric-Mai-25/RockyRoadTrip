@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const debug = require('debug');
+require('./models/User');
 
 const cors = require('cors');
 const { isProduction } = require('./config/keys');
