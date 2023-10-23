@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './NavBar.css';
 import { logout } from '../../store/session';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import * as modalActions from "../../store/modal"
 
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
@@ -28,8 +29,8 @@ function NavBar () {
     } else {
       return (
         <div className="links-auth">
-          <NavLink to={'/signup'} className="signup-link">Signup</NavLink>
-          <NavLink to={'/login'} className="login-link">Login</NavLink>
+          <button onClick={() => dispatch(modalActions.openModal("signup"))} className='signup-link'>Sign Up</button>
+          <button onClick={() => dispatch(modalActions.openModal("login"))} className="login-link">Login</button>
         </div>
       );
     }
@@ -37,8 +38,10 @@ function NavBar () {
 
   return (
     <>
-      <div className='title-div'>
-        <NavLink to={'/'} className="navlink-title"><h1 className='title'>Rocky Road Trip</h1></NavLink>
+      <div className='nav-div'>
+        <div className='title-div'>
+          <NavLink to={'/'} className="navlink-title"><h1 className='title'>Rocky Road Trip</h1></NavLink>
+        </div>
         { getLinks() }
       </div>
     </>

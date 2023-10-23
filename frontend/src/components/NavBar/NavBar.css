@@ -1,8 +1,18 @@
-.title-div{
+.nav-div{
     padding: 2%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    background-color: #33658A;
+}
+
+.title-div{
+    background-color: #F26419;
+    width: auto;
+    height: 5vh;
+    display: flex;
     align-items: center;
     align-content: center;
 }
@@ -10,7 +20,7 @@
 .title{
     font-family: fantasy;
     font-size: xx-large;
-    color: orange;
+    color: #33658A;
 }
 
 .navlink-title{
@@ -20,11 +30,17 @@
 .signup-link{
     margin: 1vw;
     text-decoration: none;
-    color: orange;
+    color: #33658A;
+    background-color: #F26419;
+    border: none;
+    cursor: pointer;
 }
 
 .login-link{
     margin: 1vw;
     text-decoration: none;
-    color: orange;
+    color: #33658A;
+    background-color: #F26419;
+    border: none;
+    cursor: pointer;
 }
