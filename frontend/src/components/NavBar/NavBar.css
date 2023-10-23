@@ -1,0 +1,30 @@
+.title-div{
+    padding: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.title{
+    font-family: fantasy;
+    font-size: xx-large;
+    color: orange;
+}
+
+.navlink-title{
+    text-decoration: none;
+}
+
+.signup-link{
+    margin: 1vw;
+    text-decoration: none;
+    color: orange;
+}
+
+.login-link{
+    margin: 1vw;
+    text-decoration: none;
+    color: orange;
+}
