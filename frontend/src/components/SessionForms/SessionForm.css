@@ -4,4 +4,59 @@ form > .errors {
     height: 15px;
     display: flex;
     align-items: center;
-  }
+    font-family: "Bebas Neue";
+}
+
+.form-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  color: #F88243;
+}
+
+.email-input{
+  margin: 8%;
+  font-family: "Bebas Neue";
+}
+
+.password-input{
+  margin: 8%;
+  font-family: "Bebas Neue";
+}
+
+.input-signup{
+  margin: 4%;
+  font-family: "Bebas Neue";
+}
+
+.submit-button{
+  background-color: #F88243;
+  color: #33658A;
+  font-family: "Bebas Neue";
+  width: 5vw;
+  font-size: medium;
+}
+
+.text-input-email{
+  background-color: #33658A;
+  color: #F88243;
+  border: 1px solid #F88243;
+  width: 13vw;
+}
+
+.text-input-email::placeholder{
+  color: #F88243;
+}
+
+.text-input-password{
+  background-color: #33658A;
+  color: #F88243;
+  border: 1px solid #F88243;
+  width: 13vw;
+}
+
+.text-input-password::placeholder{
+  color: #F88243;
+}
