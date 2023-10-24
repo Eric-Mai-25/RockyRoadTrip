@@ -12,6 +12,11 @@ export const ShowPage = (props) => {
         <>
             <div className="outer-show-div">
                 <div className="all-cities-div">
+                    <div className="city-div-start-end">
+                        <div className="city-title-div-start-end">
+                            <h1 className="city-title">{routePreview.startCity}</h1>
+                        </div>
+                    </div>
                     {routePreview.middleCities.map(city => (
                         <div className="city-div">
                             <div className="city-title-div">
@@ -30,6 +35,11 @@ export const ShowPage = (props) => {
                             </div>
                         </div>
                     ))}
+                    <div className="city-div-start-end">
+                        <div className="city-title-div-start-end">
+                            <h1 className="city-title">{routePreview.endCity}</h1>
+                        </div>
+                    </div>
                 </div>
                  <div className="yelp=div">
                     <h1>Where Yelp API will go</h1>
