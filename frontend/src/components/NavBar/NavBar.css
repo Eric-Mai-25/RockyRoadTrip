@@ -1,0 +1,50 @@
+.nav-div{
+    padding: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    background-color: #33658A;
+}
+
+.title-div{
+    background-color: #F88243;
+    width: auto;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.title{
+    font-family: "Bebas Neue";
+    font-size: xx-large;
+    color: #33658A;
+}
+
+.navlink-title{
+    text-decoration: none;
+}
+
+.signup-link{
+    margin: 1vw;
+    text-decoration: none;
+    color: #33658A;
+    background-color: #F88243;
+    border: none;
+    cursor: pointer;
+    font-family: "Bebas Neue";
+    font-size: large;
+}
+
+.login-link{
+    margin: 1vw;
+    text-decoration: none;
+    color: #33658A;
+    background-color: #F88243;
+    border: none;
+    cursor: pointer;
+    font-family: "Bebas Neue";
+    font-size: large;
+}
