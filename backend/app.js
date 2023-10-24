@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const debug = require('debug');
 require('./models/User');
+require('./models/City');
 require('./config/passport');
 const passport = require('passport'); 
 
@@ -12,9 +13,9 @@ const { isProduction } = require('./config/keys');
 const csurf = require('csurf');
 
 const usersRouter = require('./routes/api/users');
+const citiesRouter = require('./routes/api/cities');
 const itinerariesRouter = require('./routes/api/itineraries');
 const reviewsRouter = require('./routes/api/reviews');
-const sessionRouter = require('./routes/api/session');
 const csrfRouter = require('./routes/api/csrf');
 
 const app = express();
@@ -43,10 +44,10 @@ app.use(
 );
 
 app.use('/api/users', usersRouter);
-app.use('/api/session', sessionRouter);
 app.use('/api/itineraries', itinerariesRouter);
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/csrf', csrfRouter);
+app.use('/api/cities', citiesRouter);
 
 // Express custom middleware for catching all unmatched requests and formatting
 // a 404 error to be sent as the response.
