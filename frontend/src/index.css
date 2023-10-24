@@ -52,3 +52,10 @@ table {
 body{
     background-color: lightblue;
 }
+
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url("./fonts/Bebas_Neue/BebasNeue-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-weight: normal;
+}

@@ -4,4 +4,24 @@ form > .errors {
     height: 15px;
     display: flex;
     align-items: center;
-  }
+    font-family: "Bebas Neue";
+}
+
+.form-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  color: #F26419;
+}
+
+.email-input{
+  margin: 8%;
+  font-family: "Bebas Neue";
+}
+
+.password-input{
+  margin: 8%;
+  font-family: "Bebas Neue";
+}
