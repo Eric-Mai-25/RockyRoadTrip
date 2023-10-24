@@ -11,10 +11,13 @@ const User = mongoose.model('User');
 const {loginUser, restoreUser} = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
 
-router.get('/', function(req, res, next) {
-  res.json({
-    message: "GET /api/users"
-  });
+router.get('/', async function(req, res, next) {
+  try{
+    const users = await User.find().sort({createdAt: -1})
+    return res.json(users);
+  } catch(err){
+    return res.json([]);
+  }
 });
 
 router.post('/register', validateRegisterInput, async (req, res, next) => {

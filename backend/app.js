@@ -2,15 +2,16 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const debug = require('debug');
-require('./models/User');
-require('./models/City');
-require('./config/passport');
 const passport = require('passport'); 
 
-const cors = require('cors');
-const { isProduction } = require('./config/keys');
+require('./models/User');
+require('./models/City');
+require('./models/Itinerary')
+require('./config/passport');
 
+const cors = require('cors');
 const csurf = require('csurf');
+const { isProduction } = require('./config/keys');
 
 const usersRouter = require('./routes/api/users');
 const citiesRouter = require('./routes/api/cities');
