@@ -180,82 +180,82 @@
 /* ------------- */
 
 .map-marker-chicago {
-    left: 65%;
-    top: 36%;
+    left: 64%;
+    top: 35%;
   }
   .map-marker-miami {
-    left: 85%;
-    top: 91%;
+    left: 84%;
+    top: 90%;
   }
   .map-marker-miami:after {
     animation-delay: 1s;
   }
   .map-marker-los-angeles {
     left: 6%;
-    top:59%;
+    top:57%;
   }
   .map-marker-los-angeles:after {
     animation-delay: 2s;
   }
   .map-marker-portland {
     left: 5%;
-    top: 16%;
+    top: 15%;
   }
   .map-marker-portland:after {
     animation-delay: 3s;
   }
   .map-marker-denver {
-    left: 33%;
+    left: 32%;
     top: 43%;
   }
   .map-marker-denver:after {
     animation-delay: 4s;
   }
   .map-marker-minneapolis {
-    left: 55%;
+    left: 54%;
     top: 22%;
   }
   .map-marker-minneapolis:after {
     animation-delay: 5s;
   }
-  .map-marker-huston {
+  .map-marker-houston {
     left: 50%;
-    top: 86%;
+    top: 84%;
   }
-  .map-marker-huston:after {
+  .map-marker-houston:after {
     animation-delay: 6s;
   }
   .map-marker-dallas {
-    left: 49%;
+    left: 47%;
     top: 70%;
   }
   .map-marker-dallas:after {
     animation-delay: 7s;
   }
   .map-marker-milwaukee {
-    left: 64%;
-    top: 28%;
+    left: 63%;
+    top: 27%;
   }
   .map-marker-milwaukee:after {
     animation-delay: 8s;
   }
   .map-marker-detroit {
-    left: 73%;
+    left: 72%;
     top: 30%;
   }
   .map-marker-detroit:after {
     animation-delay: 9s;
   }
   .map-marker-boston {
-    left: 94%;
+    left: 93%;
     top: 21%;
   }
   .map-marker-boston:after {
     animation-delay: 10s;
   }
   .map-marker-philadelphia {
-    left: 88%;
-    top: 36%;
+    left: 87%;
+    top: 35%;
   }
   .map-marker-philadelphia:after {
     animation-delay: 11s;
@@ -268,8 +268,8 @@
     animation-delay: 12s;
   }
   .map-marker-new-orleans {
-    left: 64%;
-    top: 83%;
+    left: 63%;
+    top: 80%;
   }
   .map-marker-new-orleans:after {
     animation-delay: 13s;
@@ -282,8 +282,8 @@
     animation-delay: 5s;
   } */
   .map-marker-salt-lake-city {
-    left: 22%;
-    top: 37%;
+    left: 21%;
+    top: 38%;
   }
   .map-marker-salt-lake-city:after {
     animation-delay: 14s;
@@ -300,10 +300,24 @@
     top: 30%;
   }
   .map-marker-san-francisco {
-    left: 0%;
+    left: 1%;
     top: 39%;
   }
   .map-marker-san-francisco:after {
+    animation-delay: 16s;
+  }
+  .map-marker-phoenix {
+    left: 19%;
+    top: 62%;
+  }
+  .map-marker-phoenix:after {
+    animation-delay: 16s;
+  }
+  .map-marker-orlando {
+    left: 81%;
+    top: 85%;
+  }
+  .map-marker-orlando:after {
     animation-delay: 16s;
   }
   .map-marker-seattle {
@@ -311,6 +325,13 @@
     top: 2%;
   }
   .map-marker-seattle:after {
+    animation-delay: 17s;
+  }
+  .map-marker-washington-dc {
+    left:85%;
+    top: 42%;
+  }
+  .map-marker-washington-dc:after {
     animation-delay: 17s;
   }
 

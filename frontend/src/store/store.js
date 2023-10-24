@@ -3,10 +3,14 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import errorsReducer from './errors';
 import ui from './ui';
+import routeSessionReducer from './routeSession';
+import citiesReducer from './cities';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   errors: errorsReducer,
+  routePreview: routeSessionReducer,
+  cities: citiesReducer,
   ui: ui
 });
 
