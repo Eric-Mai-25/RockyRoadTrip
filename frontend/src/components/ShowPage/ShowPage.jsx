@@ -5,8 +5,18 @@ export const ShowPage = (props) => {
         startCity: "New York City",
         endCity: "San Francisco",
         middleCities: ["Chicago", "Kansas City", "Las Vegas"]
-    })    
+    })
 
+    const [selectedCity, setSelectedCity] = useState(""); // Store the name of the city the user is currenlty interactring with.  
+    const [selectedCategory, setSelectedCategory] = useState(""); // Store the currenlty selected category
+    const [yelpResults, setYelpResults] = useState([]); //Will store the list of results fetched from the yelp API
+    const [selectedBusiness, setSelectedBusiness] = useState({
+        // A nested state structure to store selected businesses for each city and category.
+        Chicago: { activity: null, hotel: null, food: null },
+        Chicago: {activity: null, hotel: null, food: null},
+        KansasCity: {activity: null, hotel: null, food: null},
+        LasVegas: {activity: null, hotel: null, food: null}
+    })
 
     return (
         <>
