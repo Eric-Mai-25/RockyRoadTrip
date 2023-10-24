@@ -1,0 +1,320 @@
+* {
+    box-sizing: border-box;
+  }
+  *:before, *:after {
+    box-sizing: border-box;
+  }
+  
+  svg {
+    height: auto;
+    max-width: 100%;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .subline {
+    color: #768191;
+    font-weight: normal;
+  }
+  
+  .container {
+    /* left: 50%; */
+    max-width: 900px;
+    position: absolute;
+    /* top: 50%; */
+    /* transform: translate(-50%, -50%); */
+    width: 90%;
+  }
+  
+  .map {
+    margin-top: 3em;
+    position: relative;
+  }
+  
+  .map-markers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .map-marker {
+    position: absolute;
+  }
+  .map-marker:after {
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-name: pop;
+    border-radius: 50%;
+    border: 2px solid #86bbd8;
+    content: '';
+    height: 2em;
+    left: 0;
+    margin: -.5em 0 0 -.5em;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 2em;
+  }
+  .map-marker:hover .map-marker-info {
+    display: block;
+  }
+  .map-marker a {
+    background-color: #86bbd8;
+    border-radius: 50%;
+    height: 1em;
+    display: block;
+    text-indent: -9999px;
+    width: 1em;
+  }
+
+  .map-marker-info {
+    display: none;
+    left: 50%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -2em);
+    width: 20em;
+    z-index: 999;
+  }
+  .map-marker-info header {
+    background-color: #86bbd8;
+    border-radius: .5em .5em 0 0;
+    color: #fff;
+    padding: .5em 1em;
+  }
+  .map-marker-info main {
+    background-color: #fff;
+    border-radius: 0 0 .5em .5em;
+    color: #7e7e7e;
+    padding: .5em 1em;
+  }
+  .map-marker-info h2 {
+    margin-bottom: 0;
+  }
+  .map-marker-info-inner {
+    border-radius: .5em;
+    box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.3);
+    font-size: .875em;
+  }
+  .map-marker-info-inner:after {
+    border-left: .75em solid transparent;
+    border-right: .75em solid transparent;
+    border-top: 1em solid #fff;
+    content: '';
+    height: 0;
+    left: 50%;
+    position: absolute;
+    top: 100%;
+    transform: translateX(-50%);
+    width: 0;
+  }
+  
+  .animate {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+  }
+  
+  @keyframes bounce-in {
+    0%, 20%, 40%, 60%, 80%, 100% {
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% {
+      opacity: 0;
+      transform: scale3d(0.3, 0.3, 0.3);
+    }
+    20% {
+      transform: scale3d(1.1, 1.1, 1.1);
+    }
+    40% {
+      transform: scale3d(0.9, 0.9, 0.9);
+    }
+    60% {
+      opacity: 1;
+      transform: scale3d(1.03, 1.03, 1.03);
+    }
+    80% {
+      transform: scale3d(0.97, 0.97, 0.97);
+    }
+    100% {
+      opacity: 1;
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  .animate-bounce-in {
+    animation-duration: .75s;
+    animation-name: bounce-in;
+  }
+  
+  @keyframes pop {
+    0% {
+      transform: scale(0);
+    }
+    8% {
+      opacity: .4;
+    }
+    10% {
+      opacity: 0;
+      transform: scale(1);
+    }
+  }
+  .animate-pop {
+    animation-duration: 1s;
+    animation-name: pop;
+  }
+  
+.orange-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F88243;
+    border-radius: 10px;
+    margin: 2rem;
+    width: auto;
+    height: 650px;
+    box-shadow: 0px  5px #33658a;
+}
+
+
+
+/* ------------- */
+
+.map-marker-chicago {
+    left: 65%;
+    top: 36%;
+  }
+  .map-marker-miami {
+    left: 85%;
+    top: 91%;
+  }
+  .map-marker-miami:after {
+    animation-delay: 1s;
+  }
+  .map-marker-los-angeles {
+    left: 6%;
+    top:59%;
+  }
+  .map-marker-los-angeles:after {
+    animation-delay: 2s;
+  }
+  .map-marker-portland {
+    left: 5%;
+    top: 16%;
+  }
+  .map-marker-portland:after {
+    animation-delay: 3s;
+  }
+  .map-marker-denver {
+    left: 33%;
+    top: 43%;
+  }
+  .map-marker-denver:after {
+    animation-delay: 4s;
+  }
+  .map-marker-minneapolis {
+    left: 55%;
+    top: 22%;
+  }
+  .map-marker-minneapolis:after {
+    animation-delay: 5s;
+  }
+  .map-marker-huston {
+    left: 50%;
+    top: 86%;
+  }
+  .map-marker-huston:after {
+    animation-delay: 6s;
+  }
+  .map-marker-dallas {
+    left: 49%;
+    top: 70%;
+  }
+  .map-marker-dallas:after {
+    animation-delay: 7s;
+  }
+  .map-marker-milwaukee {
+    left: 64%;
+    top: 28%;
+  }
+  .map-marker-milwaukee:after {
+    animation-delay: 8s;
+  }
+  .map-marker-detroit {
+    left: 73%;
+    top: 30%;
+  }
+  .map-marker-detroit:after {
+    animation-delay: 9s;
+  }
+  .map-marker-boston {
+    left: 94%;
+    top: 21%;
+  }
+  .map-marker-boston:after {
+    animation-delay: 10s;
+  }
+  .map-marker-philadelphia {
+    left: 88%;
+    top: 36%;
+  }
+  .map-marker-philadelphia:after {
+    animation-delay: 11s;
+  }
+  .map-marker-atlanta {
+    left: 74%;
+    top: 65%;
+  }
+  .map-marker-atlanta:after {
+    animation-delay: 12s;
+  }
+  .map-marker-new-orleans {
+    left: 64%;
+    top: 83%;
+  }
+  .map-marker-new-orleans:after {
+    animation-delay: 13s;
+  }
+  /* .map-marker-austin {
+    left: 44%;
+    top: 80%;
+  }
+  .map-marker-austin:after {
+    animation-delay: 5s;
+  } */
+  .map-marker-salt-lake-city {
+    left: 22%;
+    top: 37%;
+  }
+  .map-marker-salt-lake-city:after {
+    animation-delay: 14s;
+  }
+  .map-marker-las-vegas {
+    left: 13%;
+    top: 51%;
+  }
+  .map-marker-las-vegas:after {
+    animation-delay: 15s;
+  }
+  .map-marker-new-york {
+    left: 90%;
+    top: 30%;
+  }
+  .map-marker-san-francisco {
+    left: 0%;
+    top: 39%;
+  }
+  .map-marker-san-francisco:after {
+    animation-delay: 16s;
+  }
+  .map-marker-seattle {
+    left:8%;
+    top: 2%;
+  }
+  .map-marker-seattle:after {
+    animation-delay: 17s;
+  }
+
+  .state {
+    fill: #2f4858;
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+  }

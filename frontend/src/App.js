@@ -11,6 +11,7 @@ import SignupForm from './components/SessionForms/SignupForm';
 import Modal from './components/Modal/modal';
 
 import { getCurrentUser } from './store/session';
+import SplashPage from './components/SplashPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -25,6 +26,7 @@ function App() {
       <NavBar />
       <Switch>
         <AuthRoute exact path="/" component={MainPage} />
+        <AuthRoute exact path="/Splash" component={SplashPage} />
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
       </Switch>
