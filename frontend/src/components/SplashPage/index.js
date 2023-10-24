@@ -17,7 +17,7 @@ function SpashPage(props) {
       </div>
       <div className="route-box">
         <div className="route-content">
-          <h2>hello</h2>
+          <h2>Route 1</h2>
         </div>
         <div className="route-choose">
           <div>
@@ -28,7 +28,7 @@ function SpashPage(props) {
       </div>
       <div className="route-box">
         <div className="route-content">
-          <h2>hello</h2>
+          <h2>Route 2</h2>
         </div>
         <div className="route-choose">
         <div>
@@ -40,7 +40,7 @@ function SpashPage(props) {
       </div>
       <div className="route-box">
         <div className="route-content">
-          <h2>hello</h2>
+          <h2>Route 3</h2>
         </div>
         <div className="route-choose">
         <div>
