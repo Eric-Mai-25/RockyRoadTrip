@@ -1,0 +1,43 @@
+.outer-show-div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    border: 1px solid green;
+    margin-top: 5%;
+}
+
+.all-cities-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    border: 1px solid blue;
+}
+
+.city-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
+    border: 1px solid red;
+    height: 15vh;
+    width: 25vw;
+}
+
+.a-h-f-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.a-h-f-words{
+    margin-left: 1%;
+    margin-right: 1%;
+}
