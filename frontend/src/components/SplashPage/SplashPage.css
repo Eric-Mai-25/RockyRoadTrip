@@ -12,3 +12,46 @@ h2{
     font-size: 50px;
     color: #f88243;
 }
+
+.login-line {
+    width: 100%;
+    text-align: center;
+    line-height: 1px;
+  }
+
+  .line{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem 2%;
+  }
+
+  .route-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem 2%;
+    margin: 1rem 0rem;
+  }
+
+  .route-content{
+    width: 90%;
+    height: 9rem;
+    border-radius: 10px;
+    background-color: #33658a;
+  }
+
+  .route-choose{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    height: 9rem;
+    margin-left: 1rem;
+    border-radius: 10px;
+    background-color: #33658a;
+  }
+
+  .route-content h2{
+    color: #f6ae2d;
+  }
