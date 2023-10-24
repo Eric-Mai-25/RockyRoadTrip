@@ -1,0 +1,14 @@
+.slogan{
+    position: absolute;
+    top: 4%;
+    left: 30%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+h2{
+    font-family: "Bebas Neue";
+    font-size: 50px;
+    color: #f88243;
+}

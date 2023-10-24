@@ -25,8 +25,8 @@ function App() {
       <Modal/>
       <NavBar />
       <Switch>
-        <AuthRoute exact path="/" component={MainPage} />
-        <AuthRoute exact path="/Splash" component={SplashPage} />
+        <AuthRoute exact path="/" component={SplashPage} />
+        {/* <AuthRoute exact path="/Splash" component={SplashPage} /> */}
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
       </Switch>
