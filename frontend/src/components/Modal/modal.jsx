@@ -31,7 +31,7 @@ function Modal(){
     }
 
     const headers = {
-        "login": "Login to continue to plan adventures!",
+        "login": "On the Road to Something Great? Log In!",
         "signup": "Signup now to start your adventure!"
     }
 

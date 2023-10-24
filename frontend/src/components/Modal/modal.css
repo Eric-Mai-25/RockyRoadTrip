@@ -23,6 +23,7 @@
     align-items: center;
     color:#F26419;
     font-family: "Bebas Neue";
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 30px;
 }
 
 .modal-header {
@@ -44,4 +45,8 @@
     position: absolute;
     top: 10.5%;
     right: 1%;
+}
+
+.modal-header{
+    font-size: x-large;
 }
