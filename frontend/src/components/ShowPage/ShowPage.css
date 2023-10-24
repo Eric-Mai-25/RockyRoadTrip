@@ -79,3 +79,14 @@
    font-size: 30px;
    margin-left: 1vw;
 }
+
+.yelp-div{
+    background-color: #86BBD8;
+    height: 100vh;
+    width: 40vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}

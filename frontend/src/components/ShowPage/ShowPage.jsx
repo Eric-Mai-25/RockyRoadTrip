@@ -41,7 +41,7 @@ export const ShowPage = (props) => {
                         </div>
                     </div>
                 </div>
-                 <div className="yelp=div">
+                 <div className="yelp-div">
                     <h1>Where Yelp API will go</h1>
                  </div>
             </div>
