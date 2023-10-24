@@ -36,6 +36,7 @@ function LoginForm () {
             value={email}
             onChange={update('email')}
             placeholder="Email"
+            className='text-input-email'
           />
         </label>
         <div className="errors">{errors?.password}</div>
@@ -45,6 +46,7 @@ function LoginForm () {
             value={password}
             onChange={update('password')}
             placeholder="Password"
+            className='text-input-password'
           />
         </label>
         <input

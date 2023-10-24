@@ -25,3 +25,29 @@ form > .errors {
   margin: 8%;
   font-family: "Bebas Neue";
 }
+
+.submit-button{
+  background-color: #F26419;
+  color: #33658A;
+  font-family: "Bebas Neue";
+}
+
+.text-input-email{
+  background-color: #33658A;
+  color: #F26419;
+  border: 1px solid #F26419;
+}
+
+.text-input-email::placeholder{
+  color: #F26419;
+}
+
+.text-input-password{
+  background-color: #33658A;
+  color: #F26419;
+  border: 1px solid #F26419
+}
+
+.text-input-password::placeholder{
+  color: #F26419;
+}
