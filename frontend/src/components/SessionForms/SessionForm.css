@@ -13,8 +13,7 @@ form > .errors {
   justify-content: center;
   align-items: center;
   align-content: center;
-  color: #F26419;
-  margin-bottom: 2%;
+  color: #F88243;
 }
 
 .email-input{
@@ -27,8 +26,13 @@ form > .errors {
   font-family: "Bebas Neue";
 }
 
+.input-signup{
+  margin: 4%;
+  font-family: "Bebas Neue";
+}
+
 .submit-button{
-  background-color: #F26419;
+  background-color: #F88243;
   color: #33658A;
   font-family: "Bebas Neue";
   width: 5vw;
@@ -37,22 +41,22 @@ form > .errors {
 
 .text-input-email{
   background-color: #33658A;
-  color: #F26419;
-  border: 1px solid #F26419;
+  color: #F88243;
+  border: 1px solid #F88243;
   width: 13vw;
 }
 
 .text-input-email::placeholder{
-  color: #F26419;
+  color: #F88243;
 }
 
 .text-input-password{
   background-color: #33658A;
-  color: #F26419;
-  border: 1px solid #F26419;
+  color: #F88243;
+  border: 1px solid #F88243;
   width: 13vw;
 }
 
 .text-input-password::placeholder{
-  color: #F26419;
+  color: #F88243;
 }
