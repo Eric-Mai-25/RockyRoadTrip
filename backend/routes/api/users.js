@@ -11,7 +11,6 @@ const User = mongoose.model('User');
 const {loginUser, restoreUser} = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
   res.json({
     message: "GET /api/users"
