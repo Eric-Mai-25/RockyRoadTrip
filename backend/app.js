@@ -18,6 +18,7 @@ const citiesRouter = require('./routes/api/cities');
 const itinerariesRouter = require('./routes/api/itineraries');
 const reviewsRouter = require('./routes/api/reviews');
 const csrfRouter = require('./routes/api/csrf');
+const yelpRouter = require('./routes/api/yelp');
 
 const app = express();
 
@@ -49,6 +50,7 @@ app.use('/api/itineraries', itinerariesRouter);
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/csrf', csrfRouter);
 app.use('/api/cities', citiesRouter);
+app.use('/api/yelp', yelpRouter);
 
 // Express custom middleware for catching all unmatched requests and formatting
 // a 404 error to be sent as the response.
