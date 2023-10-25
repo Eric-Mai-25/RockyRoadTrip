@@ -6,27 +6,25 @@ import { addRoute } from "../../store/routeSession";
 import Map from "./Map";
 import "./SplashPage.css";
 import { Link } from "react-router-dom";
-import MapMarker from "./Map/MapMarker";
-import { Redirect } from "react-router-dom";
 
 function SpashPage(props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [selectedRoute, setSelectedRoute] = useState([]);
-  const  data = useSelector(state=> state)
+  const data = useSelector((state) => state);
 
   const handleAdd = (city) => (e) => {
+    console.log([...selectedRoute, city]);
     setSelectedRoute([...selectedRoute, city]);
-    console.log(selectedRoute);
   };
-  
-  const handleRouteSession = e =>{
-    let routePreview =  {
-      "startCity": selectedRoute[0],
-      "endCity": selectedRoute[selectedRoute.length-1],
-      "middleCities": selectedRoute.slice(1, selectedRoute.length-1)
-    }
+
+  const handleRouteSession = (e) => {
+    let routePreview = {
+      startCity: selectedRoute[0],
+      endCity: selectedRoute[selectedRoute.length - 1],
+      middleCities: selectedRoute.slice(1, selectedRoute.length - 1),
+    };
     dispatch(addRoute(routePreview));
-  }
+  };
 
   return (
     <>
@@ -40,14 +38,36 @@ function SpashPage(props) {
       <div className="route-box">
         <div className="route-content">
           <h2>Route 1</h2>
-          <div>
-            {selectedRoute.map((city) => {
-              return <div>hi</div>;
+          <div className="route-marker">
+            {selectedRoute.map((city, i) => {
+              return (
+                <>
+                  {i === 0 ? null : <hr color="#86bbd8" className="route-line"></hr> }
+                  <div>
+                    <ul class="map-markers route-dot">
+                      <li class="map-marker ">
+                        <a href="#">{city.name}</a>
+                        <div class="map-marker-info route-info">
+                          <div class="map-marker-info-inner animate-bounce-in">
+                            <header>
+                              <h2>{city.name}</h2>
+                            </header>
+
+                            <main>
+                              <p>{city.description}</p>
+                            </main>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              );
             })}
           </div>
         </div>
         <div className="route-choose">
-          <Link  to={"/show"}>
+          <Link to={"/show"}>
             <button onClick={handleRouteSession}>
               <TbBus size={50} color="#f88243" />
               <TbArrowBadgeRightFilled size={50} color="f6ae2d" />
