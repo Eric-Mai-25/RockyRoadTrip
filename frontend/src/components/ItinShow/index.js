@@ -7,18 +7,19 @@ function ItinShow(props){
     const dispatch = useDispatch()
     const {itinId} = useParams()
     const [itineraries, setItineraries] = useState("")
+    const itin = useSelector(state => state.itineraries[itinId])
 
 
     useEffect(()=>{
         dispatch(fetchItin(itinId))
-    })
+    },[])
 
-    return(
-        <>
-            <div>hi</div>
+    return itin ? (
+        <>  
+            <div>{itin.name}</div>
 
         </>
-    )
+    ) : null
 }
 
 export default ItinShow

@@ -2,6 +2,7 @@ export const ADD_ROUTE = "routes/ADD_ROUTE";
 export const CLEAR_ROUTE = "routes/CLEAR_ROUTE";
 
 export const addRoute = (route) => {
+  localStorage.setItem("routePreview", JSON.stringify(route))
   return {
     type: ADD_ROUTE,
     route,
@@ -9,6 +10,7 @@ export const addRoute = (route) => {
 };
 
 export const clearRoute = () => {
+  localStorage.removeItem('routePreview')
   return {
     type: CLEAR_ROUTE,
   };

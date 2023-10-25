@@ -1,7 +1,7 @@
 import jwtFetch from "./jwt";
 
-export const RECEIVE_ITIN = "itins/RECEIVE_ITIN";
-export const RECEIVE_ITINS = "itins/RECEIVE_ITINS";
+export const RECEIVE_ITIN = "itineraries/RECEIVE_ITIN";
+export const RECEIVE_ITINS = "itineraries/RECEIVE_ITINS";
 
 export const recieveItin = (itin) => {
   return {
@@ -26,15 +26,14 @@ export const getItin = (itinId) => (state) => {
 };
 
 export const fetchItin = (itinId) => async dispatch => {
-    const res = await jwtFetch(`api/itineraries/${itinId}`)
-
+    const res = await jwtFetch(`/api/itineraries/${itinId}`)
     if(res.ok) {
         const itin = await res.json()
         dispatch(recieveItin(itin))
     }
 };
 export const fetchItins = () => async dispatch => {
-    const res = await jwtFetch(`api/itineraries`)
+    const res = await jwtFetch(`/api/itineraries`)
 
     if(res.ok) {
         const itins = await res.json()
@@ -49,7 +48,7 @@ const itinReducer = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_ITIN:
-      nextState[action.itin.id] = action.itin;
+      nextState[action.itin._id] = action.itin;
       return nextState;
     case RECEIVE_ITINS:
         return {...action.itins}

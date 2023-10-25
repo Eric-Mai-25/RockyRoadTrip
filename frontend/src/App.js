@@ -14,6 +14,7 @@ import ItinShow from './components/ItinShow'
 
 import { getCurrentUser } from './store/session';
 import SplashPage from './components/SplashPage';
+import EditPage from './components/EditPage/EditPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,6 +28,7 @@ function App() {
       <Modal/>
       <NavBar />
       <Switch>
+        <AuthRoute exact path={`/edit`} component={EditPage} /> {/*TODO change from /edit to /edit/itineraryId */}
         <AuthRoute exact path="/" component={SplashPage} />
         <AuthRoute exact path="/itinerary/:itinId" component={ItinShow} />
         <AuthRoute exact path="/show" component={ShowPage} /> {/* TODO Will need to have id in route for specific itinerary, for now though we will not */}
