@@ -70,7 +70,54 @@ export const EditPage = (props) => {
                             <h1 className="city-title">{getCityName(intinerary.startCity)}</h1>
                         </div>
                     </div>
+                    {intinerary.middleCities.map(city => (
+                        <div className="city-div" key={city.city}>
+                            <div className="city-title-div">
+                                <h1 className="city-title">{getCityName(city.city)}</h1>
+                            </div>
+                            <div className="a-h-f-div">
+                                <div className="activites-div">
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'activity')}>Choose Activity</button>
+                                </div>
+                                <div className="hotel-div">
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'hotel')}>Choose Hotel</button>
+                                </div>
+                                <div className="food-div">
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'food')}>Choose food</button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                    <div className="city-div-start-end">
+                        <div className="city-title-div-start-end">
+                            <h1 className="city-title">{getCityName(intinerary.endCity)}</h1>
+                        </div>
+                    </div>
                  </div>
+                 <div className="yelp-div">
+                    <div className="results-div">
+                        {yelpResults.map(result => (
+                            <div className="result-div">
+                                <div className="result-img-div">
+                                    <img src={result.image_url} className="result-img"/>
+                                </div>
+                                <div className="result-info-div">
+                                    <h1 className="result-title">{result.name}</h1>
+                                    <div className="rating-div">
+                                        <p className="result-rating">Rating: {result.rating}</p>
+                                        <p>{result.review_count} Reviews</p>
+                                    </div>
+                                    <p>{result.categories[0].title}</p>
+                                    <p>{result.location.display_address}</p>
+                                    <div className="button-div">
+                                        <button>Choose Me!</button>
+                                        <a href={result.url} target="_blank">Check me out on Yelp!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </>
     ) : (
