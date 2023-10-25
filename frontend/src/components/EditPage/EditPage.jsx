@@ -13,7 +13,6 @@ export const EditPage = (props) => {
     const [citiesLoaded, setCitiesLoaded] = useState(false)
 
     const cities = useSelector((state) => state.cities);
-    console.log("Citites", cities);
 
     const handleCategoryClick = (city, category) => {
         setSelectedCity(city);
@@ -48,8 +47,6 @@ export const EditPage = (props) => {
     const getCityName = (cityId) => {
         if (Array.isArray(cities)) {
             const city = cities.find(city => city._id === cityId);
-            console.log("cityId", cityId)
-            console.log("city: ", city)
             return city ? city.name : "";
         }
         return "Not found";
