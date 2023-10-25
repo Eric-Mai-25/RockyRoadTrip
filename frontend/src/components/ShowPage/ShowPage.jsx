@@ -70,12 +70,13 @@ export const ShowPage = (props) => {
                     </div>
                 </div>
                  <div className="yelp-div">
-                    <h1 className="yelp-title">Results from Yelp:</h1>
-                    <ul>
-                        {yelpResults.map(business => (
-                            <li key={business.id}>{business.name}</li>
+                    <div className="results-div">
+                        {yelpResults.map(result => (
+                            <div className="result-div">
+                                <h1>{result.name}</h1>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                  </div>
             </div>
         </>
