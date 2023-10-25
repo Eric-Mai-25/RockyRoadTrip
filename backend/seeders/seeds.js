@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
-const User = require('../models/User');
-const City = require('../models/City.js')
+const User = require('../models/User.js');
+const City = require('../models/City.js');
+const Itinerary = require('../models/Itinerary.js');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
-
+const Review = require("../models/Review.js");
 
 const NUM_SEED_USERS = 10;
 
@@ -166,6 +167,80 @@ const insertSeeds = () => {
             User.ensureIndexes().then(() => User.insertMany(users)))
         .then(() => 
             City.collection.drop().then(() => City.ensureIndexes().then(() => City.insertMany(cities))))
+        .then(async () => {
+            await Itinerary.collection.drop().then(() => Itinerary.ensureIndexes().then(async () => {
+
+                let user1 = await User.findOne({email: "demo-user@rockyroadtrip.com"});
+                let itineraries = [];
+
+                let seattle = await City.findOne({name: "Seattle"})
+                let chicago = await City.findOne({name: "Chicago"})
+                let denver = await City.findOne({name: "Denver"})
+
+                let lv = await City.findOne({name: "Las Vegas"})
+                let sf = await City.findOne({name: "San Francisco (SF)"})
+
+
+                let itinerary1 = new Itinerary({"name": "Itinerary from Rocky road trip", 
+                    "startCity": seattle._id, 
+                    "endCity": chicago._id, 
+                    "middleCities":[{
+                        "city": denver._id,
+                        "activities":[{
+                            "name":"Disc Golf-Watrous course"}], 
+                        "hotels":[{
+                            "name":"The Brown Palace"}], 
+                        "food":[{
+                            "name":"Hop Alley"}]}],
+                    "author": user1._id})
+
+                itineraries.push(itinerary1)
+
+                let itinerary2 = new Itinerary({"name": "Lets rock it !!!", 
+                    "startCity": lv._id, 
+                    "endCity": denver._id, 
+                    "middleCities":[{
+                        "city": sf._id,
+                        "activities":[{
+                            "name":"Golden Gate Bridge"}], 
+                        "hotels":[{
+                            "name":"Hotel Caza Fisherman's Wharf"}], 
+                        "food":[{
+                            "name":"Bun Mee"}]}],
+                "author": user1._id})
+
+                itineraries.push(itinerary2)
+                await Itinerary.insertMany(itineraries)
+
+                console.log("Inserting reviews")
+
+                let allItineraries = await Itinerary.find()
+
+                let review1 = new Review({
+                    rating: 5,
+                    comment: "Best route ever !!",
+                    author: user1._id,
+                    itinerary: allItineraries[0]._id
+                })
+
+                let review2 = new Review({
+                    rating: 4,
+                    comment: "Was a good route !!",
+                    author: user1._id,
+                    itinerary: allItineraries[1]._id
+                })
+
+                let reviews = []
+                reviews.push(review1)
+                reviews.push(review2)
+                await Review.collection.drop()
+                await Review.insertMany(reviews);
+
+            }))
+
+
+
+        })
         .then(() => {
             console.log("Done!");
             mongoose.disconnect();
