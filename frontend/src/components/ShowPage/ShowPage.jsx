@@ -42,40 +42,56 @@ export const ShowPage = (props) => {
                 <div className="all-cities-div">
                     <div className="city-div-start-end">
                         <div className="city-title-div-start-end">
-                            <h1 className="city-title">{routePreview.startCity}</h1>
+                            <h1 className="city-title">{routePreview.startCity.name}</h1>
                         </div>
                     </div>
                     {routePreview.middleCities.map(city => (
-                        <div className="city-div" key={city}>
+                        <div className="city-div" key={city._id}>
                             <div className="city-title-div">
-                                <h1 className="city-title">{city}</h1>
+                                <h1 className="city-title">{city.name}</h1>
                             </div>
                             <div className="a-h-f-div">
                                 <div className="activites-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(city, 'activity')}>Choose Activity</button>
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(city.name, 'activity')}>Choose Activity</button>
                                 </div>
                                 <div className="hotel-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(city, 'hotel')}>Choose Hotel</button>
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(city.name, 'hotel')}>Choose Hotel</button>
                                 </div>
                                 <div className="food-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(city, 'food')}>Choose food</button>
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(city.name, 'food')}>Choose food</button>
                                 </div>
                             </div>
                         </div>
                     ))}
                     <div className="city-div-start-end">
                         <div className="city-title-div-start-end">
-                            <h1 className="city-title">{routePreview.endCity}</h1>
+                            <h1 className="city-title">{routePreview.endCity.name}</h1>
                         </div>
                     </div>
                 </div>
                  <div className="yelp-div">
-                    <h1>Yelp Results:</h1>
-                    <ul>
-                        {yelpResults.map(business => (
-                            <li key={business.id}>{business.name}</li>
+                    <div className="results-div">
+                        {yelpResults.map(result => (
+                            <div className="result-div">
+                                <div className="result-img-div">
+                                    <img src={result.image_url} className="result-img"/>
+                                </div>
+                                <div className="result-info-div">
+                                    <h1 className="result-title">{result.name}</h1>
+                                    <div className="rating-div">
+                                        <p className="result-rating">Rating: {result.rating}</p>
+                                        <p>{result.review_count} Reviews</p>
+                                    </div>
+                                    <p>{result.categories[0].title}</p>
+                                    <p>{result.location.display_address}</p>
+                                    <div className="button-div">
+                                        <button>Choose Me!</button>
+                                        <a href={result.url} target="_blank">Check me out on Yelp!</a>
+                                    </div>
+                                </div>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                  </div>
             </div>
         </>
