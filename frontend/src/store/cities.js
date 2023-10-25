@@ -1,9 +1,9 @@
 import jwtFetch from "./jwt";
 
-const RECIEVE_CITIES = "cities/RECIEVE_CITIES";
+const RECEIVE_CITIES = "cities/RECEIVE_CITIES";
 
 const receiveCities = (cities) => ({
-  type: RECIEVE_CITIES,
+  type: RECEIVE_CITIES,
   cities,
 });
 
@@ -20,7 +20,7 @@ const citiesReducer = (state = {}, action) => {
   const nextState = Object.assign({}, state);
 
   switch (action.type) {
-    case RECIEVE_CITIES:
+    case RECEIVE_CITIES:
       return action.cities;
     default:
       return state;
