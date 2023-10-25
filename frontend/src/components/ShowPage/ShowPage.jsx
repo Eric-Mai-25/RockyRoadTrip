@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import { useSelector } from 'react-redux';
-import "./ShowPage.css"
-export const ShowPage = (props) => {
+import { useDispatch, useSelector } from 'react-redux';
+import "./ShowPage.css";
+import { addRoute } from "../../store/routeSession";
+import { Redirect } from "react-router-dom";
 
+export const ShowPage = (props) => {
+    const dispatch = useDispatch();
     const [selectedCity, setSelectedCity] = useState(""); // Store the name of the city the user is currenlty interactring with.  
     const [selectedCategory, setSelectedCategory] = useState(""); // Store the currenlty selected category
     const [yelpResults, setYelpResults] = useState([]); //Will store the list of results fetched from the yelp API
@@ -12,13 +15,20 @@ export const ShowPage = (props) => {
         KansasCity: {activity: null, hotel: null, food: null},
         LasVegas: {activity: null, hotel: null, food: null}
     })
+    
+    const routePreview = useSelector((state) => state.routePreview);
+
+    useEffect(() => {
+        let lsRoute = JSON.parse(localStorage.getItem("routePreview")) ||  {};
+        if(!Object.keys(routePreview).length && lsRoute){
+            dispatch(addRoute(lsRoute))
+        }
+    }, [])
 
     const handleCategoryClick = (city, category) => {
         setSelectedCity(city);
         setSelectedCategory(category)
     }
-
-    const routePreview = useSelector((state) => state.routePreview);
 
     const fetchYelpData = async () => {
         try{
@@ -35,6 +45,10 @@ export const ShowPage = (props) => {
             fetchYelpData();
         }
     }, [selectedCity, selectedCategory])
+
+    if(!Object.keys(routePreview).length){
+        return <Redirect to="/"/>
+    }
 
     return (
         <>
@@ -69,7 +83,7 @@ export const ShowPage = (props) => {
                         </div>
                     </div>
                 </div>
-                 <div className="yelp-div">
+                <div className="yelp-div">
                     <div className="results-div">
                         {yelpResults.map(result => (
                             <div className="result-div">
@@ -92,7 +106,7 @@ export const ShowPage = (props) => {
                             </div>
                         ))}
                     </div>
-                 </div>
+                </div>
             </div>
         </>
     )

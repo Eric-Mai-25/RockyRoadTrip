@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TbBus, TbArrowBadgeRightFilled } from "react-icons/tb";
 import { addRoute } from "../../store/routeSession";
+import { Redirect } from "react-router-dom";
 
 import Map from "./Map";
 import "./SplashPage.css";
@@ -10,7 +11,7 @@ import { Link } from "react-router-dom";
 function SpashPage(props) {
   const dispatch = useDispatch();
   const [selectedRoute, setSelectedRoute] = useState([]);
-  const data = useSelector((state) => state);
+  const routePreview = useSelector((state) => state.routePreview);
 
   const handleAdd = (city) => (e) => {
     setSelectedRoute([...selectedRoute, city]);
@@ -24,6 +25,10 @@ function SpashPage(props) {
     };
     dispatch(addRoute(routePreview));
   };
+
+  if(Object.keys(routePreview).length){
+    return <Redirect to="/show"/>
+  }
 
   return (
     <>
