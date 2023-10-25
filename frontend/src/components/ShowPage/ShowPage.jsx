@@ -52,13 +52,13 @@ export const ShowPage = (props) => {
                             </div>
                             <div className="a-h-f-div">
                                 <div className="activites-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(city, 'activity')}>Choose Activity</button>
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(city.name, 'activity')}>Choose Activity</button>
                                 </div>
                                 <div className="hotel-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(city, 'hotel')}>Choose Hotel</button>
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(city.name, 'hotel')}>Choose Hotel</button>
                                 </div>
                                 <div className="food-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(city, 'food')}>Choose food</button>
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(city.name, 'food')}>Choose food</button>
                                 </div>
                             </div>
                         </div>
