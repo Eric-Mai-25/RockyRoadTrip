@@ -47,11 +47,8 @@ export const EditPage = (props) => {
     }
 
     const getCityName = (cityId) => {
-        if (Array.isArray(cities)) {
-            const city = cities.find(city => city._id === cityId);
-            return city ? city.name : "";
-        }
-        return "Not found";
+        const city = cities[cityId]
+        return city ? city.name : "";
     }
 
     useEffect(() => {
