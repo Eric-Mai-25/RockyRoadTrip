@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const {requireUser} = require('../../config/passport');
 const {validateItineraryInput, validateItineraryPatchInput} = require('../../validations/itineraries');
+const Review = mongoose.model('Review');
 const City = mongoose.model('City');
 const Itinerary = mongoose.model('Itinerary');
 
@@ -16,6 +17,23 @@ router.get('/', async function(req, res, next) {
         return res.json([]);
     }
 });
+
+router.delete('/:id', requireUser, async (req, res, next) => {
+    try{
+        const itinerary = await Itinerary.find({_id: req.params.id, author: req.user._id})
+        if(!itinerary) {
+            let error = new Error('Itinerary not found');
+            error.statusCode = 404;
+            error.errors = { message: "Itinerary not found or you dont have access to it" };
+            return next(error);
+        }
+        const deleteRes = await Itinerary.deleteOne({_id: req.params.id})
+        await Review.deleteMany({itinerary: itinerary._id})
+        return res.json(deleteRes);
+    } catch (err){
+        return res.json(err)
+    }
+})
 
 router.post('/', requireUser, validateItineraryInput, async(req, res, next) => {
     const err = new Error("Validation Error");
@@ -94,9 +112,6 @@ router.patch('/:id', requireUser, validateItineraryPatchInput, async (req, res, 
         error.errors = { message: "Allowed params are: middleCities" };
         return next(error);
     }
-
-    console.log(req.user._id)
-    console.log(itinerary.author)
 
     if(req.user._id.toString() !== itinerary.author.toString()){
         let error = new Error('Unauthorized');

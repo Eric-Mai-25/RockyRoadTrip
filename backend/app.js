@@ -6,7 +6,8 @@ const passport = require('passport');
 
 require('./models/User');
 require('./models/City');
-require('./models/Itinerary')
+require('./models/Itinerary');
+require('./models/Review');
 require('./config/passport');
 
 const cors = require('cors');
@@ -46,7 +47,7 @@ app.use(
 
 app.use('/api/users', usersRouter);
 app.use('/api/itineraries', itinerariesRouter);
-app.use('/api/reviews', reviewsRouter);
+app.use('/api/itineraries/:itineraryId/reviews', reviewsRouter);
 app.use('/api/csrf', csrfRouter);
 app.use('/api/cities', citiesRouter);
 
