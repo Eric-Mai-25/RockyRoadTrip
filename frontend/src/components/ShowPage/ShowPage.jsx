@@ -73,7 +73,22 @@ export const ShowPage = (props) => {
                     <div className="results-div">
                         {yelpResults.map(result => (
                             <div className="result-div">
-                                <h1>{result.name}</h1>
+                                <div className="result-img-div">
+                                    <img src={result.image_url} className="result-img"/>
+                                </div>
+                                <div className="result-info-div">
+                                    <h1 className="result-title">{result.name}</h1>
+                                    <div className="rating-div">
+                                        <p className="result-rating">Rating: {result.rating}</p>
+                                        <p>{result.review_count} Reviews</p>
+                                    </div>
+                                    <p>{result.categories[0].title}</p>
+                                    <p>{result.location.display_address}</p>
+                                    <div className="button-div">
+                                        <button>Choose Me!</button>
+                                        <a href={result.url} target="_blank">Check me out on Yelp!</a>
+                                    </div>
+                                </div>
                             </div>
                         ))}
                     </div>
