@@ -15,7 +15,7 @@ export const clearRoute = () => {
 };
 
 const routeSessionReducer = (state = {}, action) => {
-  const nextState = Object.assign({}, state);
+  let nextState = Object.assign({}, state);
 
   switch (action.type) {
     case ADD_ROUTE:
