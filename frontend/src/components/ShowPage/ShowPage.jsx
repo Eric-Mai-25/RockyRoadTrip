@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
 import "./ShowPage.css"
 export const ShowPage = (props) => {
-    const [routePreview, setRoutePreview] = useState({
-        startCity: "New York City",
-        endCity: "San Francisco",
-        middleCities: ["Chicago", "Kansas City", "Las Vegas"]
-    })
 
     const [selectedCity, setSelectedCity] = useState(""); // Store the name of the city the user is currenlty interactring with.  
     const [selectedCategory, setSelectedCategory] = useState(""); // Store the currenlty selected category
@@ -22,13 +18,13 @@ export const ShowPage = (props) => {
         setSelectedCategory(category)
     }
 
+    const routePreview = useSelector((state) => state.routePreview);
+
     const fetchYelpData = async () => {
         try{
             const response = await fetch(`/api/yelp/searchYelp?location=${selectedCity}&term=${selectedCategory}&limit=5`);
             const data = await response.json();
             setYelpResults(data.businesses);
-            console.log("We are inside fetchYelpData")
-            console.log("Yelp data: ", yelpResults)
         } catch (error) {
             console.error("Error fetching Yelp data:", error);
         }
