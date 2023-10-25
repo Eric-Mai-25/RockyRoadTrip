@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { closeModal } from '../../store/modal';
 import './SessionForm.css';
 
 import { login, clearSessionErrors } from '../../store/session';
@@ -33,6 +34,7 @@ function LoginForm () {
     setEmail(demoEmail);
     setPassword(demoPassword)
     dispatch(login({ email: demoEmail, password: demoPassword }));
+    dispatch(closeModal());
   }
 
   return (
