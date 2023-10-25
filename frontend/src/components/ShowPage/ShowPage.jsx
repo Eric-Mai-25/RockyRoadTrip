@@ -42,13 +42,13 @@ export const ShowPage = (props) => {
                 <div className="all-cities-div">
                     <div className="city-div-start-end">
                         <div className="city-title-div-start-end">
-                            <h1 className="city-title">{routePreview.startCity}</h1>
+                            <h1 className="city-title">{routePreview.startCity.name}</h1>
                         </div>
                     </div>
                     {routePreview.middleCities.map(city => (
-                        <div className="city-div" key={city}>
+                        <div className="city-div" key={city._id}>
                             <div className="city-title-div">
-                                <h1 className="city-title">{city}</h1>
+                                <h1 className="city-title">{city.name}</h1>
                             </div>
                             <div className="a-h-f-div">
                                 <div className="activites-div">
@@ -65,12 +65,12 @@ export const ShowPage = (props) => {
                     ))}
                     <div className="city-div-start-end">
                         <div className="city-title-div-start-end">
-                            <h1 className="city-title">{routePreview.endCity}</h1>
+                            <h1 className="city-title">{routePreview.endCity.name}</h1>
                         </div>
                     </div>
                 </div>
                  <div className="yelp-div">
-                    <h1>Yelp Results:</h1>
+                    <h1 className="yelp-title">Results from Yelp:</h1>
                     <ul>
                         {yelpResults.map(business => (
                             <li key={business.id}>{business.name}</li>
