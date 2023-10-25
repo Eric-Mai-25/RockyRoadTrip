@@ -13,60 +13,7 @@ export const EditPage = (props) => {
         setSelectedCategory(category)
     }
 
-    const itinerary = {
-
-_id: 6538b1fc91da721e2abe4105
-name
-"Lets rock it !!!"
-startCity
-6538b1f991da721e2abe40cd
-endCity
-6538b1f991da721e2abe40d3
-
-middleCities
-Array
-
-0
-Object
-city
-6538b1f991da721e2abe40c9
-
-activities
-Array
-
-0
-Object
-name
-"Golden Gate Bridge"
-_id
-6538b1fc91da721e2abe4107
-
-hotels
-Array
-
-0
-Object
-name
-"Hotel Caza Fisherman's Wharf"
-_id
-6538b1fc91da721e2abe4108
-
-food
-Array
-
-0
-Object
-name
-"Bun Mee"
-_id
-6538b1fc91da721e2abe4109
-_id
-6538b1fc91da721e2abe4106
-author
-6538b1f891da721e2abe40bb
-__v
-0
-    }
+    
 
     return (
         <>
