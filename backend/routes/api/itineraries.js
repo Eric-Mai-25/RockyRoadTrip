@@ -32,7 +32,7 @@ router.get('/:id', async function(req, res, next) {
 
 router.delete('/:id', requireUser, async (req, res, next) => {
     try{
-        const itinerary = await Itinerary.find({_id: req.params.id, author: req.user._id})
+        const itinerary = await Itinerary.findOne({_id: req.params.id, author: req.user._id})
         if(!itinerary) {
             let error = new Error('Itinerary not found');
             error.statusCode = 404;
