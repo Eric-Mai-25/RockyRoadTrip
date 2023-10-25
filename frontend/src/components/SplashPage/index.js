@@ -13,7 +13,6 @@ function SpashPage(props) {
   const data = useSelector((state) => state);
 
   const handleAdd = (city) => (e) => {
-    console.log([...selectedRoute, city]);
     setSelectedRoute([...selectedRoute, city]);
   };
 
@@ -37,15 +36,17 @@ function SpashPage(props) {
       </div>
       <div className="route-box">
         <div className="route-content">
-          <h2>Route 1</h2>
+          <h2 className="route-name">Your Custom Route</h2>
           <div className="route-marker">
             {selectedRoute.map((city, i) => {
               return (
                 <>
-                  {i === 0 ? null : <hr color="#86bbd8" className="route-line"></hr> }
-                  <div>
+                  {i === 0 ? null : (
+                    <hr color="#86bbd8" className="route-line"></hr>
+                  )}
+                  <div className="route-line-content">
                     <ul class="map-markers route-dot">
-                      <li class="map-marker ">
+                      <li class="map-marker route-map-marker">
                         <a href="#">{city.name}</a>
                         <div class="map-marker-info route-info">
                           <div class="map-marker-info-inner animate-bounce-in">
@@ -60,12 +61,14 @@ function SpashPage(props) {
                         </div>
                       </li>
                     </ul>
+                    <h2 className="route-city-name">{city.name}</h2>
                   </div>
                 </>
               );
             })}
           </div>
         </div>
+        
         <div className="route-choose">
           <Link to={"/show"}>
             <button onClick={handleRouteSession}>
@@ -74,6 +77,9 @@ function SpashPage(props) {
             </button>
           </Link>
         </div>
+      </div>
+      <div className="line">
+        <hr color="#86bbd8" className="login-line"></hr>
       </div>
       <div className="route-box">
         <div className="route-content">
