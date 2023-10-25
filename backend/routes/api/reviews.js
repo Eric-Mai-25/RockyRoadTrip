@@ -7,7 +7,7 @@ const Review = mongoose.model('Review');
 
 router.get('/', async function(req, res, next) {
     const reviews = await Review.find({itinerary: req.params.itineraryId})
-    return res.json(reviews)
+    return res.json(reviews.reduce((resObj, ele) => ({...resObj, [ele._id]: ele._doc}), {}))
 });
 
 router.delete('/:id', requireUser, async (req, res, next) => {
