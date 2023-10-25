@@ -10,6 +10,7 @@ import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
 import Modal from './components/Modal/modal';
 import ShowPage from './components/ShowPage/ShowPage';
+import ItinShow from './components/ItinShow'
 
 import { getCurrentUser } from './store/session';
 import SplashPage from './components/SplashPage';
@@ -27,7 +28,7 @@ function App() {
       <NavBar />
       <Switch>
         <AuthRoute exact path="/" component={SplashPage} />
-        {/* <AuthRoute exact path="/Splash" component={SplashPage} /> */}
+        <AuthRoute exact path="/itinerary/:itinId" component={ItinShow} />
         <AuthRoute exact path="/show" component={ShowPage} /> {/* TODO Will need to have id in route for specific itinerary, for now though we will not */}
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />

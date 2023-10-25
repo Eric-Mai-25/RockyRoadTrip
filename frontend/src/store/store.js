@@ -5,12 +5,14 @@ import errorsReducer from './errors';
 import ui from './ui';
 import routeSessionReducer from './routeSession';
 import citiesReducer from './cities';
+import itinReducer from './itinerary';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   errors: errorsReducer,
   routePreview: routeSessionReducer,
   cities: citiesReducer,
+  itineraries: itinReducer,
   ui: ui
 });
 
