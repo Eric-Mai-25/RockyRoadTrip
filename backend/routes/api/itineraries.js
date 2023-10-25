@@ -5,6 +5,7 @@ const {requireUser} = require('../../config/passport');
 const {validateItineraryInput, validateItineraryPatchInput} = require('../../validations/itineraries');
 const Review = mongoose.model('Review');
 const City = mongoose.model('City');
+const User = mongoose.model('User');
 const Itinerary = mongoose.model('Itinerary');
 
 router.get('/', async function(req, res, next) {
@@ -47,12 +48,16 @@ router.delete('/:id', requireUser, async (req, res, next) => {
     }
 })
 
-router.post('/', requireUser, validateItineraryInput, async(req, res, next) => {
+router.post('/', validateItineraryInput, async(req, res, next) => {
+    
+    // TOOD require user and update all user ref to requser
+    let user = await User.findOne({email: 'demo-user@rockyroadtrip.com'})
+
     const err = new Error("Validation Error");
     err.statusCode = 400;
     const errors = {};
 
-    let itineraryExists = await Itinerary.count({name: req.body.name, author: req.user._id})
+    let itineraryExists = await Itinerary.count({name: req.body.name, author: user._id})
     if(itineraryExists){
         errors.name = "A itinerary with this name already exists";
     }
@@ -95,7 +100,7 @@ router.post('/', requireUser, validateItineraryInput, async(req, res, next) => {
         return next(err)
     }
 
-    req.body.author = req.user._id
+    req.body.author = user._id
     try {
         let itinerary = await new Itinerary(req.body).save();
         itinerary = await itinerary.populate('author', '_id username');

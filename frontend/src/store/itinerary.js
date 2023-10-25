@@ -41,7 +41,18 @@ export const fetchItins = () => async dispatch => {
     }
 };
 
+export const createItinerary = (itinerary) => {
+  return async(dispatch) => {
+      const res = await jwtFetch("/api/itineraries", {
+          method: 'POST',
+          body: JSON.stringify(itinerary)
+      })
 
+      const data = await res.json();
+      dispatch(recieveItin(data));
+      return data;
+  }
+}
 
 const itinReducer = (state = {}, action) => {
   const nextState = Object.assign({}, state);

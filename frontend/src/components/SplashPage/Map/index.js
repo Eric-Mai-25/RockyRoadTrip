@@ -13,13 +13,13 @@ function Map({add}) {
     dispatch(fetchCities());
   }, []);
 
-  return cities[0] ? (
+  return Object.keys(cities).length ? (
     <>
       <div className="orange-box">
         <div className="container">
           <div className="map">
             <ul class="map-markers">
-              {cities.map((city, i) => {
+              {Object.values(cities).map((city, i) => {
                 return <MapMarker key={city.name + i} add={add.bind(this)} city={city} />;
               })}
             </ul>

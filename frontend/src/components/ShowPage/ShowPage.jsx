@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import "./ShowPage.css";
 import { addRoute } from "../../store/routeSession";
 import { Redirect } from "react-router-dom";
+import * as itinerariesAction from "../../store/itinerary";
 
 export const ShowPage = (props) => {
     const dispatch = useDispatch();
@@ -45,6 +46,71 @@ export const ShowPage = (props) => {
             fetchYelpData();
         }
     }, [selectedCity, selectedCategory])
+
+    const handleUpdateMiddleCities = (selectedRes) => {
+
+        let routePreviewCopy = {...routePreview}
+
+        routePreviewCopy.middleCities.forEach((middleCity) => {
+            if(!middleCity.city){
+                middleCity.city = middleCity._id
+            }
+            if(middleCity.name !== selectedCity){
+                return
+            }
+
+            let objToInsert = {
+                name: selectedRes.name,
+                imageUrl: selectedRes.image_url,
+                rating: selectedRes.rating,
+                reviewCount: selectedRes.review_count,
+                title: selectedRes.categories[0].title,
+                displayAddress: selectedRes.location.display_address,
+                busineesId: selectedRes.id
+            }
+
+            switch (selectedCategory) {
+                case "activity":
+                    let activities = middleCity.activities || []
+                    activities.push(objToInsert)
+                    middleCity.activities = activities
+                    break;
+                case "hotel":
+                    let hotels = middleCity.hotels || []
+                    hotels.push(objToInsert);
+                    middleCity.hotels = hotels
+                    break;
+                case "food":
+                    let food = middleCity.food || []
+                    food.push(objToInsert);
+                    middleCity.food = food;
+                    break;
+            }
+        })
+        dispatch(addRoute(routePreviewCopy))
+    }
+
+    const handleCreateItinerary = () => {
+        let itineraryObj = {name: "my demo 4 itinerary"}
+
+        itineraryObj.startCity = routePreview.startCity._id
+        itineraryObj.endCity = routePreview.endCity._id
+        itineraryObj.middleCities = []
+
+        routePreview.middleCities.forEach(middleCity => {
+            let midCity = {}
+            midCity.city = middleCity._id;
+            midCity.activities = middleCity.activities || [];
+            midCity.hotels = middleCity.hotels || [];
+            midCity.food = middleCity.food || [];
+            itineraryObj.middleCities.push(midCity);
+        })
+
+        dispatch(itinerariesAction.createItinerary(itineraryObj)).then((data) => {
+            return <Redirect to={`/itinerary/${data._id}`}/>
+        })
+
+    }
 
     if(!Object.keys(routePreview).length){
         return <Redirect to="/"/>
@@ -99,7 +165,7 @@ export const ShowPage = (props) => {
                                     <p>{result.categories[0].title}</p>
                                     <p>{result.location.display_address}</p>
                                     <div className="button-div">
-                                        <button>Choose Me!</button>
+                                        <button onClick={() => handleUpdateMiddleCities(result)}>Choose Me!</button>
                                         <a href={result.url} target="_blank">Check me out on Yelp!</a>
                                     </div>
                                 </div>
@@ -107,6 +173,9 @@ export const ShowPage = (props) => {
                         ))}
                     </div>
                 </div>
+            </div>
+            <div>
+                <button onClick={handleCreateItinerary}>Create Itinerary</button>
             </div>
         </>
     )
