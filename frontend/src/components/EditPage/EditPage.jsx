@@ -9,7 +9,7 @@ export const EditPage = (props) => {
     const [selectedCity, setSelectedCity] = useState(""); // Store the name of the city the user is currenlty interactring with.  
     const [selectedCategory, setSelectedCategory] = useState(""); // Store the currenlty selected category
     const [yelpResults, setYelpResults] = useState([]); //Will store the list of results fetched from the yelp API
-    const [intinerary, setItinerary] = useState({})
+    const [itinerary, setItinerary] = useState({})
     const [citiesLoaded, setCitiesLoaded] = useState(false)
 
     const cities = useSelector((state) => state.cities);
@@ -21,6 +21,7 @@ export const EditPage = (props) => {
 
     useEffect(() => {
         getItinerary()
+        console.log("itinerary: ", itinerary)
         dispatch(fetchCities()).then(() => setCitiesLoaded(true));
     }, [])
 
@@ -28,6 +29,7 @@ export const EditPage = (props) => {
         try{
             const response = await fetch(`/api/itineraries/6538b1fc91da721e2abe4105`)
             const data = await response.json();
+            console.log("data: ", data)
             setItinerary(data)
         } catch (error){
             console.error("Error fetching itinerary", error);
@@ -61,16 +63,17 @@ export const EditPage = (props) => {
 
 
 
-    return (intinerary && cities && citiesLoaded) ? (
+    return (itinerary && cities && citiesLoaded && itinerary.middleCities) ? (
         <>
+            {console.log("itinerary in return", itinerary)}
             <div className="outer-show-div">
                 <div className="all-cities-div">
                     <div className="city-div-start-end">
                         <div className="city-title-div-start-end">
-                            <h1 className="city-title">{getCityName(intinerary.startCity)}</h1>
+                            <h1 className="city-title">{getCityName(itinerary.startCity)}</h1>
                         </div>
                     </div>
-                    {intinerary.middleCities.map(city => (
+                    {itinerary.middleCities.map(city => (
                         <div className="city-div" key={city.city}>
                             <div className="city-title-div">
                                 <h1 className="city-title">{getCityName(city.city)}</h1>
@@ -90,7 +93,7 @@ export const EditPage = (props) => {
                     ))}
                     <div className="city-div-start-end">
                         <div className="city-title-div-start-end">
-                            <h1 className="city-title">{getCityName(intinerary.endCity)}</h1>
+                            <h1 className="city-title">{getCityName(itinerary.endCity)}</h1>
                         </div>
                     </div>
                  </div>
@@ -127,4 +130,4 @@ export const EditPage = (props) => {
 
 export default EditPage;
 
-// cities && Array.isArray(cities) ? cities.find(city => city._id === intinerary._id)?.name : 'City not found'
+// cities && Array.isArray(cities) ? cities.find(city => city._id === itinerary._id)?.name : 'City not found'
