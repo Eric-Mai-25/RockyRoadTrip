@@ -17,9 +17,9 @@ const itinerarySchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'City'
             }, 
-            activities: [{name: {type: String, required: true}}],
-            hotels: [{name: {type: String, required: true}}],
-            food: [{name: {type: String, required: true}}]
+            activities: [],
+            hotels: [],
+            food: []
         }],
         author: {
             type: Schema.Types.ObjectId,
