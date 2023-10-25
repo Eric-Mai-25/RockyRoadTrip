@@ -13,6 +13,7 @@ import ShowPage from './components/ShowPage/ShowPage';
 
 import { getCurrentUser } from './store/session';
 import SplashPage from './components/SplashPage';
+import EditPage from './components/EditPage/EditPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,9 +27,10 @@ function App() {
       <Modal/>
       <NavBar />
       <Switch>
+        <AuthRoute exact path={`/edit`} component={EditPage} /> {/*TODO change from /edit to /edit/itineraryId */}
         <AuthRoute exact path="/" component={SplashPage} />
         {/* <AuthRoute exact path="/Splash" component={SplashPage} /> */}
-        <AuthRoute exact path="/show" component={ShowPage} /> {/* TODO Will need to have id in route for specific itinerary, for now though we will not */}
+        <AuthRoute exact path="/show" component={ShowPage} /> {/* TODO Change from /show to /new */}
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
       </Switch>
