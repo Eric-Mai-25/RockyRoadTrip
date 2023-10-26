@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { TbBus, TbArrowBadgeRightFilled } from "react-icons/tb";
 import { addRoute } from "../../store/routeSession";
 import { Redirect } from "react-router-dom";
+import { BiCurrentLocation, BiSolidChevronRight } from "react-icons/bi";
+import splashImg from "../../assets/images/splash.jpg";
 
 import Map from "./Map";
 import "./SplashPage.css";
@@ -12,6 +14,7 @@ function SpashPage(props) {
   const dispatch = useDispatch();
   const [selectedRoute, setSelectedRoute] = useState([]);
   const routePreview = useSelector((state) => state.routePreview);
+  const [toggleHero, setToggleHero] = useState(true);
 
   const handleAdd = (city) => (e) => {
     setSelectedRoute([...selectedRoute, city]);
@@ -26,16 +29,63 @@ function SpashPage(props) {
     dispatch(addRoute(routePreview));
   };
 
-  if(Object.keys(routePreview).length){
-    return <Redirect to="/show"/>
+  if (Object.keys(routePreview).length) {
+    return <Redirect to="/show" />;
+  }
+  const handleToggle = () => {
+    setToggleHero(false);
+  };
+
+  let currentImage;
+
+  if (toggleHero) {
+    currentImage = (
+      <>
+        <h1>Where will your journey take you?</h1>
+        <p>create your dream trip</p>
+        <div className="hero-button">
+          <button onClick={handleToggle}>Create your route</button>
+          <button>
+            <div className="browse-button">
+              Browse
+              <BiSolidChevronRight />
+            </div>
+          </button>
+        </div>
+      </>
+    );
+  } else {
+    currentImage = (
+      <>
+        <h2>Pick your starting city</h2>
+        <div className="map-splash">
+          <Map add={handleAdd.bind(this)} />
+        </div>
+      </>
+    );
   }
 
   return (
     <>
-      <div className="slogan">
-        <h2>Where will your journey take you?</h2>
+      {/* <div class="big-image">
+        <div class="overlay">
+          <h1>Where will your journey take you?</h1>
+          <p>create your dream trip</p>
+          <div className="hero-button">
+            <button>Create your route</button>
+            <button>
+              <div className="browse-button">
+                Browse
+                <BiSolidChevronRight />
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
-      <Map add={handleAdd.bind(this)} />
+      <Map add={handleAdd.bind(this)} /> */}
+      <div class="big-image">
+        <div class="overlay">{currentImage}</div>
+      </div>
       <div className="line">
         <hr color="#86bbd8" className="login-line"></hr>
       </div>
@@ -73,7 +123,7 @@ function SpashPage(props) {
             })}
           </div>
         </div>
-        
+
         <div className="route-choose">
           <Link to={"/show"}>
             <button onClick={handleRouteSession}>

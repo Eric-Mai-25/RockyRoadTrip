@@ -173,7 +173,7 @@ svg {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f88243;
+  background-color: rgba(248, 130, 67, 0.9);
   border-radius: 10px;
   margin: 2rem;
   width: auto;
