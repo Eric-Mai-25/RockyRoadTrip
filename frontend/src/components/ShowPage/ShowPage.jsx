@@ -120,10 +120,7 @@ export const ShowPage = (props) => {
     if(!Object.keys(routePreview).length){
         return <Redirect to="/"/>
     }
-
-    console.log("this is just before");
-    console.log(selectedCity, selectedCategory);
-
+    
     return (
         <>
             <div className="outer-show-div">
