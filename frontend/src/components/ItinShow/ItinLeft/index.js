@@ -2,9 +2,12 @@ import "./itinLeft.css";
 import { AiFillStar, AiOutlineCaretDown } from "react-icons/ai";
 import { CgArrowLongDownC } from "react-icons/cg";
 import { BiSolidFlag, BiTestTube } from "react-icons/bi";
-import { FaMapMarkerAlt } from "react-icons/fa";
+
+import { useDispatch } from "react-redux";
+import * as modalActions from "../../../store/modal" 
 
 function ItinLeft({ itin, cities }) {
+  const dispatch = useDispatch();
   const middle = itin.middleCities.map((currCity) => currCity.city);
   const itinStartToFin = [itin.startCity, ...middle, itin.endCity];
 
@@ -149,7 +152,11 @@ function ItinLeft({ itin, cities }) {
           );
         })}
         <h2>{cities[itin.endCity].name}</h2>
-        <BiSolidFlag className="down-arrow flag" size={"50px"} color="#f6ae2d" />
+        <BiSolidFlag
+          className="down-arrow flag"
+          size={"50px"}
+          color="#f6ae2d"
+        />
       </div>
       <div className="line">
         <hr color="#86bbd8" className="login-line"></hr>
@@ -175,7 +182,9 @@ function ItinLeft({ itin, cities }) {
           })}
         </div>
         <div>
-            <button>Write a Comment</button>
+          <button onClick={() => dispatch(modalActions.openModal("createReview"))}>
+            Write a Comment
+          </button>
         </div>
       </div>
     </>

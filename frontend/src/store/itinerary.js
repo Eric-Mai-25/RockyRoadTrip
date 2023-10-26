@@ -18,7 +18,7 @@ export const recieveItins = (itins) => {
 };
 
 export const getItins = (state) => {
-  return state.itins ? Object.values(state.itins) : [];
+  return state.itineraries ? Object.values(state.itineraries) : [];
 };
 
 export const getItin = (itinId) => (state) => {

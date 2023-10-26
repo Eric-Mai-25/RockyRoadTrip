@@ -1,13 +1,16 @@
-import React from 'react';
+import React  from 'react';
 import { closeModal } from '../../store/modal';
 import { useSelector, useDispatch } from 'react-redux';
 import './modal.css'
 import LoginForm from '../SessionForms/LoginForm';
 import SignupForm from '../SessionForms/SignupForm';
+import ReviewForm from '../Review';
+
 
 function Modal(){
     const dispatch = useDispatch();
     const modal = useSelector( state => state.ui.modal)
+    const itinerary = useSelector(state => Object.values(state.itineraries))
 
     if (!modal){
         return null;
@@ -26,13 +29,17 @@ function Modal(){
         case 'signup':
             component = <SignupForm />;
             break;
+        case 'createReview':
+            component = <ReviewForm/>
+            break;
         default:
             return null;
     }
 
     const headers = {
         "login": "On the Road to Something Great? Log In!",
-        "signup": "Signup now to start your adventure!"
+        "signup": "Signup now to start your adventure!",
+        "createReview": `Leave a comment for ${itinerary[0].name}`
     }
 
     return(
