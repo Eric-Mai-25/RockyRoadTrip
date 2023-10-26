@@ -13,9 +13,9 @@ router.get('/', async function(req, res, next) {
         const itineraries = await Itinerary.find()
                                     .populate("author", "_id username")
                                     .sort({createdAt: -1});
-        return res.json(itineraries);
+        return res.json(itineraries.reduce((result, ele) => ({...result, [ele._id] : ele._doc}), {}));
     } catch(err){
-        return res.json([]);
+        return res.json({});
     }
 });
 
@@ -23,9 +23,7 @@ router.get('/:id', async function(req, res, next) {
     try{
         const itinerary = await Itinerary.findOne({_id: req.params.id}).populate("author", "_id username");
         const reviews = await Review.find({"itinerary": itinerary._id})
-        let itineraryNew = {...itinerary._doc}
-        itineraryNew.reviews = reviews
-        return res.json(itineraryNew);
+        return res.json({...itinerary._doc, ["reviews"]: reviews});
     } catch(err){
         return res.json({});
     }
@@ -49,7 +47,7 @@ router.delete('/:id', requireUser, async (req, res, next) => {
 })
 
 router.post('/', validateItineraryInput, async(req, res, next) => {
-    
+
     // TOOD require user and update all user ref to requser
     let user = await User.findOne({email: 'demo-user@rockyroadtrip.com'})
 
