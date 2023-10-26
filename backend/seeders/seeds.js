@@ -171,77 +171,510 @@ const insertSeeds = () => {
             City.collection.drop().then(() => City.ensureIndexes().then(() => City.insertMany(cities))))
         .then(async () => {
             await Itinerary.collection.drop().then(() => Itinerary.ensureIndexes().then(async () => {
+                let users = await User.find();
+                let [user1, user2, user3, user4, user5] = users;
 
-                let user1 = await User.findOne({email: "demo-user@rockyroadtrip.com"});
+                let cities = await City.find();
+
+                let NameToCity = cities.reduce((resObj, ele) => ({...resObj, [ele.name]: ele}), {})
+
                 let itineraries = [];
 
-                let seattle = await City.findOne({name: "Seattle"})
-                let chicago = await City.findOne({name: "Chicago"})
-                let denver = await City.findOne({name: "Denver"})
-
-                let lv = await City.findOne({name: "Las Vegas"})
-                let sf = await City.findOne({name: "San Francisco (SF)"})
-
-
-                let itinerary1 = new Itinerary({"name": "Itinerary from Rocky road trip", 
-                    "startCity": seattle._id, 
-                    "endCity": chicago._id, 
+                let itinerary1 = new Itinerary({
+                    "name":"Itenerary1",
+                    "startCity": NameToCity["Las Vegas"]._id,
+                    "endCity": NameToCity["Dallas"]._id,
                     "middleCities":[{
-                        "city": denver._id,
-                        "activities":[{
-                            "name":"Disc Golf-Watrous course"}], 
-                        "hotels":[{
-                            "name":"The Brown Palace"}], 
-                        "food":[{
-                            "name":"Hop Alley"}]}],
+                        "city": NameToCity["Salt Lake City"]._id,
+                        "activities":[
+                            {
+                                "name": "Another Round",
+                                "imageUrl": "https://s3-media1.fl.yelpcdn.com/bphoto/SXETxwYgGsb0-KPWJgSD7g/o.jpg",
+                                "rating": 4,
+                                "reviewCount": 149,
+                                "title": "Mini Golf",
+                                "displayAddress": [
+                                    "660 Fort Worth Ave",
+                                    "Ste 100",
+                                    "Dallas, TX 75208"
+                                ],
+                                "busineesId": "omNpv2vEH181aaMBm8LydQ"
+                            }
+                        ],
+                        "hotels":[
+                            {
+                                "name": "The Highland Dallas, Curio Collection by Hilton",
+                                "imageUrl": "https://s3-media3.fl.yelpcdn.com/bphoto/hbDY8mngpWnjA_bbuCRhZA/o.jpg",
+                                "rating": 4,
+                                "reviewCount": 238,
+                                "title": "Hotels",
+                                "displayAddress": [
+                                    "5300 E Mockingbird Ln",
+                                    "Dallas, TX 75206"
+                                ],
+                                "busineesId": "J7w-BX8rnWAUmou918jx7g"
+                            }
+                        ],
+                        "food":[
+                            {
+                                "name": "Pho Vietz",
+                                "imageUrl": "https://s3-media3.fl.yelpcdn.com/bphoto/hf-7HYh3B0QvqeNvuEmfMw/o.jpg",
+                                "rating": 5,
+                                "reviewCount": 35,
+                                "title": "Vietnamese",
+                                "displayAddress": [
+                                    "4906 Maple Ave",
+                                    "Dallas, TX 75235"
+                                ],
+                                "busineesId": "L5j_40WApWfn2O6Wn3Oyxg"
+                            }
+                        ]}],
                     "author": user1._id})
 
-                itineraries.push(itinerary1)
-
-                let itinerary2 = new Itinerary({"name": "Lets rock it !!!", 
-                    "startCity": lv._id, 
-                    "endCity": denver._id, 
+                let itinerary2 = new Itinerary({
+                    "name":"Itenerary2",
+                    "startCity": NameToCity["Salt Lake City"]._id,
+                    "endCity": NameToCity["Dallas"]._id,
                     "middleCities":[{
-                        "city": sf._id,
-                        "activities":[{
-                            "name":"Golden Gate Bridge"}], 
-                        "hotels":[{
-                            "name":"Hotel Caza Fisherman's Wharf"}], 
-                        "food":[{
-                            "name":"Bun Mee"}]}],
-                "author": user1._id})
+                        "city": NameToCity["New Orleans"]._id,
+                        "activities":[
+                            {
+                                "name": "New Orleans Kayak Swamp Tours",
+                                "imageUrl": "https://s3-media3.fl.yelpcdn.com/bphoto/NBjXqKI6b8BZmW9DJTblLg/o.jpg",
+                                "rating": 5,
+                                "reviewCount": 255,
+                                "title": "Rafting/Kayaking",
+                                "displayAddress": [
+                                    "740 North Rampart St",
+                                    "New Orleans, LA 70116"
+                                ],
+                                "busineesId": "TGa-k0lkz6t4pUpchVUoEQ"
+                            }
+                        ],
+                        "hotels":[
+                            {
+                                "name": "French Market Inn",
+                                "imageUrl": "https://s3-media4.fl.yelpcdn.com/bphoto/qQcW4H-lyqbfuVMvlUxwAg/o.jpg",
+                                "rating": 4,
+                                "reviewCount": 387,
+                                "title": "Hotels",
+                                "displayAddress": [
+                                    "509 Decatur St",
+                                    "New Orleans, LA 70130"
+                                ],
+                                "busineesId": "4JWuSA8tyXHteRgh_hU_Cw"
+                            }
+                        ],
+                        "food": [
+                            {
+                                "name": "Bésame",
+                                "imageUrl": "https://s3-media3.fl.yelpcdn.com/bphoto/OqhRdeMOJsSk5sdMuLukkQ/o.jpg",
+                                "rating": 4.5,
+                                "reviewCount": 174,
+                                "title": "Tapas/Small Plates",
+                                "displayAddress": [
+                                    "110 S Rampart",
+                                    "New Orleans, LA 70112"
+                                ],
+                                "busineesId": "CZ907J8vyP0xs56ggEgsqQ"
+                            }
+                        ]}],
+                    "author": user1._id})
 
+
+                let itinerary3 = new Itinerary({
+                    "name":"Itenerary3",
+                    "startCity": NameToCity["Las Vegas"]._id,
+                    "endCity": NameToCity["Dallas"]._id,
+                    "middleCities":[{
+                        "city": NameToCity["Denver"]._id,
+                        "activities":[
+                            {
+                                "name": "International Church Of Cannabis",
+                                "imageUrl": "https://s3-media3.fl.yelpcdn.com/bphoto/XbZae3SGryR_bgW7YQD5zA/o.jpg",
+                                "rating": 4.5,
+                                "reviewCount": 324,
+                                "title": "Community Centers",
+                                "displayAddress": [
+                                    "400 S Logan St",
+                                    "Denver, CO 80209"
+                                ],
+                                "busineesId": "PlptbDaLbOXGtrykkZAQRg"
+                            }
+                        ],
+                        "hotels":[
+                            {
+                                "name": "Vīb Hotel by Best Western Denver RiNo",
+                                "imageUrl": "https://s3-media1.fl.yelpcdn.com/bphoto/YwYXc2Y7otrunZoTBATSDg/o.jpg",
+                                "rating": 5,
+                                "reviewCount": 17,
+                                "title": "Hotels",
+                                "displayAddress": [
+                                    "3560 Brighton Blvd",
+                                    "Denver, CO 80216"
+                                ],
+                                "busineesId": "Mb5FrFDf04LDV7Ssk5ECKw"
+                            }
+                        ],
+                        "food": [
+                            {
+                                "name": "Lucky Noodles",
+                                "imageUrl": "https://s3-media4.fl.yelpcdn.com/bphoto/sI1LfYfMkL0k-6f6U702VQ/o.jpg",
+                                "rating": 4.5,
+                                "reviewCount": 227,
+                                "title": "Thai",
+                                "displayAddress": [
+                                    "1201 E Colfax Ave",
+                                    "Ste 102",
+                                    "Denver, CO 80218"
+                                ],
+                                "busineesId": "RTvR4W7K-59xFFZAUTMTbQ"
+                            }
+                        ]
+                    }],
+                    "author": user1._id})
+
+
+                    let itinerary4 = new Itinerary({
+                        "name":"Itenerary4",
+                        "startCity": NameToCity["Minneapolis"]._id,
+                        "endCity": NameToCity["Detroit"]._id,
+                        "middleCities":[{
+                            "city": NameToCity["Chicago"]._id,
+                            "activities":[
+                                {
+                                    "name": "Big Mini Putt Club",
+                                    "imageUrl": "https://s3-media4.fl.yelpcdn.com/bphoto/YieYJNZHhRO39NHitaLf3Q/o.jpg",
+                                    "rating": 5,
+                                    "reviewCount": 104,
+                                    "title": "Mini Golf",
+                                    "displayAddress": [
+                                        "1302 N Milwaukee Ave",
+                                        "Chicago, IL 60622"
+                                    ],
+                                    "busineesId": "UVRkAcABnSxOIOpKXkdWAQ"
+                                }
+                            ],
+                            "hotels":[
+                                {
+                                    "name": "The Robey",
+                                    "imageUrl": "https://s3-media2.fl.yelpcdn.com/bphoto/uHnwGRTUszLcWUGxHaqLQg/o.jpg",
+                                    "rating": 3.5,
+                                    "reviewCount": 176,
+                                    "title": "Hotels",
+                                    "displayAddress": [
+                                        "2018 W North Ave",
+                                        "Chicago, IL 60647"
+                                    ],
+                                    "busineesId": "KpiYA2QRxzVZlvvExWNlTg"
+                                }
+                            ],
+                            "food": [
+                                {
+                                    "name": "Quesabirria Jalisco",
+                                    "imageUrl": "https://s3-media3.fl.yelpcdn.com/bphoto/F7yhgtgDsmAitulijvZpmQ/o.jpg",
+                                    "rating": 5,
+                                    "reviewCount": 41,
+                                    "title": "Tacos",
+                                    "displayAddress": [
+                                        "1314 W 18th St",
+                                        "Chicago, IL 60608"
+                                    ],
+                                    "busineesId": "L12zP2yCgoKm_NLwW_HIDw"
+                                }
+                            ]
+                        }],
+                        "author": user2._id})
+
+                    let itinerary5 = new Itinerary({
+                        "name":"Itenerary5",
+                        "startCity": NameToCity["Chicago"]._id,
+                        "endCity": NameToCity["Washington, D.C. (DC)"]._id,
+                        "middleCities":[{
+                            "city": NameToCity["Philadelphia"]._id,
+                            "activities":[
+                                {
+                                    "name": "Planet Word Museum",
+                                    "imageUrl": "https://s3-media2.fl.yelpcdn.com/bphoto/ppoaT6LCfLvI4zPoRugpVA/o.jpg",
+                                    "rating": 5,
+                                    "reviewCount": 122,
+                                    "title": "Museums",
+                                    "displayAddress": [
+                                        "925 13th St NW",
+                                        "Washington, DC 20005"
+                                    ],
+                                    "busineesId": "piCDoicFTnVgOwQBRSjfmQ"
+                                }
+                            ],
+                            "hotels":[
+                                {
+                                    "name": "Kimpton George Hotel",
+                                    "imageUrl": "https://s3-media1.fl.yelpcdn.com/bphoto/cv7zs5Ls0gSuKwktUM9iEg/o.jpg",
+                                    "rating": 4,
+                                    "reviewCount": 225,
+                                    "title": "Hotels",
+                                    "displayAddress": [
+                                        "15 E St NW",
+                                        "Washington, DC 20001"
+                                    ],
+                                    "busineesId": "kl1LzY7Qjd0eW2UCsfxQwg"
+                                }
+                            ],
+                            "food": [
+                                {
+                                    "name": "Cane",
+                                    "imageUrl": "https://s3-media2.fl.yelpcdn.com/bphoto/ohbZe6vtFHFN_ZW8n91mYw/o.jpg",
+                                    "rating": 4.5,
+                                    "reviewCount": 553,
+                                    "title": "Caribbean",
+                                    "displayAddress": [
+                                        "403 H St NE",
+                                        "Washington, DC 20002"
+                                    ],
+                                    "busineesId": "ZQmeDA4ZkM6F1dr2HNVWXA"
+                                }
+                            ]
+                        }],
+                        "author": user2._id})
+
+                    let itinerary6 = new Itinerary({
+                        "name":"Itenerary6",
+                        "startCity": NameToCity["Houston"]._id,
+                        "endCity": NameToCity["Miami"]._id,
+                        "middleCities":[{
+                            "city": NameToCity["Atlanta"]._id,
+                            "activities":[
+                                {
+                                    "name": "The Splatter Studio",
+                                    "imageUrl": "https://s3-media2.fl.yelpcdn.com/bphoto/Wa8y8iS3ifDuR-YLyW3vmA/o.jpg",
+                                    "rating": 5,
+                                    "reviewCount": 25,
+                                    "title": "Team Building Activities",
+                                    "displayAddress": [
+                                        "792 North Highland Ave NE",
+                                        "Atlanta, GA 30306"
+                                    ],
+                                    "busineesId": "5ADCGI9hjNBWNWwkFlGRaw"
+                                }
+                            ],
+                            "hotels":[
+                                {
+                                    "name": "The St. Regis Atlanta",
+                                    "imageUrl": "https://s3-media2.fl.yelpcdn.com/bphoto/AYXmRAVPA_0XFTo_y1d0Og/o.jpg",
+                                    "rating": 4,
+                                    "reviewCount": 215,
+                                    "title": "Hotels",
+                                    "displayAddress": [
+                                        "88 W Paces Ferry Rd",
+                                        "Atlanta, GA 30305"
+                                    ],
+                                    "busineesId": "x7lGiUPoObkxcz4Wd8-WCw"
+                                }
+                            ],
+                            "food": [
+                                {
+                                    "name": "Pelicana Chicken",
+                                    "imageUrl": "https://s3-media3.fl.yelpcdn.com/bphoto/2pWMg9UoCOZ2oJ0YkuRuwQ/o.jpg",
+                                    "rating": 5,
+                                    "reviewCount": 62,
+                                    "title": "Korean",
+                                    "displayAddress": [
+                                        "420 14th St NW",
+                                        "Ste 100A",
+                                        "Atlanta, GA 30318"
+                                    ],
+                                    "busineesId": "saBBzLm12utmiab6hwod5w"
+                                }
+                            ]
+                        }],
+                        "author": user2._id})
+
+                    let itinerary7 = new Itinerary({
+                        "name":"Itenerary7",
+                        "startCity": NameToCity["Phoenix"]._id,
+                        "endCity": NameToCity["Washington, D.C. (DC)"]._id,
+                        "middleCities":[{
+                            "city": NameToCity["New Orleans"]._id,
+                            "activities":[
+                                {
+                                    "name": "New Orleans Secrets Tours",
+                                    "imageUrl": "https://s3-media3.fl.yelpcdn.com/bphoto/TDFAekuASswfxcOZbUWRug/o.jpg",
+                                    "rating": 5,
+                                    "reviewCount": 250,
+                                    "title": "Food Tours",
+                                    "displayAddress": [
+                                        "New Orleans, LA 70130"
+                                    ],
+                                    "busineesId": "ez4kMLP6OJEIaMbMrrGRdA"
+                                }
+                            ],
+                            "hotels":[
+                                {
+                                    "name": "Courtyard by Marriott New Orleans French Quarter/Iberville",
+                                    "imageUrl": "https://s3-media3.fl.yelpcdn.com/bphoto/Q92WSCmu2bZ6uUeCwYH6Sw/o.jpg",
+                                    "rating": 4,
+                                    "reviewCount": 176,
+                                    "title": "Hotels",
+                                    "displayAddress": [
+                                        "910 Iberville St",
+                                        "New Orleans, LA 70112"
+                                    ],
+                                    "busineesId": "tcAB1Q_NLd5uXpq4Pe1aQg"
+                                }
+                            ],
+                            "food": [
+                                {
+                                    "name": "Bésame",
+                                    "imageUrl": "https://s3-media3.fl.yelpcdn.com/bphoto/OqhRdeMOJsSk5sdMuLukkQ/o.jpg",
+                                    "rating": 4.5,
+                                    "reviewCount": 174,
+                                    "title": "Tapas/Small Plates",
+                                    "displayAddress": [
+                                        "110 S Rampart",
+                                        "New Orleans, LA 70112"
+                                    ],
+                                    "busineesId": "CZ907J8vyP0xs56ggEgsqQ"
+                                }
+                            ]
+                        }],
+                        "author": user3._id})
+
+                    let itinerary8 = new Itinerary({
+                        "name":"Itenerary8",
+                        "startCity": NameToCity["Seattle"]._id,
+                        "endCity": NameToCity["San Francisco (SF)"]._id,
+                        "middleCities":[{
+                            "city": NameToCity["Portland"]._id,
+                            "activities":[
+                                {
+                                    "name": "DIY BAR",
+                                    "imageUrl": "https://s3-media4.fl.yelpcdn.com/bphoto/NazJvxE2C9eSHF2CeU7brA/o.jpg",
+                                    "rating": 5,
+                                    "reviewCount": 169,
+                                    "title": "Arts & Crafts",
+                                    "displayAddress": [
+                                        "3522 N Vancouver Ave",
+                                        "Portland, OR 97227"
+                                    ],
+                                    "busineesId": "qGtQp-klDYK28cI428QW5A"
+                                }
+                            ],
+                            "hotels":[
+                                {
+                                    "name": "The Society Hotel",
+                                    "imageUrl": "https://s3-media1.fl.yelpcdn.com/bphoto/rBkoAcpuJYV7V1-kaW5DqQ/o.jpg",
+                                    "rating": 4.5,
+                                    "reviewCount": 396,
+                                    "title": "Hotels",
+                                    "displayAddress": [
+                                        "203 NW 3rd Ave",
+                                        "Portland, OR 97209"
+                                    ],
+                                    "busineesId": "1fvKhU81LtdTl4EqcIAu8Q"
+                                }
+                            ],
+                            "food": [
+                                {
+                                    "name": "Eem",
+                                    "imageUrl": "https://s3-media2.fl.yelpcdn.com/bphoto/eITdDr4IffxkXCl980rG1w/o.jpg",
+                                    "rating": 4.5,
+                                    "reviewCount": 1024,
+                                    "title": "Cocktail Bars",
+                                    "displayAddress": [
+                                        "3808 N Williams Ave",
+                                        "Ste 127",
+                                        "Portland, OR 97227"
+                                    ],
+                                    "busineesId": "6DwR5rF1s6fJn4f-Lvfbuw"
+                                }
+                            ]
+                        }],
+                        "author": user4._id})
+
+
+                    let itinerary9 = new Itinerary({
+                        "name":"Itenerary9",
+                        "startCity": NameToCity["San Francisco (SF)"]._id,
+                        "endCity": NameToCity["Phoenix"]._id,
+                        "middleCities":[{
+                            "city": NameToCity["Salt Lake City"]._id,
+                            "activities":[
+                                {
+                                    "name": "Dreamscapes",
+                                    "imageUrl": "https://s3-media2.fl.yelpcdn.com/bphoto/JG-cQ9YZkg7sZR1H8QgjMg/o.jpg",
+                                    "rating": 4.5,
+                                    "reviewCount": 58,
+                                    "title": "Art Museums",
+                                    "displayAddress": [
+                                        "10450 State St",
+                                        "Ste 2200",
+                                        "Salt Lake City, UT 84101"
+                                    ],
+                                    "busineesId": "kQKQIRwPkEddjOC2TYWb_Q"
+                                }
+                            ],
+                            "hotels":[
+                                {
+                                    "name": "Inn On The Hill",
+                                    "imageUrl": "https://s3-media4.fl.yelpcdn.com/bphoto/ZdMuMnzHdHv4e3U9mrWA1g/o.jpg",
+                                    "rating": 5,
+                                    "reviewCount": 42,
+                                    "title": "Hotels",
+                                    "displayAddress": [
+                                        "225 N State St",
+                                        "Salt Lake City, UT 84103"
+                                    ],
+                                    "busineesId": "MuEBCFdd1NPb2a2M6V7oFA"
+                                }
+                            ],
+                            "food": [
+                                {
+                                    "name": "Arempa's",
+                                    "imageUrl": "https://s3-media2.fl.yelpcdn.com/bphoto/QX_C9kKgToTAQZ1JKFlXyg/o.jpg",
+                                    "rating": 4.5,
+                                    "reviewCount": 278,
+                                    "title": "Venezuelan",
+                                    "displayAddress": [
+                                        "350 S State St",
+                                        "Salt Lake City, UT 84111"
+                                    ],
+                                    "busineesId": "rY53WNZpNCQN-TxjbLXKlQ"
+                                }
+                            ]
+                        }],
+                        "author": user5._id})
+
+                itineraries.push(itinerary1)
                 itineraries.push(itinerary2)
+                itineraries.push(itinerary3)
+                itineraries.push(itinerary4)
+                itineraries.push(itinerary5)
+                itineraries.push(itinerary6)
+                itineraries.push(itinerary7)
+                itineraries.push(itinerary8)
+                itineraries.push(itinerary9)
                 await Itinerary.insertMany(itineraries)
 
-                console.log("Inserting reviews")
-
                 let allItineraries = await Itinerary.find()
+                const reviews = [];
+                for (let i = 0; i < 20; i++) {
+                    const randomRating = Math.floor(Math.random() * 5) + 1; 
+                    const randomComment = faker.lorem.sentence();
+                    const randomAuthor = users[Math.floor(Math.random() * users.length)]._id;
+                    const randomItinerary = allItineraries[Math.floor(Math.random() * allItineraries.length)]._id; 
 
-                let review1 = new Review({
-                    rating: 5,
-                    comment: "Best route ever !!",
-                    author: user1._id,
-                    itinerary: allItineraries[0]._id
-                })
-
-                let review2 = new Review({
-                    rating: 4,
-                    comment: "Was a good route !!",
-                    author: user1._id,
-                    itinerary: allItineraries[1]._id
-                })
-
-                let reviews = []
-                reviews.push(review1)
-                reviews.push(review2)
-                await Review.collection.drop()
+                    const review = {
+                        rating: randomRating,
+                        comment: randomComment,
+                        author: randomAuthor,
+                        itinerary: randomItinerary,
+                    };
+                    reviews.push(review);
+                }
+                await Review.collection.drop();
+                console.log("Inserting reviews");
                 await Review.insertMany(reviews);
-
             }))
-
-
-
         })
         .then(() => {
             console.log("Done!");
@@ -253,47 +686,11 @@ const insertSeeds = () => {
         });
     }
 
-const insertReviews = () => {
-    Review.collection.drop().then(async () => {
-        let users = await User.find()
-        let itineraryId = new mongoose.Types.ObjectId("653996a44dfa6532e594b4ba");
-
-        console.log(users);
-
-        let user1 = users[0]._id
-        let user2 = users[1]._id
-        let user3 = users[2]._id
-
-        await Review.collection.insertOne({
-            rating: 5,
-            comment: "Best route ever !!",
-            author: user1._id,
-            itinerary: itineraryId})
-
-        await Review.collection.insertOne({
-            rating: 5,
-            comment: "Best route ever !!",
-            author: user2._id,
-            itinerary: itineraryId})
-
-        await Review.collection.insertOne({
-            rating: 5,
-            comment: "Best route ever !!",
-            author: user3._id,
-            itinerary: itineraryId})
-            
-    }).then(() => {
-        console.log("Done!!")
-        mongoose.disconnect();
-    })
-}
-
 mongoose
     .connect(db, { useNewUrlParser: true })
     .then(() => {
         console.log('Connected to MongoDB successfully');
         insertSeeds();
-        // insertReviews();
     })
     .catch(err => {
         console.error(err.stack);
