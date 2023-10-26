@@ -1,0 +1,53 @@
+.itin-data-info {
+  height: 150px;
+  background-color: #33658a;
+  border-radius: 4px;
+  display: flex;
+  margin: 1rem;
+  width: 400px;
+}
+
+.data-box {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  flex-wrap: wrap;
+}
+
+.data-img {
+  height: 100%;
+  width: 150px;
+  border-radius: 4px;
+}
+
+h3{
+    font-family: "Bebas Neue";
+    font-size: 30px;
+    color: #f6ae2d;
+}
+
+h4{
+    font-family: "Bebas Neue";
+    font-size: 25px;
+    color: #86bbd8; 
+}
+
+h5{
+    font-family: "Bebas Neue";
+    font-size: 15px;
+    color: #2f4858; 
+}
+
+p{
+    font-family: "Bebas Neue";
+    font-size: 20px;
+    color: white; 
+}
+
+.data-words{
+    margin: 5px;
+}
+
+.middle-route{
+    margin: 1rem;
+}
