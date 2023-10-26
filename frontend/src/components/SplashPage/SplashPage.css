@@ -51,7 +51,6 @@ h2 {
   height: 11rem;
   border-radius: 10px;
   background-color: #33658a;
-
 }
 
 .route-choose {
@@ -83,7 +82,6 @@ h2 {
 .route-line-content h2 {
   font-size: 20px;
   color: #f6ae2d;
-  
 }
 .route-marker {
   display: flex;
@@ -104,7 +102,7 @@ h2 {
   padding-top: 2rem;
 }
 
-.map-marker-info-inner h2{
+.map-marker-info-inner h2 {
   font-family: "Bebas Neue";
   font-size: 50px;
   color: #f88243;
@@ -115,10 +113,102 @@ h2 {
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-.route-map-marker{
+.route-map-marker {
   animation: fadeIn 2s;
+}
+
+.splash-image {
+  width: 100%;
+}
+
+/* --------------------- */
+
+/* body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  overflow-x: hidden;
+} */
+
+.big-image {
+  font-family: "Bebas Neue";
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-image: url("../../assets/images/splash.jpg");
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  color: #f6ae2d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: all 2s ease-in-out;
+}
+
+.overlay h1 {
+  font-size: 65px;
+  letter-spacing: 0px;
+  margin: 0 0 5px;
+}
+
+.overlay p {
+  margin: 0;
+  font-size: 28px;
+}
+
+.hero-button{
+  margin-top: 20rem;
+
+}
+
+.hero-button button{
+  font-family: "bebas Neue";
+  font-size: 25px;
+  margin: 3rem 10rem;
+  height: 50px;
+  width: 200px;
+  border-radius: 4px;
+  border: 2px solid white;
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+
+}
+
+.browse-button{
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.map-splash{
+  animation: fadeIn 1s ;
+  width: 90%;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

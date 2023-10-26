@@ -25,7 +25,6 @@ function MapMarker({ city , add}) {
     Atlanta: "atlanta",
   };
 
-  console.log(city.description,"hello")
   return (
     <>
       <li onClick={add(city)} class={`map-marker map-marker-${CITIES_CSS[city.name]}`}>
