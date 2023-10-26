@@ -54,6 +54,25 @@ export const createItinerary = (itinerary) => {
   }
 }
 
+export const updateItinerary = (itineraryId) => {
+  return async(dispatch) => {
+    const res = await jwtFetch(`/api/itineraries/${itineraryId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      }, 
+      body: JSON.stringify(itineraryId)
+    })
+    if(res.ok){
+      const data = await res.json();
+      dispatch(recieveItin(data));
+    }else{
+      const errorMessage = await res.json();
+      console.error("Failed to update Itinerary", errorMessage.message || "Unknown Error");
+    }
+  }
+}
+
 const itinReducer = (state = {}, action) => {
   const nextState = Object.assign({}, state);
 
