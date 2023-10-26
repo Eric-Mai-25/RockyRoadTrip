@@ -60,7 +60,7 @@ function SpashPage(props) {
                             </header>
 
                             <main>
-                              <p>{city.description}</p>
+                              <h5>{city.description}</h5>
                             </main>
                           </div>
                         </div>
