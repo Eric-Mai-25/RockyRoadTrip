@@ -1,0 +1,15 @@
+.update-button-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 5vh;
+}
+
+.update-button{
+    width: 100%;
+    background-color: #f88243;
+    font-family: "Bebas Neue";
+    color: #33658A;
+    cursor: pointer;
+    font-size: 30px;
+}

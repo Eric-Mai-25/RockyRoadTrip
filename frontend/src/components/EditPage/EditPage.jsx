@@ -84,6 +84,9 @@ export const EditPage = (props) => {
                             <h1 className="city-title">{getCityName(itinerary.endCity)}</h1>
                         </div>
                     </div>
+                    <div className="update-button-div">
+                        <button className="update-button">Update Itinerary</button>
+                    </div>
                  </div>
                  <div className="yelp-div">
                     <div className="results-div">
@@ -112,7 +115,9 @@ export const EditPage = (props) => {
             </div>
         </>
     ) : (
-        null
+        <>
+            <h1>Not loaded properly</h1>
+        </>
     )
 }
 
