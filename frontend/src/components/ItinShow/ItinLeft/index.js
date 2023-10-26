@@ -1,5 +1,8 @@
 import "./itinLeft.css";
-import { AiFillStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineCaretDown } from "react-icons/ai";
+import { CgArrowLongDownC } from "react-icons/cg";
+import { BiSolidFlag, BiTestTube } from "react-icons/bi";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 function ItinLeft({ itin, cities }) {
   const middle = itin.middleCities.map((currCity) => currCity.city);
@@ -7,7 +10,7 @@ function ItinLeft({ itin, cities }) {
 
   return (
     <>
-      <h2>{itin.name}</h2>
+      <h2 className="itin-title">{itin.name}</h2>
       <div className="route-box">
         <div className="route-content">
           <h2 className="route-name">On this route</h2>
@@ -48,7 +51,9 @@ function ItinLeft({ itin, cities }) {
         <hr color="#86bbd8" className="login-line"></hr>
       </div>
       <div className="middle-route">
-        {itin.middleCities.map((cityData) => {
+        <h2>{cities[itin.startCity].name}</h2>
+        <CgArrowLongDownC className="down-arrow arrow" size={"50px"} />
+        {itin.middleCities.map((cityData, i) => {
           const city = cities[cityData.city];
           return (
             <>
@@ -71,16 +76,12 @@ function ItinLeft({ itin, cities }) {
                           <div className="data-words">
                             <h4>{activities.name}</h4>
                             <p>
-                              <AiFillStar color={"#f6ae2d"}/>
+                              <AiFillStar color={"#f6ae2d"} />
                               {activities.rating} rating
                             </p>
                             <p>{activities.reviewCount} reviews</p>
-                            <p>
-                              {activities.displayAddress[0]}
-                            </p>
-                            <p>
-                              {activities.displayAddress[1]}
-                            </p>
+                            <p>{activities.displayAddress[0]}</p>
+                            <p>{activities.displayAddress[1]}</p>
                           </div>
                         </div>
                       </>
@@ -91,7 +92,7 @@ function ItinLeft({ itin, cities }) {
               <div>
                 <h3>Where you will stay</h3>
                 <div className="data-box">
-                {cityData.hotels.map((hotels) => {
+                  {cityData.hotels.map((hotels) => {
                     return (
                       <>
                         <div className="itin-data-info">
@@ -104,16 +105,12 @@ function ItinLeft({ itin, cities }) {
                           <div className="data-words">
                             <h4>{hotels.name}</h4>
                             <p>
-                              <AiFillStar color={"#f6ae2d"}/>
+                              <AiFillStar color={"#f6ae2d"} />
                               {hotels.rating} rating
                             </p>
                             <p>{hotels.reviewCount} reviews</p>
-                            <p>
-                              {hotels.displayAddress[0]}
-                            </p>
-                            <p>
-                              {hotels.displayAddress[1]}
-                            </p>
+                            <p>{hotels.displayAddress[0]}</p>
+                            <p>{hotels.displayAddress[1]}</p>
                           </div>
                         </div>
                       </>
@@ -124,29 +121,22 @@ function ItinLeft({ itin, cities }) {
               <div>
                 <h3>Where you will eat</h3>
                 <div className="data-box">
-                {cityData.food.map((food) => {
+                  {cityData.food.map((food) => {
                     return (
                       <>
                         <div className="itin-data-info">
                           <div>
-                            <img
-                              className="data-img"
-                              src={food.imageUrl}
-                            ></img>
+                            <img className="data-img" src={food.imageUrl}></img>
                           </div>
                           <div className="data-words">
                             <h4>{food.name}</h4>
                             <p>
-                              <AiFillStar color={"#f6ae2d"}/>
+                              <AiFillStar color={"#f6ae2d"} />
                               {food.rating} rating
                             </p>
                             <p>{food.reviewCount} reviews</p>
-                            <p>
-                              {food.displayAddress[0]}
-                            </p>
-                            <p>
-                              {food.displayAddress[1]}
-                            </p>
+                            <p>{food.displayAddress[0]}</p>
+                            <p>{food.displayAddress[1]}</p>
                           </div>
                         </div>
                       </>
@@ -154,21 +144,39 @@ function ItinLeft({ itin, cities }) {
                   })}
                 </div>
               </div>
+              <CgArrowLongDownC className="down-arrow arrow" size={"50px"} />
             </>
           );
         })}
+        <h2>{cities[itin.endCity].name}</h2>
+        <BiSolidFlag className="down-arrow flag" size={"50px"} color="#f6ae2d" />
       </div>
       <div className="line">
         <hr color="#86bbd8" className="login-line"></hr>
       </div>
       <div className="middle-route">
-        {itin.reviews.map((review) => {
-          return (
-            <>
-              <div> hi</div>
-            </>
-          );
-        })}
+        <div className="data-box">
+          {itin.reviews.map((review) => {
+            return (
+              <>
+                <div className="itin-data-info">
+                  <div>
+                    <img
+                      className="prof-img"
+                      src={"https://xsgames.co/randomusers/avatar.php?g=male"}
+                    ></img>
+                  </div>
+                  <div className="data-words">
+                    <p>{review.comment}</p>
+                  </div>
+                </div>
+              </>
+            );
+          })}
+        </div>
+        <div>
+            <button>Write a Comment</button>
+        </div>
       </div>
     </>
   );
