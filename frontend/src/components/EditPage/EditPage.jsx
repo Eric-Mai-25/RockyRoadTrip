@@ -21,7 +21,6 @@ export const EditPage = (props) => {
 
     useEffect(() => {
         getItinerary()
-        console.log("itinerary: ", itinerary)
         dispatch(fetchCities()).then(() => setCitiesLoaded(true));
     }, [])
 
@@ -29,7 +28,6 @@ export const EditPage = (props) => {
         try{
             const response = await fetch(`/api/itineraries/6538b1fc91da721e2abe4105`)
             const data = await response.json();
-            console.log("data: ", data)
             setItinerary(data)
         } catch (error){
             console.error("Error fetching itinerary", error);
@@ -62,7 +60,6 @@ export const EditPage = (props) => {
 
     return (itinerary && cities && citiesLoaded && itinerary.middleCities) ? (
         <>
-            {console.log("itinerary in return", itinerary)}
             <div className="outer-show-div">
                 <div className="all-cities-div">
                     <div className="city-div-start-end">
