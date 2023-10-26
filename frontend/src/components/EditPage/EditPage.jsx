@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCities } from "../../store/cities";
 import "./EditPage.css";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { fetchItin, getItin } from "../../store/itinerary";
 
 export const EditPage = (props) => {
     
@@ -9,10 +11,12 @@ export const EditPage = (props) => {
     const [selectedCity, setSelectedCity] = useState(""); // Store the name of the city the user is currenlty interactring with.  
     const [selectedCategory, setSelectedCategory] = useState(""); // Store the currenlty selected category
     const [yelpResults, setYelpResults] = useState([]); //Will store the list of results fetched from the yelp API
-    const [itinerary, setItinerary] = useState({})
     const [citiesLoaded, setCitiesLoaded] = useState(false)
 
+    const {itinId} = useParams();
+
     const cities = useSelector((state) => state.cities);
+    const itinerary = useSelector(getItin(itinId));
 
     const handleCategoryClick = (city, category) => {
         setSelectedCity(city);
@@ -20,19 +24,9 @@ export const EditPage = (props) => {
     }
 
     useEffect(() => {
-        getItinerary()
+        dispatch(fetchItin(itinId));
         dispatch(fetchCities()).then(() => setCitiesLoaded(true));
     }, [])
-
-    const getItinerary = async() => {
-        try{
-            const response = await fetch(`/api/itineraries/653aafea7b7a562ed6ce4306`)
-            const data = await response.json();
-            setItinerary(data)
-        } catch (error){
-            console.error("Error fetching itinerary", error);
-        }
-    }
 
     const fetchYelpData = async () => {
         try{
