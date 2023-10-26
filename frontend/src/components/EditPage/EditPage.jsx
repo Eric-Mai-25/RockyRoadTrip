@@ -26,7 +26,7 @@ export const EditPage = (props) => {
 
     const getItinerary = async() => {
         try{
-            const response = await fetch(`/api/itineraries/6538b1fc91da721e2abe4105`)
+            const response = await fetch(`/api/itineraries/653aafea7b7a562ed6ce4306`)
             const data = await response.json();
             setItinerary(data)
         } catch (error){
