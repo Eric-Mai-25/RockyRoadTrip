@@ -39,37 +39,41 @@ function LoginForm () {
 
   return (
     <>
-      <form className="session-form" onSubmit={handleSubmit}>
-        <div className='form-div'>
-          <div className="errors">{errors?.email}</div>
-          <label className='email-input'>
-            <span>Email: </span>
-            <input type="text"
-              value={email}
-              onChange={update('email')}
-              placeholder="Email"
-              className='text-input-email'
+    <div className='login-div'>
+        <form className="session-form" onSubmit={handleSubmit}>
+          <div className='form-div'>
+            <div className="errors">{errors?.email}</div>
+            <label className='email-input'>
+              <span>Email: </span>
+              <input type="text"
+                value={email}
+                onChange={update('email')}
+                placeholder="Email"
+                className='text-input-email'
+              />
+            </label>
+            <div className="errors">{errors?.password}</div>
+            <label className='password-input'>
+              <span>Password: </span>
+              <input type="password"
+                value={password}
+                onChange={update('password')}
+                placeholder="Password"
+                className='text-input-password'
+              />
+            </label>
+            <input
+              type="submit"
+              value="Log In"
+              disabled={!email || !password}
+              className='submit-button'
             />
-          </label>
-          <div className="errors">{errors?.password}</div>
-          <label className='password-input'>
-            <span>Password: </span>
-            <input type="password"
-              value={password}
-              onChange={update('password')}
-              placeholder="Password"
-              className='text-input-password'
-            />
-          </label>
-          <input
-            type="submit"
-            value="Log In"
-            disabled={!email || !password}
-            className='submit-button'
-          />
+          </div>
+        </form>
+        <div className='demo-button-div'>
+          <button className='submit-button' onClick={handleDemoClick}>Demo User</button>
         </div>
-      </form>
-      <button className='submit-button' onClick={handleDemoClick}>Demo User</button>
+    </div>
     </>
   );
 }
