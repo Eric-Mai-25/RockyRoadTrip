@@ -23,12 +23,17 @@ export const ShowPage = (props) => {
         let lsRoute = JSON.parse(localStorage.getItem("routePreview")) ||  {};
         if(!Object.keys(routePreview).length && lsRoute){
             dispatch(addRoute(lsRoute))
+        } 
+
+        if(lsRoute.middleCities.length){
+            setSelectedCity(lsRoute.middleCities[0].name);
+            setSelectedCategory("activity");
         }
     }, [])
 
     const handleCategoryClick = (city, category) => {
         setSelectedCity(city);
-        setSelectedCategory(category)
+        setSelectedCategory(category);
     }
 
     const fetchYelpData = async () => {
@@ -115,6 +120,9 @@ export const ShowPage = (props) => {
     if(!Object.keys(routePreview).length){
         return <Redirect to="/"/>
     }
+
+    console.log("this is just before");
+    console.log(selectedCity, selectedCategory);
 
     return (
         <>

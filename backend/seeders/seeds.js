@@ -6,6 +6,8 @@ const Itinerary = require('../models/Itinerary.js');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 const Review = require("../models/Review.js");
+const Schema = mongoose.Schema;
+
 
 const NUM_SEED_USERS = 10;
 
@@ -251,11 +253,47 @@ const insertSeeds = () => {
         });
     }
 
+const insertReviews = () => {
+    Review.collection.drop().then(async () => {
+        let users = await User.find()
+        let itineraryId = new mongoose.Types.ObjectId("653996a44dfa6532e594b4ba");
+
+        console.log(users);
+
+        let user1 = users[0]._id
+        let user2 = users[1]._id
+        let user3 = users[2]._id
+
+        await Review.collection.insertOne({
+            rating: 5,
+            comment: "Best route ever !!",
+            author: user1._id,
+            itinerary: itineraryId})
+
+        await Review.collection.insertOne({
+            rating: 5,
+            comment: "Best route ever !!",
+            author: user2._id,
+            itinerary: itineraryId})
+
+        await Review.collection.insertOne({
+            rating: 5,
+            comment: "Best route ever !!",
+            author: user3._id,
+            itinerary: itineraryId})
+            
+    }).then(() => {
+        console.log("Done!!")
+        mongoose.disconnect();
+    })
+}
+
 mongoose
     .connect(db, { useNewUrlParser: true })
     .then(() => {
         console.log('Connected to MongoDB successfully');
         insertSeeds();
+        // insertReviews();
     })
     .catch(err => {
         console.error(err.stack);
