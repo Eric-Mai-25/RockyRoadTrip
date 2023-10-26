@@ -60,3 +60,19 @@ form > .errors {
 .text-input-password::placeholder{
   color: #F88243;
 }
+
+.login-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-button-div{
+  margin-top: 10%;
+}
+
+.submit-button{
+  border: none;
+  cursor: pointer;
+}

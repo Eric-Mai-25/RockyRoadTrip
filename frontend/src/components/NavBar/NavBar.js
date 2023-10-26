@@ -19,11 +19,7 @@ function NavBar () {
     if (loggedIn) {
       return (
         <div className="links-nav">
-          {/* <Link to={'/tweets'}>All Tweets</Link>
-          <Link to={'/profile'}>Profile</Link>
-          <Link to={'/tweets/new'}>Write a Tweet</Link> */} 
-          <p>TODO: LINKS SHOULD GO HERE</p>
-          <button onClick={logoutUser}>Logout</button>
+          <button onClick={logoutUser} className='submit-button'>Logout</button>
         </div>
       );
     } else {

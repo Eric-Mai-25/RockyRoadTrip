@@ -15,6 +15,7 @@ import ItinShow from './components/ItinShow'
 import { getCurrentUser } from './store/session';
 import SplashPage from './components/SplashPage';
 import EditPage from './components/EditPage/EditPage';
+import { Route } from 'react-router-dom/cjs/react-router-dom.min';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,12 +29,10 @@ function App() {
       <Modal/>
       <NavBar />
       <Switch>
-        <AuthRoute exact path={`/edit`} component={EditPage} /> {/*TODO change from /edit to /edit/itineraryId */}
-        <AuthRoute exact path="/" component={SplashPage} />
-        <AuthRoute exact path="/itinerary/:itinId" component={ItinShow} />
-        <AuthRoute exact path="/show" component={ShowPage} /> {/* TODO Will need to have id in route for specific itinerary, for now though we will not */}
-        <AuthRoute exact path="/login" component={LoginForm} />
-        <AuthRoute exact path="/signup" component={SignupForm} />
+        <Route exact path={`/edit`} component={EditPage} /> {/*TODO change from /edit to /edit/itineraryId */}
+        <Route exact path="/" component={SplashPage} />
+        <Route exact path="/itinerary/:itinId" component={ItinShow} />
+        <Route exact path="/show" component={ShowPage} /> {/* TODO Will need to have id in route for specific itinerary, for now though we will not */}
       </Switch>
     </>
   );
