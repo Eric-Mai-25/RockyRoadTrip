@@ -20,7 +20,7 @@ function Map({add}) {
           <div className="map">
             <ul class="map-markers">
               {Object.values(cities).map((city, i) => {
-                return <MapMarker key={city.name + i} add={add.bind(this)} city={city} />;
+                return <MapMarker key={city.name + i}  add={add.bind(this)} city={city} />;
               })}
             </ul>
 

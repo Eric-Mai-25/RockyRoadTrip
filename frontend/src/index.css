@@ -59,3 +59,12 @@ body{
     font-weight: normal;
     font-weight: normal;
 }
+
+
+:root{
+	--orange: #f88243;
+	--yellow: #f6ae2d;
+	--charcoal: #2f4858;
+	--light-blue: #86bbd8;
+	--lapis: #33658a;
+}

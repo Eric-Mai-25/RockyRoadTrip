@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TbBus, TbArrowBadgeRightFilled } from "react-icons/tb";
 import { addRoute } from "../../store/routeSession";
 import { Redirect } from "react-router-dom";
 import { BiCurrentLocation, BiSolidChevronRight } from "react-icons/bi";
-import splashImg from "../../assets/images/splash.jpg";
 
 import Map from "./Map";
 import "./SplashPage.css";
@@ -15,6 +14,7 @@ function SpashPage(props) {
   const [selectedRoute, setSelectedRoute] = useState([]);
   const routePreview = useSelector((state) => state.routePreview);
   const [toggleHero, setToggleHero] = useState(true);
+  
 
   const handleAdd = (city) => (e) => {
     setSelectedRoute([...selectedRoute, city]);
@@ -57,7 +57,7 @@ function SpashPage(props) {
   } else {
     currentImage = (
       <>
-        <h2>Pick your starting city</h2>
+        <h2 className="map-splash-title" >Pick your starting city</h2>
         <div className="map-splash">
           <Map add={handleAdd.bind(this)} />
         </div>
