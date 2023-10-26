@@ -33,7 +33,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
           <Component {...props} />
         ) : (
           // If not logged in, redirect to the login page
-          <Redirect to="/login" />
+          <Redirect to="/" />
         )
       }
     />
