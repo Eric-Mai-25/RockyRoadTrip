@@ -48,9 +48,11 @@ export const createItinerary = (itinerary) => {
           body: JSON.stringify(itinerary)
       })
 
-      const data = await res.json();
-      dispatch(recieveItin(data));
-      return data;
+      if (res.ok){
+        const data = await res.json();
+        dispatch(recieveItin(data));
+        return data;
+      }
   }
 }
 

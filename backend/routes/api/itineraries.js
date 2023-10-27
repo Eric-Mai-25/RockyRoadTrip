@@ -22,8 +22,8 @@ router.get('/', async function(req, res, next) {
 router.get('/:id', async function(req, res, next) {
     try{
         const itinerary = await Itinerary.findOne({_id: req.params.id}).populate("author", "_id username");
-        const reviews = await Review.find({"itinerary": itinerary._id})
-        return res.json({...itinerary._doc, ["reviews"]: reviews});
+        const reviews = await Review.find({"itinerary": itinerary._id});
+        return res.json({...itinerary._doc, ["reviews"]: reviews || []});
     } catch(err){
         return res.json({});
     }
@@ -46,10 +46,9 @@ router.delete('/:id', requireUser, async (req, res, next) => {
     }
 })
 
-router.post('/', validateItineraryInput, async(req, res, next) => {
+router.post('/', requireUser, validateItineraryInput, async(req, res, next) => {
 
-    // TOOD require user and update all user ref to requser
-    let user = await User.findOne({email: 'demo-user@rockyroadtrip.com'})
+    let user = await User.findOne({_id: req.user._id})
 
     const err = new Error("Validation Error");
     err.statusCode = 400;
@@ -60,10 +59,6 @@ router.post('/', validateItineraryInput, async(req, res, next) => {
         errors.name = "A itinerary with this name already exists";
     }
 
-    if(req.body.startCity === req.body.endCity){
-        errors.startCity = "startCity and endCity cannot be same";
-    }
-
     let allCities = await City.find()
     let cities = {}
 
@@ -72,22 +67,17 @@ router.post('/', validateItineraryInput, async(req, res, next) => {
     });
 
     if (!cities[req.body.startCity]){
-        errors.startCity = "unable to find startCity"
+        errors.startCity = "Invalid startCity"
     }
 
     if (!cities[req.body.endCity]){
-        errors.endCity = "unable to find endCity"
+        errors.endCity = "Invalid endCity"
     }
 
     let middleCitiesErrors = []
-
     req.body.middleCities.forEach((mCity, idx) => {
         if(!mCity.city || !cities[mCity.city]){
-            middleCitiesErrors[idx] = {"city": "Invalid city"};
-            return
-        }
-        if(mCity.city === req.body.startCity || mCity.city === req.body.endCity){
-            middleCitiesErrors[idx] = {"city": `city cannot be same as start or end city`};
+            middleCitiesErrors.push("Invalid city");
             return
         }
     })

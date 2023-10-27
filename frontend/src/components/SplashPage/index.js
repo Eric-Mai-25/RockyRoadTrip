@@ -29,9 +29,6 @@ function SpashPage(props) {
     dispatch(addRoute(routePreview));
   };
 
-  if (Object.keys(routePreview).length) {
-    return <Redirect to="/show" />;
-  }
   const handleToggle = () => {
     setToggleHero(false);
     handleClickScroll()

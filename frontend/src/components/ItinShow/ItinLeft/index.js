@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import * as modalActions from "../../../store/modal" 
 
 function ItinLeft({ itin, cities }) {
-  console.log("this is itin show")
   const dispatch = useDispatch();
   const middle = itin.middleCities.map((currCity) => currCity.city);
   const itinStartToFin = [itin.startCity, ...middle, itin.endCity];
@@ -164,7 +163,7 @@ function ItinLeft({ itin, cities }) {
       </div>
       <div className="middle-route">
         <div className="data-box">
-          {itin.reviews.map((review) => {
+          {itin.reviews && itin.reviews.map((review) => {
             return (
               <>
                 <div className="itin-data-info">

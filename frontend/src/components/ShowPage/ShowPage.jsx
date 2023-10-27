@@ -2,21 +2,20 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import "./ShowPage.css";
 import { addRoute } from "../../store/routeSession";
-import { Redirect } from "react-router-dom";
 import * as itinerariesAction from "../../store/itinerary";
+import * as modalActions from "../../store/modal";
+import { useHistory } from "react-router-dom";
 
 export const ShowPage = (props) => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const [selectedCity, setSelectedCity] = useState(""); // Store the name of the city the user is currenlty interactring with.  
     const [selectedCategory, setSelectedCategory] = useState(""); // Store the currenlty selected category
     const [yelpResults, setYelpResults] = useState([]); //Will store the list of results fetched from the yelp API
-    const [selectedBusiness, setSelectedBusiness] = useState({
-        // A nested state structure to store selected businesses for each city and category.
-        Chicago: {activity: null, hotel: null, food: null},
-        KansasCity: {activity: null, hotel: null, food: null},
-        LasVegas: {activity: null, hotel: null, food: null}
-    })
+    const [itineraryName, setItineraryName] = useState("");
+    const [errors, setErrors] = useState([]);
     
+    const sessionUser = useSelector((state) => state.session.user);
     const routePreview = useSelector((state) => state.routePreview);
 
     useEffect(() => {
@@ -96,7 +95,7 @@ export const ShowPage = (props) => {
     }
 
     const handleCreateItinerary = () => {
-        let itineraryObj = {name: "my demo 4 itinerary"}
+        let itineraryObj = {name: itineraryName}
 
         itineraryObj.startCity = routePreview.startCity._id
         itineraryObj.endCity = routePreview.endCity._id
@@ -111,20 +110,44 @@ export const ShowPage = (props) => {
             itineraryObj.middleCities.push(midCity);
         })
 
-        dispatch(itinerariesAction.createItinerary(itineraryObj)).then((data) => {
-            return <Redirect to={`/itinerary/${data._id}`}/>
-        })
+        dispatch(itinerariesAction.createItinerary(itineraryObj))
+            .then((data) => {
+                history.push(`/itinerary/${data._id}`);
+            })
+            .catch(async(res) => {
+                let data;
+                try {
+                    data = await res.json();
+                } catch {
+                    data = await res.text(); // Will hit this case if the server is down
+                }
 
-    }
-
-    if(!Object.keys(routePreview).length){
-        return <Redirect to="/"/>
+                if (data?.errors) {
+                    let errs = []
+                    Object.entries(data.errors).forEach(([key, value]) => {
+                        if(key === "name"){
+                            errs.push(`Invalid Name`);
+                        } else {
+                            errs.push(value);
+                        }
+                    })
+                    setErrors(errs);
+                }
+                else if (data) setErrors([data]);
+                else setErrors([res.statusText]);
+            })
     }
     
-    return (
+    return (Object.keys(routePreview).length && 
         <>
             <div className="outer-show-div">
                 <div className="all-cities-div">
+                    {errors.map((error) => <div>{error}</div>)}
+                    <div className="itinerary-title">Choose a unique name for your itinerary
+                        <input type="text" value={itineraryName} 
+                            onChange={(e) => setItineraryName(e.target.value)}></input>
+                    </div>
+
                     <div className="city-div-start-end">
                         <div className="city-title-div-start-end">
                             <h1 className="city-title">{routePreview.startCity.name}</h1>
@@ -153,6 +176,17 @@ export const ShowPage = (props) => {
                             <h1 className="city-title">{routePreview.endCity.name}</h1>
                         </div>
                     </div>
+                    <div className="show-page-cta">
+                    {sessionUser ? 
+                        <div className="show-page-with-user">
+                            <button onClick={handleCreateItinerary}>Create Itinerary</button> 
+                        </div> :
+                        <div className="show-page-no-user-cta">
+                            <button onClick={() => dispatch(modalActions.openModal("signup"))}>Signup to create itinerary</button> OR 
+                            <button onClick={() => dispatch(modalActions.openModal("login"))}>Already have an account? Login to create itinerary</button>
+                        </div>
+                    }
+            </div>
                 </div>
                 <div className="yelp-div">
                     <div className="results-div">
@@ -179,9 +213,7 @@ export const ShowPage = (props) => {
                     </div>
                 </div>
             </div>
-            <div>
-                <button onClick={handleCreateItinerary}>Create Itinerary</button>
-            </div>
+            
         </>
     )
 }
