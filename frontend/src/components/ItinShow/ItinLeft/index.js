@@ -2,9 +2,12 @@ import "./itinLeft.css";
 import { AiFillStar, AiOutlineCaretDown } from "react-icons/ai";
 import { CgArrowLongDownC } from "react-icons/cg";
 import { BiSolidFlag, BiTestTube } from "react-icons/bi";
-import { FaMapMarkerAlt } from "react-icons/fa";
+
+import { useDispatch } from "react-redux";
+import * as modalActions from "../../../store/modal" 
 
 function ItinLeft({ itin, cities }) {
+  const dispatch = useDispatch();
   const middle = itin.middleCities.map((currCity) => currCity.city);
   const itinStartToFin = [itin.startCity, ...middle, itin.endCity];
 
@@ -26,17 +29,6 @@ function ItinLeft({ itin, cities }) {
                     <ul class="map-markers route-dot">
                       <li class="map-marker route-map-marker">
                         <a href="#">{city.name}</a>
-                        <div class="map-marker-info route-info">
-                          <div class="map-marker-info-inner animate-bounce-in">
-                            <header>
-                              <h2>{city.name}</h2>
-                            </header>
-
-                            <main>
-                              <p>{city.description}</p>
-                            </main>
-                          </div>
-                        </div>
                       </li>
                     </ul>
                     <h2 className="route-city-name">{city.name}</h2>
@@ -149,14 +141,18 @@ function ItinLeft({ itin, cities }) {
           );
         })}
         <h2>{cities[itin.endCity].name}</h2>
-        <BiSolidFlag className="down-arrow flag" size={"50px"} color="#f6ae2d" />
+        <BiSolidFlag
+          className="down-arrow flag"
+          size={"50px"}
+          color="#f6ae2d"
+        />
       </div>
       <div className="line">
         <hr color="#86bbd8" className="login-line"></hr>
       </div>
       <div className="middle-route">
         <div className="data-box">
-          {itin.reviews.map((review) => {
+          {itin.reviews && itin.reviews.map((review) => {
             return (
               <>
                 <div className="itin-data-info">
@@ -174,8 +170,10 @@ function ItinLeft({ itin, cities }) {
             );
           })}
         </div>
-        <div>
-            <button>Write a Comment</button>
+        <div className="review-create-button">
+          <button onClick={() => dispatch(modalActions.openModal("createReview"))}>
+            Write a Comment
+          </button>
         </div>
       </div>
     </>

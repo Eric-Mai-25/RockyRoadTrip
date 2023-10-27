@@ -1,0 +1,126 @@
+.itin-card {
+    height: 400px;
+    background-color: #33658a;
+    display: flex;
+    margin: 1rem;
+    width: 400px;
+
+}
+
+.user-itins{
+    margin: 2rem;
+}
+
+.splash-itin-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+
+.itin-card{
+    transition: all 0.5s;
+}
+
+.itin-card:hover{
+    filter: drop-shadow(2px 2px 2px black);
+    cursor: pointer;
+    /* filter: brightness(70%); */
+}
+
+
+.link-card{
+    text-decoration: none;
+}
+
+.card-portland{
+    background-image: url("../../../assets/images/Cities/Portland.jpg");
+    background-size: cover;
+}
+.card-seattle{
+    background-image: url("../../../assets/images/Cities/Seattle.jpg");
+    background-size: cover;
+}
+.card-san-francisco{
+    background-image: url("../../../assets/images/Cities/SanFran.jpg");
+    background-size: cover;
+}
+.card-los-angeles{
+    background-image: url("../../../assets/images/Cities/LosAngel.jpg");
+    background-size: cover;
+}
+.card-las-vegas{
+    background-image: url("../../../assets/images/Cities/LasVega.jpg");
+    background-size: cover;
+}
+.card-phoenix{
+    background-image: url("../../../assets/images/Cities/Phoenix.jpg");
+    background-size: cover;
+}
+.card-salt-lake-city{
+    background-image: url("../../../assets/images/Cities/SaltLake.jpg");
+    background-size: cover;
+}
+.card-denver{
+    background-image: url("../../../assets/images/Cities/Denver.jpg");
+    background-size: cover;
+}
+.card-minneapolis{
+    background-image: url("../../../assets/images/Cities/Minni.jpg");
+    background-size: cover;
+}
+.card-houston{
+    background-image: url("../../../assets/images/Cities/Houston.jpg");
+    background-size: cover;
+}
+.card-dallas{
+    background-image: url("../../../assets/images/Cities/dallas.jpg");
+    background-size: cover;
+}
+.card-new-orleans{
+    background-image: url("../../../assets/images/Cities/NewOrleans.jpg");
+    background-size: cover;
+}
+.card-chicago{
+    background-image: url("../../../assets/images/Cities/Chicago.jpg");
+    background-size: cover;
+}
+.card-milwaukee{
+    background-image: url("../../../assets/images/Cities/Milwalk.jpg");
+    background-size: cover;
+}
+.card-detroit{
+    background-image: url("../../../assets/images/Cities/Detroit.jpg");
+    background-size: cover;
+}
+.card-new-york{
+    background-image: url("../../../assets/images/Cities/NewYork.jpg");
+    background-size: cover;
+}
+.card-boston{
+    background-image: url("../../../assets/images/Cities/Boston.jpg");
+    background-size: cover;
+}
+.card-philadelphia{
+    background-image: url("../../../assets/images/Cities/philly.jpg");
+    background-size: cover;
+}
+.card-washington-dc{
+    background-image: url("../../../assets/images/Cities/WashDc.jpg");
+    background-size: cover;
+}
+.card-miami{
+    background-image: url("../../../assets/images/Cities/Miami.jpg");
+    background-size: cover;
+}
+.card-orlando{
+    background-image: url("../../../assets/images/Cities/Orlando.jpg");
+    background-size: cover;
+}
+.card-atlanta{
+    background-image: url("../../../assets/images/Cities/atlanta.jpg");
+    background-size: cover;
+}
+

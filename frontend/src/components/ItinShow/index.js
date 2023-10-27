@@ -17,9 +17,13 @@ function ItinShow(props) {
   useEffect(() => {
     dispatch(fetchItin(itinId));
     dispatch(fetchCities());
-  }, []);
+  }, [itinId]);
 
-  return itin ? (
+  if (!itin || !cities){
+    return null
+  }
+
+  return Object.keys(itin).length && Object.keys(cities).length ? (
     <>
       <div className="itin-show-box-left">
         <ItinLeft itin={itin} cities={cities} />

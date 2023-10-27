@@ -4,14 +4,9 @@ import "./Map.css";
 import { fetchCities } from "../../../store/cities";
 import MapMarker from "./MapMarker";
 
-function Map({add}) {
+function Map({add, cities}) {
   const dispatch = useDispatch();
-  const cities = useSelector((state) => state.cities);
 
-
-  useEffect(() => {
-    dispatch(fetchCities());
-  }, []);
 
   return Object.keys(cities).length ? (
     <>
@@ -20,7 +15,7 @@ function Map({add}) {
           <div className="map">
             <ul class="map-markers">
               {Object.values(cities).map((city, i) => {
-                return <MapMarker key={city.name + i} add={add.bind(this)} city={city} />;
+                return <MapMarker key={city.name + i}  add={add.bind(this)} city={city} />;
               })}
             </ul>
 
