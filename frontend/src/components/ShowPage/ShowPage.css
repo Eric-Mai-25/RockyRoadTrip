@@ -5,7 +5,7 @@
     justify-content: space-around;
     align-items: center;
     align-content: center;
-    margin-top: 5%;
+    margin-top: 3%;
 }
 
 .all-cities-div{
@@ -74,10 +74,10 @@
 }
 
 .city-title{
-   color: #F88243;
-   font-family: "Bebas Neue";
-   font-size: 30px;
-   margin-left: 1vw;
+    color: #F88243;
+    font-family: "Bebas Neue";
+    font-size: 30px;
+    margin-left: 1vw;
 }
 
 .yelp-div{
@@ -151,4 +151,18 @@
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
+}
+
+.itinerary-title{
+    display: flex;
+    flex-direction: column;
+    color: #F88243;
+}
+
+.itinerary-title > input {
+    margin-top: 2%;
+}
+
+.show-page-cta {
+    border: 2px solid white;
 }

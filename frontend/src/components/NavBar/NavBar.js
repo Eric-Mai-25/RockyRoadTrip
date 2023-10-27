@@ -1,18 +1,21 @@
-
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './NavBar.css';
 import { logout } from '../../store/session';
-import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
-import * as modalActions from "../../store/modal"
+import { NavLink, Redirect, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import * as modalActions from "../../store/modal";
+import * as routeSessionActions from "../../store/routeSession";
 
 function NavBar () {
+  const history = useHistory();
   const loggedIn = useSelector(state => !!state.session.user);
   const dispatch = useDispatch();
   
   const logoutUser = e => {
       e.preventDefault();
+      dispatch(routeSessionActions.clearRoute());
       dispatch(logout());
+      history.push("/");
   }
 
   const getLinks = () => {

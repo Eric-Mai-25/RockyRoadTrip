@@ -163,7 +163,7 @@ function ItinLeft({ itin, cities }) {
       </div>
       <div className="middle-route">
         <div className="data-box">
-          {itin.reviews.map((review) => {
+          {itin.reviews && itin.reviews.map((review) => {
             return (
               <>
                 <div className="itin-data-info">

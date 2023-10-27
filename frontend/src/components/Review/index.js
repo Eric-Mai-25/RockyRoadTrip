@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { login, clearSessionErrors } from '../../store/session';
 import { createReview } from '../../store/reviews';
+import * as modalActions from "../../store/modal";
 
 function ReviewForm () {
     const dispatch = useDispatch()
@@ -19,7 +20,9 @@ function ReviewForm () {
         author: "653af2171bb4ab80cf592bbf",
         itinerary: itinId[0]
     }
-    dispatch(createReview(body))
+    dispatch(createReview(body)).then(() => {
+      dispatch(modalActions.closeModal())
+    })
   }
 
 // rating
