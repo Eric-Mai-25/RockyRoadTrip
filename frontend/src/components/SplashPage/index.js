@@ -22,6 +22,7 @@ function SpashPage(props) {
   const cities = useSelector((state) => state.cities);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     dispatch(fetchCities());
   }, []);
 
@@ -41,14 +42,14 @@ function SpashPage(props) {
   if (Object.keys(routePreview).length) {
     return <Redirect to="/show" />;
   }
-  const handleToggle = field => () => {
+  const handleToggle = (field) => () => {
     setToggleHero(false);
     handleClickScroll(field);
   };
 
-  const handleBrowse =field => e =>{
-    handleClickScroll(field)
-  }
+  const handleBrowse = (field) => (e) => {
+    handleClickScroll(field);
+  };
   const handleClickScroll = (field) => {
     const element = document.getElementById(field);
     if (element) {
@@ -65,7 +66,9 @@ function SpashPage(props) {
         <h1>Where will your journey take you?</h1>
         <p>create your dream trip</p>
         <div className="hero-button">
-          <button className="create-button" onClick={handleToggle("big-image")}>Create your route</button>
+          <button className="create-button" onClick={handleToggle("big-image")}>
+            Create your route
+          </button>
           <button onClick={handleBrowse("user-itin")}>
             <div className="browse-button">
               Browse
@@ -80,7 +83,7 @@ function SpashPage(props) {
       <>
         <h2 className="map-splash-title">Pick your starting city</h2>
         <div className="map-splash">
-          <Map add={handleAdd.bind(this)}  cities={cities}/>
+          <Map add={handleAdd.bind(this)} cities={cities} />
           <div className="route-box title-route">
             <div className="route-content">
               <h2 className="route-name">Your Custom Route</h2>
@@ -149,7 +152,9 @@ function SpashPage(props) {
                 <h3> Personalize your itinerary along the way!</h3>
               </div>
               <div className="create-review-button">
-                <button onClick={handleToggle("big-image")}>Start your route!</button>
+                <button onClick={handleToggle("big-image")}>
+                  Start your route!
+                </button>
               </div>
             </div>
           </div>
@@ -163,7 +168,7 @@ function SpashPage(props) {
       </div>
       <div className="user-itins">
         <div className="splash-itin-box">
-              <ItinCard cities={cities}/>
+          <ItinCard cities={cities} />
         </div>
       </div>
     </>
@@ -171,5 +176,3 @@ function SpashPage(props) {
 }
 
 export default SpashPage;
-
-
