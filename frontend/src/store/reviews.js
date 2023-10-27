@@ -14,6 +14,7 @@ const getReview = (reviewId) => (state) => {
 };
 
 export const createReview = (review) => async (dispatch) => {
+    console.log(review.itinerary)
   const res = await jwtFetch(`/api/itineraries/${review.itinerary}/reviews`, {
     method: "POST",
     body: JSON.stringify(review),

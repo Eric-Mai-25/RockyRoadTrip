@@ -12,11 +12,11 @@ function ReviewForm () {
     const itinId = useSelector(state => Object.keys(state.itineraries))
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const body = {
         rating : 2,
-        comment: "This route is crazy!",
-        author: "653ade9d08199d10c60af069",
+        comment: "this is great!",
+        author: "653af2171bb4ab80cf592bbf",
         itinerary: itinId[0]
     }
     dispatch(createReview(body))
