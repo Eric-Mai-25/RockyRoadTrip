@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 const mongoose = require('mongoose');
 const {requireUser} = require('../../config/passport');
 const validateReviewInput = require('../../validations/reviews');
@@ -30,13 +30,13 @@ router.delete('/:id', requireUser, async (req, res, next) => {
 router.post('/', requireUser, validateReviewInput, async (req, res, next) => {
     const reviewCnt = await Review.count({itinerary: req.params.itineraryId, author: req.user._id})
     if(reviewCnt){
-        const err = new Error("Validation Error");
-        err.statusCode = 400;
-        const errors = {message: "A review for this itinerary has been submitted by this user"};
-        err.errors = errors;
-        return next(err);
-    }
-
+            const err = new Error("Validation Error");
+            err.statusCode = 400;
+            const errors = {message: "A review for this itinerary has been submitted by this user"};
+            err.errors = errors;
+            return next(err);
+        }
+        
     req.body.author = req.user._id
     req.body.itinerary = req.params.itineraryId
     const newReview = new Review(req.body)

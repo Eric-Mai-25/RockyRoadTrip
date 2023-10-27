@@ -34,6 +34,15 @@ function SpashPage(props) {
   }
   const handleToggle = () => {
     setToggleHero(false);
+    handleClickScroll()
+  };
+
+  const handleClickScroll = () => {
+    const element = document.getElementById('big-image');
+    if (element) {
+      // 👇 Will scroll smoothly to the top of the next section
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   let currentImage;
@@ -60,36 +69,7 @@ function SpashPage(props) {
         <h2 className="map-splash-title" >Pick your starting city</h2>
         <div className="map-splash">
           <Map add={handleAdd.bind(this)} />
-        </div>
-      </>
-    );
-  }
-
-  return (
-    <>
-      {/* <div class="big-image">
-        <div class="overlay">
-          <h1>Where will your journey take you?</h1>
-          <p>create your dream trip</p>
-          <div className="hero-button">
-            <button>Create your route</button>
-            <button>
-              <div className="browse-button">
-                Browse
-                <BiSolidChevronRight />
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
-      <Map add={handleAdd.bind(this)} /> */}
-      <div class="big-image">
-        <div class="overlay">{currentImage}</div>
-      </div>
-      <div className="line">
-        <hr color="#86bbd8" className="login-line"></hr>
-      </div>
-      <div className="route-box">
+          <div className="route-box title-route">
         <div className="route-content">
           <h2 className="route-name">Your Custom Route</h2>
           <div className="route-marker">
@@ -133,9 +113,20 @@ function SpashPage(props) {
           </Link>
         </div>
       </div>
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <div class="big-image" id="big-image">
+        <div class="overlay">{currentImage}</div>
+      </div>
       <div className="line">
         <hr color="#86bbd8" className="login-line"></hr>
       </div>
+      
       <div className="route-box">
         <div className="route-content">
           <h2>Route 2</h2>
