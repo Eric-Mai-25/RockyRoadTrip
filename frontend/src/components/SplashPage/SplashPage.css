@@ -173,12 +173,11 @@ h2 {
   font-size: 28px;
 }
 
-.hero-button{
+.hero-button {
   margin-top: 20rem;
-
 }
 
-.hero-button button{
+.hero-button button {
   font-family: "bebas Neue";
   font-size: 25px;
   margin: 3rem 10rem;
@@ -190,50 +189,43 @@ h2 {
   background-color: rgba(0, 0, 0, 0.7);
   text-decoration: none;
   transition: all 0.3s;
-
 }
-.hero-button button:hover{
+.hero-button button:hover {
   color: var(--orange);
   border: 2px solid var(--orange);
 }
 
-.browse-button{
+.browse-button {
   display: flex;
   justify-content: center;
   cursor: pointer;
 }
-.create-button{
-
+.create-button {
   cursor: pointer;
 }
 
-
-
-.map-splash{
-  animation: fadeIn 1s ;
+.map-splash {
+  animation: fadeIn 1s;
   width: 90%;
 }
-.map-splash-title{
-  animation: fadeIn 1s ;
-  color: #f6ae2d
+.map-splash-title {
+  animation: fadeIn 1s;
+  color: #f6ae2d;
 }
 
-
-.title-route{
+.title-route {
   margin: 0;
 }
 
-.splash-detail{
+.splash-detail {
   display: flex;
   align-items: center;
   justify-content: center;
   align-content: center;
   margin: 3rem;
-
-
 }
 
-.detail-data{
+.detail-data {
   display: flex;
   justify-content: space-between;
   height: 450px;
@@ -241,34 +233,53 @@ h2 {
   background: linear-gradient(-45deg, #f6ae2d, #f88243);
 }
 
-.detail-data h2{
+.detail-data h2 {
   font-size: 65px;
-  color: var(--charcoal)
+  color: var(--charcoal);
 }
-.detail-data h3{
+.detail-data h3 {
   font-size: 50px;
   color: var(--light-blue);
   width: 50%;
-  
 }
 
-.detail-image img{
+.detail-image img {
   height: 100%;
   width: 100%;
 }
 
-.detail-words{
+.detail-words {
   margin: 3rem;
 }
 
-.create-review-button button{
-  background-color: var(--charcoal);
+.create-review-button {
+  position: relative;
+  color: #86bbd8;
+  left: 40%;
+}
+
+.create-review-button button {
+  font-family: "bebas Neue";
+  font-size: 25px;
+  height: 50px;
+  width: 200px;
+  border-radius: 4px;
+  border: 2px solid var(--orage);
   color: var(--orange);
+  background-color: var(--charcoal);
+
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.create-review-button button:hover {
+  color: white;
 }
 
-.user-created-title{
+
+
+.user-created-title {
   margin: 3rem;
 }
-.user-created-title h2{
+.user-created-title h2 {
   color: var(--yellow);
 }

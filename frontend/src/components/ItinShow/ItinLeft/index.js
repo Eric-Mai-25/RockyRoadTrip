@@ -29,17 +29,6 @@ function ItinLeft({ itin, cities }) {
                     <ul class="map-markers route-dot">
                       <li class="map-marker route-map-marker">
                         <a href="#">{city.name}</a>
-                        <div class="map-marker-info route-info">
-                          <div class="map-marker-info-inner animate-bounce-in">
-                            <header>
-                              <h2>{city.name}</h2>
-                            </header>
-
-                            <main>
-                              <p>{city.description}</p>
-                            </main>
-                          </div>
-                        </div>
                       </li>
                     </ul>
                     <h2 className="route-city-name">{city.name}</h2>
@@ -181,7 +170,7 @@ function ItinLeft({ itin, cities }) {
             );
           })}
         </div>
-        <div className="create-review-button">
+        <div className="review-create-button">
           <button onClick={() => dispatch(modalActions.openModal("createReview"))}>
             Write a Comment
           </button>
