@@ -12,22 +12,27 @@ export const EditPage = (props) => {
     const [selectedCategory, setSelectedCategory] = useState(""); // Store the currenlty selected category
     const [yelpResults, setYelpResults] = useState([]); //Will store the list of results fetched from the yelp API
     const [citiesLoaded, setCitiesLoaded] = useState(false)
-
+    
+    window.yelpResults = yelpResults; //TODO DELETE
+    
     const {itinId} = useParams();
-
+    
     const cities = useSelector((state) => state.cities);
-    const itinerary = useSelector(getItin(itinId));
-
+    
+    const [itinMiddleCities, setItinMiddleCities] = useState([]);
+    
     const handleCategoryClick = (city, category) => {
         setSelectedCity(city);
         setSelectedCategory(category)
     }
-
+    
     useEffect(() => {
         dispatch(fetchItin(itinId));
         dispatch(fetchCities()).then(() => setCitiesLoaded(true));
     }, [])
-
+    
+    const itinerary = useSelector(getItin(itinId));
+    
     const fetchYelpData = async () => {
         try{
             const response = await fetch(`/api/yelp/searchYelp?location=${selectedCity}&term=${selectedCategory}&limit=5`);
@@ -37,19 +42,39 @@ export const EditPage = (props) => {
             console.error("Error fetching Yelp data:", error);
         }
     }
-
+    
     const getCityName = (cityId) => {
         const city = cities[cityId]
         return city ? city.name : "";
     }
-
+    
     useEffect(() => {
         if(selectedCity && selectedCategory) {
             fetchYelpData();
         }
     }, [selectedCity, selectedCategory])
 
+    useEffect(() => {
+        const { middleCities } = itinerary;
 
+        setItinMiddleCities(middleCities);
+        console.log("ItinMiddleCity: ", itinMiddleCities)
+    }, [itinerary]);
+
+    const handleChoose = (result, city) => (e) => {
+        e.preventDefault();
+
+        const updatedItinMiddleCities = JSON.parse(JSON.stringify(itinMiddleCities));
+        console.log("updatedItinMiddleCities: ", updatedItinMiddleCities);
+
+        const cityIndex = updatedItinMiddleCities.findIndex(middleCity => getCityName(middleCity.city) === city);
+        console.log("cityIndex", cityIndex);
+
+        if(cityIndex !== -1){
+            const selectedMiddleCity = updatedItinMiddleCities[cityIndex];
+            console.log("selectedMiddleCity", selectedMiddleCity);
+        }
+    }
 
 
     return (itinerary && cities && citiesLoaded && itinerary.middleCities) ? (
@@ -68,10 +93,10 @@ export const EditPage = (props) => {
                             </div>
                             <div className="a-h-f-div">
                                 <div className="activites-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'activity')}>Choose Activity</button>
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'activities')}>Choose Activity</button>
                                 </div>
                                 <div className="hotel-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'hotel')}>Choose Hotel</button>
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'hotels')}>Choose Hotel</button>
                                 </div>
                                 <div className="food-div">
                                     <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'food')}>Choose food</button>
@@ -104,7 +129,7 @@ export const EditPage = (props) => {
                                     <p>{result.categories[0].title}</p>
                                     <p>{result.location.display_address}</p>
                                     <div className="button-div">
-                                        <button>Choose Me!</button>
+                                        <button onClick={handleChoose(result, selectedCity)}>Choose Me!</button>
                                         <a href={result.url} target="_blank">Check me out on Yelp!</a>
                                     </div>
                                 </div>
