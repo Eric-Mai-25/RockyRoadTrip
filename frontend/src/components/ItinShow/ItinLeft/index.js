@@ -42,7 +42,7 @@ function ItinLeft({ itin, cities }) {
     itinReview = (
       <div className="review-create-button">
         <button
-          onClick={() => dispatch(modalActions.openModal("createReview"))}
+          onClick={()=>{}}
         >
           Login to comment
         </button>
