@@ -3,17 +3,64 @@ import { AiFillStar, AiOutlineCaretDown } from "react-icons/ai";
 import { CgArrowLongDownC } from "react-icons/cg";
 import { BiSolidFlag, BiTestTube } from "react-icons/bi";
 
-import { useDispatch } from "react-redux";
-import * as modalActions from "../../../store/modal" 
+import { useDispatch, useSelector } from "react-redux";
+import * as modalActions from "../../../store/modal";
 
 function ItinLeft({ itin, cities }) {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
   const middle = itin.middleCities.map((currCity) => currCity.city);
   const itinStartToFin = [itin.startCity, ...middle, itin.endCity];
 
+  let itinReview;
+  let itinEdit;
+
+  if (user) {
+    itinReview = (
+      <div className="review-create-button">
+        <button
+          onClick={() => dispatch(modalActions.openModal("createReview"))}
+        >
+          Write a Comment
+        </button>
+      </div>
+    );
+    if (itin.author._id === user._id) {
+      itinEdit = (
+        <div className="review-edit-button">
+          <button onClick={() => {}}>Edit</button>
+        </div>
+      );
+    } else {
+      itinEdit = (
+        <div className="review-edit-button">
+          <button onClick={() => {}}>Copy</button>
+        </div>
+      );
+    }
+  } else {
+    itinReview = (
+      <div className="review-create-button">
+        <button
+          onClick={()=>{}}
+        >
+          Login to comment
+        </button>
+      </div>
+    );
+    itinEdit = (
+      <div className="review-edit-button">
+        <button onClick={() => {}}>Copy</button>
+      </div>
+    );
+  }
+
   return (
     <>
-      <h2 className="itin-title">{itin.name}</h2>
+      <div className="itin-titler">
+        <h2 className="itin-title">{itin.name}</h2>
+        {itinEdit}
+      </div>
       <div className="route-box">
         <div className="route-content">
           <h2 className="route-name">On this route</h2>
@@ -95,7 +142,7 @@ function ItinLeft({ itin, cities }) {
                             ></img>
                           </div>
                           <div className="data-words">
-                            <h4>{hotels.name}</h4>
+                            <h4 className="itin-card-title">{hotels.name}</h4>
                             <p>
                               <AiFillStar color={"#f6ae2d"} />
                               {hotels.rating} rating
@@ -152,29 +199,26 @@ function ItinLeft({ itin, cities }) {
       </div>
       <div className="middle-route">
         <div className="data-box">
-          {itin.reviews && itin.reviews.map((review) => {
-            return (
-              <>
-                <div className="itin-data-info">
-                  <div>
-                    <img
-                      className="prof-img"
-                      src={"https://xsgames.co/randomusers/avatar.php?g=male"}
-                    ></img>
+          {itin.reviews &&
+            itin.reviews.map((review) => {
+              return (
+                <>
+                  <div className="itin-data-info">
+                    <div>
+                      <img
+                        className="prof-img"
+                        src={"https://xsgames.co/randomusers/avatar.php?g=male"}
+                      ></img>
+                    </div>
+                    <div className="data-words">
+                      <p>{review.comment}</p>
+                    </div>
                   </div>
-                  <div className="data-words">
-                    <p>{review.comment}</p>
-                  </div>
-                </div>
-              </>
-            );
-          })}
+                </>
+              );
+            })}
         </div>
-        <div className="review-create-button">
-          <button onClick={() => dispatch(modalActions.openModal("createReview"))}>
-            Write a Comment
-          </button>
-        </div>
+        {itinReview}
       </div>
     </>
   );

@@ -64,31 +64,40 @@ p {
   position: relative;
   color: #86bbd8;
   left: 50%;
-
 }
 
-@keyframes bounce { 
-    from { 
-        transform: translate3d(0, 0, 0); 
-    } 
-    to { 
-        transform: translate3d(0, 5px, 0); 
-    } 
-} 
+@keyframes bounce {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 5px, 0);
+  }
+}
 
-.arrow{
-    animation: bounce 0.5s;
-    animation-direction: alternate;
-    animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
-    animation-iteration-count: infinite;
+.arrow {
+  animation: bounce 0.5s;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
+  animation-iteration-count: infinite;
 }
 
 @keyframes wiggle {
-    0% { transform: rotate(0deg); }
-   80% { transform: rotate(0deg); }
-   85% { transform: rotate(5deg); }
-   95% { transform: rotate(-5deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+  85% {
+    transform: rotate(5deg);
+  }
+  95% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .flag {
@@ -96,13 +105,13 @@ p {
   animation: wiggle 2s infinite;
 }
 
-.review-create-button{
+.review-create-button {
   position: relative;
   color: #86bbd8;
   left: 40%;
 }
 
-.review-create-button button{
+.review-create-button button {
   font-family: "bebas Neue";
   font-size: 25px;
   height: 50px;
@@ -114,6 +123,39 @@ p {
   text-decoration: none;
   transition: all 0.3s;
 }
-.review-create-button button:hover{
+.review-create-button button:hover {
   color: white;
+}
+
+.itin-card-title {
+  width: 15rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.review-edit-button {
+  color: #86bbd8;
+}
+
+.review-edit-button button {
+  font-family: "bebas Neue";
+  font-size: 25px;
+  height: 50px;
+  width: 100px;
+  border-radius: 4px;
+  border: 2px solid var(--orage);
+  color: var(--charcoal);
+  background-color: var(--orange);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.review-edit-button button:hover {
+  color: white;
+}
+
+.itin-titler{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

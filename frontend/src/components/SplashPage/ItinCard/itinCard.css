@@ -25,7 +25,7 @@
 }
 
 .itin-card:hover{
-    filter: drop-shadow(2px 2px 2px black);
+    filter: drop-shadow(4px 4px 4px black);
     cursor: pointer;
     /* filter: brightness(70%); */
 }

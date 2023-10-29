@@ -15,6 +15,7 @@ function ItinShow(props) {
   const cities = useSelector((state) => state.cities);
 
   useEffect(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     dispatch(fetchItin(itinId));
     dispatch(fetchCities());
   }, [itinId]);
