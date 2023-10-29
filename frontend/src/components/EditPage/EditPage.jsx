@@ -1,3 +1,4 @@
+//All imports:
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCities } from "../../store/cities";
@@ -11,28 +12,32 @@ export const EditPage = (props) => {
     const [selectedCity, setSelectedCity] = useState(""); // Store the name of the city the user is currenlty interactring with.  
     const [selectedCategory, setSelectedCategory] = useState(""); // Store the currenlty selected category
     const [yelpResults, setYelpResults] = useState([]); //Will store the list of results fetched from the yelp API
-    const [citiesLoaded, setCitiesLoaded] = useState(false)
+    const [citiesLoaded, setCitiesLoaded] = useState(false) //Will keep track of if cities loaded...this will help not crash
     
     window.yelpResults = yelpResults; //TODO DELETE
     
-    const {itinId} = useParams();
+    const {itinId} = useParams(); //This gets the itinerary ID in the url to load the proper itinerary
     
-    const cities = useSelector((state) => state.cities);
+    const cities = useSelector((state) => state.cities); //This gets all the citites in the store updated
     
-    const [itinMiddleCities, setItinMiddleCities] = useState([]);
+    const [itinMiddleCities, setItinMiddleCities] = useState([]); //This gets the middle cities for an itinerary
     
+    //This sets the city and category for when the category is selected
     const handleCategoryClick = (city, category) => {
         setSelectedCity(city);
         setSelectedCategory(category)
     }
-    
+    let itinerary;
+    //This gets the specific itinerary and fetches the cities, as well as sets citiesLoaded to true so loading goes smooothly
     useEffect(() => {
+        console.log("I AM NOW FETCHING THE ITINERAY")
         dispatch(fetchItin(itinId));
         dispatch(fetchCities()).then(() => setCitiesLoaded(true));
-    }, [])
+    }, [itinId])
     
-    const itinerary = useSelector(getItin(itinId));
+    itinerary = useSelector(getItin(itinId));
     
+    //This fetches the yelp data using the city and category that was set when a user clicks on a activity
     const fetchYelpData = async () => {
         try{
             const response = await fetch(`/api/yelp/searchYelp?location=${selectedCity}&term=${selectedCategory}&limit=5`);
@@ -43,40 +48,50 @@ export const EditPage = (props) => {
         }
     }
     
+    //This gets a cities name to display on the react componenet
     const getCityName = (cityId) => {
         const city = cities[cityId]
         return city ? city.name : "";
     }
     
+    //This activiates the yelp API if a city and category are a thing
     useEffect(() => {
         if(selectedCity && selectedCategory) {
             fetchYelpData();
         }
     }, [selectedCity, selectedCategory])
+    
 
-    useEffect(() => {
-        const { middleCities } = itinerary;
 
-        setItinMiddleCities(middleCities);
-        console.log("ItinMiddleCity: ", itinMiddleCities)
-    }, [itinerary]);
-
+    //This gets the middlecities of an itinerary
+    useEffect(() => {  
+        console.log("itinId: ", itinId)
+        console.log("Itinerary: ", itinerary)
+        if(itinerary){
+            const { middleCities } = itinerary;
+            
+            setItinMiddleCities(middleCities);
+            console.log("ItinMiddleCity: ", itinMiddleCities)
+        }
+    }, [itinerary, itinId]);
+    
+    //This fucntion will handle when a user selectes the button "choose me!" and will make that acitivity/food/hotel the one chosen to be updated
     const handleChoose = (result, city) => (e) => {
         e.preventDefault();
-
+        
         const updatedItinMiddleCities = JSON.parse(JSON.stringify(itinMiddleCities));
         console.log("updatedItinMiddleCities: ", updatedItinMiddleCities);
-
+        
         const cityIndex = updatedItinMiddleCities.findIndex(middleCity => getCityName(middleCity.city) === city);
         console.log("cityIndex", cityIndex);
-
+        
         if(cityIndex !== -1){
             const selectedMiddleCity = updatedItinMiddleCities[cityIndex];
             console.log("selectedMiddleCity", selectedMiddleCity);
         }
     }
-
-
+    
+    //The react component:
     return (itinerary && cities && citiesLoaded && itinerary.middleCities) ? (
         <>
             <div className="outer-show-div">
@@ -141,11 +156,9 @@ export const EditPage = (props) => {
         </>
     ) : (
         <>
-            <h1>Not loaded properly</h1>
+            <h1>Loading...</h1>
         </>
     )
 }
 
 export default EditPage;
-
-// cities && Array.isArray(cities) ? cities.find(city => city._id === itinerary._id)?.name : 'City not found'
