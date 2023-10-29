@@ -5,7 +5,8 @@ import { addRoute } from "../../store/routeSession";
 import * as itinerariesAction from "../../store/itinerary";
 import * as modalActions from "../../store/modal";
 import { useHistory } from "react-router-dom";
-import { AiOutlineEdit, AiFillStar } from "react-icons/ai";
+import { AiOutlineEdit, AiFillStar, AiFillCloseSquare } from "react-icons/ai";
+import { BsYelp } from "react-icons/bs";
 
 export const ShowPage = (props) => {
   const history = useHistory();
@@ -139,6 +140,42 @@ export const ShowPage = (props) => {
       });
   };
 
+  let plural;
+
+  switch (selectedCategory) {
+    case "activity":
+      plural = "Activities";
+      break;
+    case "hotel":
+      plural = "Hotels";
+      break;
+    case "food":
+      plural = "resturants";
+      break;
+    default:
+      break;
+  }
+
+  const handleDelete= (searchInd, deleteInd, array, section) => (e)=>{
+    const updated = array.splice(deleteInd, 1)
+    let routePreviewCopy = { ...routePreview }
+    switch (section) {
+        case "activity":
+            routePreviewCopy.middleCities[searchInd].activities = array
+            break;
+        case "hotel":
+            routePreviewCopy.middleCities[searchInd].hotels = array
+            break;
+        case "food":
+            routePreviewCopy.middleCities[searchInd].food = array
+            break;
+        default:
+            break;
+    }
+
+    dispatch(addRoute(routePreviewCopy))
+  }
+
   return (
     Object.keys(routePreview).length && (
       <>
@@ -198,9 +235,11 @@ export const ShowPage = (props) => {
                       <div className="collection-cards">
                         {routePreview.middleCities[i].activities ? (
                           routePreview.middleCities[i].activities.map(
-                            (activities) => {
+                            (activities, j) => {
                               return (
                                 <div className="itin-data-info show-itin-data">
+                                
+                                  <AiFillCloseSquare onClick={handleDelete(i, j, routePreview.middleCities[i].activities, "activity")} className="close-card" size={"30px"} />
                                   <div>
                                     <img
                                       className="data-img"
@@ -208,7 +247,11 @@ export const ShowPage = (props) => {
                                     ></img>
                                   </div>
                                   <div className="data-words">
-                                    <h4>{activities.name}</h4>
+                                    <div className="title-and-x">
+                                      <h4 className="data-card-title">
+                                        {activities.name}
+                                      </h4>
+                                    </div>
                                     <p>
                                       <AiFillStar color={"#f6ae2d"} />
                                       {activities.rating} rating
@@ -246,9 +289,10 @@ export const ShowPage = (props) => {
                     <div className="panel">
                       <div className="collection-cards">
                         {routePreview.middleCities[i].hotels ? (
-                          routePreview.middleCities[i].hotels.map((hotels) => {
+                          routePreview.middleCities[i].hotels.map((hotels , j) => {
                             return (
                               <div className="itin-data-info show-itin-data">
+                                <AiFillCloseSquare onClick={handleDelete(i, j, routePreview.middleCities[i].hotels, "hotel")} className="close-card" size={"30px"} />
                                 <div>
                                   <img
                                     className="data-img"
@@ -293,9 +337,10 @@ export const ShowPage = (props) => {
                     <div className="panel">
                       <div className="collection-cards">
                         {routePreview.middleCities[i].food ? (
-                          routePreview.middleCities[i].food.map((food) => {
+                          routePreview.middleCities[i].food.map((food, j) => {
                             return (
                               <div className="itin-data-info show-itin-data">
+                                <AiFillCloseSquare onClick={handleDelete(i, j, routePreview.middleCities[i].food, "food")} className="close-card" size={"30px"} />
                                 <div>
                                   <img
                                     className="data-img"
@@ -338,7 +383,7 @@ export const ShowPage = (props) => {
             <div className="show-page-cta">
               {sessionUser ? (
                 <div className="show-page-no-user-cta">
-                  <div className="review-create-button">
+                  <div className="review-create-button show-review">
                     <button onClick={handleCreateItinerary}>
                       Create Itinerary
                     </button>
@@ -366,7 +411,50 @@ export const ShowPage = (props) => {
             </div>
           </div>
           <div className="yelp-div">
-            <div className="results-div">
+            <div>
+              <h2>
+                {plural} in {selectedCity}
+              </h2>
+            </div>
+            <div className="collection-cards yelp-collection">
+              {yelpResults.map((res) => {
+                return (
+                  <div className="itin-data-info yelp-data-info">
+                    <div className="yelp-container">
+                      <img
+                        className="data-img yelp-img"
+                        src={res.image_url}
+                      ></img>
+                    </div>
+                    <div className="data-words">
+                      <h4>{res.name}</h4>
+                      <p>
+                        <AiFillStar color={"#f6ae2d"} />
+                        {res.rating} rating
+                      </p>
+                      <p>{res.review_count} reviews</p>
+                      <p>{res.location.display_address}</p>
+                      <div className="line">
+                        <hr color="#86bbd8" className="login-line"></hr>
+                      </div>
+                      <div className="button-div">
+                        <div className="review-create-button show-review">
+                          <button onClick={() => handleUpdateMiddleCities(res)}>
+                            Choose Me!
+                          </button>
+                        </div>
+                        <div className="review-create-button show-review">
+                          <button onClick={() => window.open(res.url)}>
+                            <BsYelp size={"30px"} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            {/* <div className="results-div">
               {yelpResults.map((result) => (
                 <div className="result-div">
                   <div className="result-img-div">
@@ -391,7 +479,7 @@ export const ShowPage = (props) => {
                   </div>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </>
