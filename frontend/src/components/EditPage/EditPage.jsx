@@ -27,7 +27,7 @@ export const EditPage = (props) => {
         setSelectedCity(city);
         setSelectedCategory(category)
     }
-    let itinerary;
+
     //This gets the specific itinerary and fetches the cities, as well as sets citiesLoaded to true so loading goes smooothly
     useEffect(() => {
         console.log("I AM NOW FETCHING THE ITINERAY")
@@ -35,7 +35,7 @@ export const EditPage = (props) => {
         dispatch(fetchCities()).then(() => setCitiesLoaded(true));
     }, [itinId])
     
-    itinerary = useSelector(getItin(itinId));
+    const itinerary = useSelector(getItin(itinId));
     
     //This fetches the yelp data using the city and category that was set when a user clicks on a activity
     const fetchYelpData = async () => {
@@ -144,7 +144,7 @@ export const EditPage = (props) => {
                                     <p>{result.categories[0].title}</p>
                                     <p>{result.location.display_address}</p>
                                     <div className="button-div">
-                                        <button onClick={handleChoose(result, selectedCity)}>Choose Me!</button>
+                                        <button onClick={handleChoose(result, selectedCity)} className="choose-button">Choose Me!</button>
                                         <a href={result.url} target="_blank">Check me out on Yelp!</a>
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@ export const EditPage = (props) => {
         </>
     ) : (
         <>
-            <h1>Loading...</h1>
+            <h1>Not loading, probably itinerary undefined...</h1>
         </>
     )
 }
