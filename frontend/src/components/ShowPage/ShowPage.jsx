@@ -181,16 +181,16 @@ export const ShowPage = (props) => {
   return (
     Object.keys(routePreview).length && (
       <>
-        <div className="outer-show-div">
-          <div className="all-cities-div">
+        <div className="outer-new-div">
+          <div className="all-new-div">
             {errors.map((error) => (
               <div>{error}</div>
             ))}
-            <div className="itinerary-title">
+            <div className="itinerary-new-title">
               <h2>Title your journey!</h2>
               <div className="title-input-box">
                 <input
-                  className="title-input"
+                  className="title-new-input"
                   type="text"
                   value={itineraryName}
                   onChange={(e) => setItineraryName(e.target.value)}
@@ -206,15 +206,15 @@ export const ShowPage = (props) => {
             <div className="line">
               <hr color="#86bbd8" className="login-line"></hr>
             </div>
-            <div className="city-div-start-end">
-              <div className="city-title-div-start-end">
-                <h2 className="city-title">{routePreview.startCity.name}</h2>
+            <div className="city-new-div-start-end">
+              <div >
+                <h2 className="city-new-title">{routePreview.startCity.name}</h2>
               </div>
             </div>
             {routePreview.middleCities.map((city, i) => (
-              <div className="city-div" key={city._id}>
-                <div className="city-title-div">
-                  <h2 className="city-title">{city.name}</h2>
+              <div  key={city._id}>
+                <div >
+                  <h2 className="city-new-title">{city.name}</h2>
                 </div>
                 <div className="city-collection">
                   <div className="tabs">
@@ -374,15 +374,15 @@ export const ShowPage = (props) => {
                 </div>
               </div>
             ))}
-            <div className="city-div-start-end">
-              <div className="city-title-div-start-end">
-                <h2 className="city-title">{routePreview.endCity.name}</h2>
+            <div className="end-city">
+              <div >
+                <h2 >{routePreview.endCity.name}</h2>
               </div>
             </div>
             <div className="line">
               <hr color="#86bbd8" className="login-line"></hr>
             </div>
-            <div className="show-page-cta">
+            <div>
               {sessionUser ? (
                 <div className="show-page-no-user-cta">
                   <div className="review-create-button show-review">
@@ -412,7 +412,7 @@ export const ShowPage = (props) => {
               )}
             </div>
           </div>
-          <div className="yelp-div">
+          <div className="yelp-new-div">
             <div>
               <h2>
                 {plural} in {selectedCity}
