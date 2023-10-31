@@ -255,9 +255,7 @@ justify-content: space-evenly;
   color: var(--light-blue);
   border-bottom: 2px solid var(--light-blue);
 }
-.label:active {
-  /* background: #ccc; */
-}
+
 .input:focus + .label {
   z-index: 1;
 }

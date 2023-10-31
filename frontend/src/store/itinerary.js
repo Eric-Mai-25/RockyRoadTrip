@@ -81,7 +81,7 @@ const itinReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_ITIN:
       nextState[action.itin._id] = action.itin;
-      return nextState;
+      return nextState ;
     case RECEIVE_ITINS:
         return {...action.itins}
     default:
