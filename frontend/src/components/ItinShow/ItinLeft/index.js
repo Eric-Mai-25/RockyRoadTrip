@@ -9,6 +9,8 @@ import { addItin } from "../../../store/itinSession";
 import { addRoute } from "../../../store/routeSession";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+
 function ItinLeft({ itin, cities }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
@@ -48,7 +50,9 @@ function ItinLeft({ itin, cities }) {
     if (itin.author._id === user._id) {
       itinEdit = (
         <div className="review-edit-button">
-          <button onClick={() => {}}>Edit</button>
+          <NavLink to={`/edit/${itin._id}`}>
+            <button onClick={() => {}}>Edit</button>
+          </NavLink>
         </div>
       );
     } else {
