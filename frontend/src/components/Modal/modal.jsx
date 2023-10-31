@@ -39,7 +39,7 @@ function Modal(){
     const headers = {
         "login": "On the Road to Something Great? Log In!",
         "signup": "Signup now to start your adventure!",
-        "createReview": itinerary.length ? `Leave a comment for ${itinerary[0].name}` : ""
+        "createReview": itinerary.length ? `Leave a comment!` : ""
     }
 
     return(

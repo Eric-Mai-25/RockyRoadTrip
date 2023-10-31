@@ -5,6 +5,9 @@ import { BiSolidFlag, BiTestTube } from "react-icons/bi";
 
 import { useDispatch, useSelector } from "react-redux";
 import * as modalActions from "../../../store/modal";
+import { addItin } from "../../../store/itinSession";
+import { addRoute } from "../../../store/routeSession";
+import { Link } from "react-router-dom/cjs/react-router-dom";
 
 function ItinLeft({ itin, cities }) {
   const dispatch = useDispatch();
@@ -15,11 +18,26 @@ function ItinLeft({ itin, cities }) {
   let itinReview;
   let itinEdit;
 
+  const handleComment= e=>{
+    dispatch(addItin(itin._id))
+    dispatch(modalActions.openModal("createReview"))
+  }
+
+  const handleLogin = e =>{
+    dispatch(modalActions.openModal("login"))
+  }
+
+  const handleCopy = e =>{
+    
+    
+    dispatch(addRoute(itin))
+  }
+
   if (user) {
     itinReview = (
       <div className="review-create-button">
         <button
-          onClick={() => dispatch(modalActions.openModal("createReview"))}
+          onClick={handleComment}
         >
           Write a Comment
         </button>
@@ -33,16 +51,17 @@ function ItinLeft({ itin, cities }) {
       );
     } else {
       itinEdit = (
+        <Link to={"/show"}>
         <div className="review-edit-button">
-          <button onClick={() => {}}>Copy</button>
+          <button onClick={handleCopy}>Copy</button>
         </div>
+        </Link>
       );
     }
   } else {
     itinReview = (
       <div className="review-create-button">
-        <button
-          onClick={()=>{}}
+        <button onClick={handleLogin}
         >
           Login to comment
         </button>
