@@ -133,7 +133,7 @@ function SpashPage(props) {
     );
   }
 
-  return (
+  return cities ? (
     <>
       <div class="big-image" id="big-image">
         <div class="overlay">{currentImage}</div>
@@ -172,7 +172,7 @@ function SpashPage(props) {
         </div>
       </div>
     </>
-  );
+  ) : <div>Loading</div>;
 }
 
 export default SpashPage;
