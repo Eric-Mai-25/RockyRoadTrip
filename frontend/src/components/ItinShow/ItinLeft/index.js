@@ -12,8 +12,6 @@ import { Link } from "react-router-dom/cjs/react-router-dom";
 import {AiFillCloseSquare} from "react-icons/ai"
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
-
 function ItinLeft({ itin, cities }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
