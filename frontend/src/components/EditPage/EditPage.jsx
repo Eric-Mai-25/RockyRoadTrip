@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCities } from "../../store/cities";
 import "./EditPage.css";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { fetchItin, getItin, updateItinerary } from "../../store/itinerary";
 
 export const EditPage = (props) => {
@@ -116,7 +116,6 @@ export const EditPage = (props) => {
     }
 
     const handleUpdate = (e) => {
-        e.preventDefault();
         console.log("ABOUT TO PASS IN THIS: ", itinMiddleCities)
         dispatch(updateItinerary(itinId, itinMiddleCities))
     }
@@ -157,7 +156,7 @@ export const EditPage = (props) => {
                         </div>
                     </div>
                     <div className="update-button-div">
-                        <button className="update-button" onClick={handleUpdate}>Update Itinerary</button>
+                        <NavLink className="update-button" to={`/itinerary/${itinId}`} onClick={handleUpdate}>Update Itinerary</NavLink>
                     </div>
                  </div>
                  <div className="yelp-div">

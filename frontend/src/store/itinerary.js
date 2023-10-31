@@ -96,7 +96,14 @@ const itinReducer = (state = {}, action) => {
     case UPDATE_ITIN:
       console.log("action.payload", action.payload)
       const {itinId, itin} = action.payload;
-      nextState[itinId] = itin;
+      const existingItin = nextState[itinId];
+      if(existingItin) {
+        nextState[itinId] = {
+          ...existingItin, middleCities: itin.middleCities
+        }
+      } else {
+        nextState[itinId] = itin;
+      }
       return nextState;
     default:
       return state;

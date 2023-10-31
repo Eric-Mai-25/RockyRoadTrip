@@ -29,10 +29,10 @@ function App() {
       <Modal/>
       <NavBar />
       <Switch>
-        <Route exact path="/edit/:itinId" component={EditPage} />
-        <Route exact path="/" component={SplashPage} />
         <Route exact path="/itinerary/:itinId" component={ItinShow} />
+        <Route exact path="/edit/:itinId" component={EditPage} />
         <Route exact path="/show" component={ShowPage} /> {/* TODO Will need to have id in route for specific itinerary, for now though we will not */}
+        <Route exact path="/" component={SplashPage} />
       </Switch>
     </>
   );
