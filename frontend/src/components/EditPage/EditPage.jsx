@@ -186,9 +186,7 @@ export const EditPage = (props) => {
             </div>
         </>
     ) : (
-        <>
-            <h1>Not loading, probably itinerary undefined...</h1>
-        </>
+        null
     )
 }
 
