@@ -138,10 +138,6 @@ router.patch('/:id', requireUser, validateItineraryPatchInput, async (req, res, 
             middleCitiesErrors[idx] = {"city": "Invalid city"};
             return
         }
-        if(mCity.city === req.body.startCity || mCity.city === req.body.endCity){
-            middleCitiesErrors[idx] = {"city": `city cannot be same as start or end city`};
-            return
-        }
     })
 
     try{
