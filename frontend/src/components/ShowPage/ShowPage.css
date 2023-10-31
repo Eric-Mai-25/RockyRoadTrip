@@ -1,189 +1,22 @@
-/* .outer-show-div{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: center;
-    align-content: center;
-    margin-top: 3%;
-}
 
-.all-cities-div{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: flex-start;
-}
 
-.city-div{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    align-content: flex-start;
-    height: 25vh;
-    width: 35vw;
-    background-color: #33658A;
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-
-.city-div-start-end{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    align-content: flex-start;
-    height: 10vh;
-    width: 35vw;
-    background-color: #33658A;
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-
-.city-title-div{
-    background-color: #86BBD8;
-    width: 70%;
-    height: 30%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.city-title-div-start-end{
-    background-color: #86BBD8;
-    width: 70%;
-    height: 50%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.a-h-f-div{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-}
-
-.a-h-f-words{
-    margin-left: 1%;
-    margin-right: 1%;
-}
-
-.city-title{
-    color: #F88243;
-    font-family: "Bebas Neue";
-    font-size: 30px;
-    margin-left: 1vw;
-}
-
-.yelp-div{
-    background-color: #86BBD8;
-    height: 100vh;
-    width: 40vw;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-}
-
-.results-div{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-    height: 90%;
-}
-
-.result-div{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: flex-start;
-    height: 19%;
-    background-color: whitesmoke;
-    border-radius: 20px;
-}
-
-.result-img-div{
-    width: 30%;
-    height: 88%;
-    margin: 2%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.result-info-div{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    width: 100%;
-}
-
-.result-img{
-    max-width: 100%;
-    max-height: 100%;
-}
-
-.rating-div{
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    width: 100%;
-}
-
-.result-rating{
-    margin-right: 5%;
-}
-
-.result-title{
-    font-weight: bold;
-}
-.button-div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 100%;
-}
-
-.itinerary-title{
-    display: flex;
-    flex-direction: column;
-    color: #F88243;
-}
-
-.itinerary-title > input {
-    margin-top: 2%;
-}
-
-.show-page-cta {
-    border: 2px solid white;
-} */
-
-.outer-show-div {
+.outer-new-div {
   /* margin: 2rem; */
   display: flex;
   justify-content: center;
 }
 
-.all-cities-div {
+.all-new-div {
   width: 60%;
   margin-left: 1rem;
 }
 
-.yelp-div {
+.yelp-new-div {
   width: 40%;
 
 }
 
-.title-input {
+.title-new-input {
   font-family: "bebas neue";
   color: var(--yellow);
   font-size: 40px;
@@ -195,20 +28,20 @@
   padding: 0px;
 }
 
-.title-input:focus {
+.title-new-input:focus {
   outline: none;
   border-bottom: 2px solid var(--yellow);
 }
 
-.title-input-box {
+.title-new-input-box {
   display: flex;
   align-items: center;
 }
-.itinerary-title {
+.itinerary-new-title {
   margin-bottom: 2rem;
 }
 
-.city-div-start-end {
+.city-new-div-start-end {
   margin: 2rem 0rem;
 }
 
@@ -318,6 +151,9 @@ justify-content: space-evenly;
     font-size: 20px !important;
 }
 
+.end-city{
+    margin: 1rem 0rem;
+}
 
 /* ----------yelp----------------- */
 
