@@ -2,6 +2,7 @@ import jwtFetch from "./jwt";
 
 export const RECEIVE_ITIN = "itineraries/RECEIVE_ITIN";
 export const RECEIVE_ITINS = "itineraries/RECEIVE_ITINS";
+export const UPDATE_ITIN = "itineraries/UPDATE_ITIN";
 
 export const recieveItin = (itin) => {
   return {
@@ -16,6 +17,13 @@ export const recieveItins = (itins) => {
     itins,
   };
 };
+
+export const updateItin = (payload) => {
+  return {
+    type: UPDATE_ITIN,
+    payload
+  }
+}
 
 export const getItins = (state) => {
   return state.itineraries ? Object.values(state.itineraries) : [];
@@ -64,10 +72,11 @@ export const updateItinerary = (itineraryId, itinMiddleCities) => {
         "Content-Type": "application/json"
       }, 
       body: JSON.stringify({middleCities: itinMiddleCities})
-    })
+    });
     if(res.ok){
       const data = await res.json();
-      dispatch(recieveItin(data));
+      console.log("data: ", data)
+      dispatch(updateItin({ itinId: itineraryId, itin: itinMiddleCities }));
     }else{
       const errorMessage = await res.json();
       console.error("Failed to update Itinerary", errorMessage.message || "Unknown Error");
@@ -84,6 +93,11 @@ const itinReducer = (state = {}, action) => {
       return nextState;
     case RECEIVE_ITINS:
         return {...action.itins}
+    case UPDATE_ITIN:
+      console.log("action.payload", action.payload)
+      const {itinId, itin} = action.payload;
+      nextState[itinId] = itin;
+      return nextState;
     default:
       return state;
   }
