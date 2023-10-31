@@ -7,14 +7,16 @@ import { useDispatch, useSelector } from "react-redux";
 import * as modalActions from "../../../store/modal";
 import { addItin } from "../../../store/itinSession";
 import { addRoute } from "../../../store/routeSession";
+import {deleteReview} from "../../../store/reviews"
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import {AiFillCloseSquare} from "react-icons/ai"
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 function ItinLeft({ itin, cities }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  console.log("itin in Itin Left: ", itin);
   const middle = itin.middleCities.map((currCity) => currCity.city);
   const itinStartToFin = [itin.startCity, ...middle, itin.endCity];
 
@@ -35,6 +37,11 @@ function ItinLeft({ itin, cities }) {
     
     
     dispatch(addRoute(itin))
+  }
+
+  const handleDelete = reviewId => e =>{
+    dispatch(deleteReview(reviewId , itin._id));
+    window.location.reload();
   }
 
   if (user) {
@@ -230,14 +237,20 @@ function ItinLeft({ itin, cities }) {
                 <>
                   <div className="itin-data-info">
                     <div>
+                  {user && user._id === review.author ? (<>
+                    <AiFillCloseSquare onClick={handleDelete(review._id)} className="close-review-button" size={"20px"} />
+                  </>): null}
+                    </div>
+                    <div>
                       <img
                         className="prof-img"
                         src={"https://xsgames.co/randomusers/avatar.php?g=male"}
                       ></img>
                     </div>
-                    <div className="data-words">
+                    <div className="data-review-words">
                       <p>{review.comment}</p>
                     </div>
+                      <button>Edit</button>
                   </div>
                 </>
               );
