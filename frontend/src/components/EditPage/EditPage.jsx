@@ -125,9 +125,12 @@ export const EditPage = (props) => {
     //The react component:
     return (itinerary && cities && citiesLoaded && itinerary.middleCities) ? (
         <>
-            <div className="outer-show-div">
+            <div className="outer-show-div-edit">
                 <div className="all-cities-div">
-                    <div className="city-div-start-end">
+                    <div className="itin-name-edit">
+                        <h2>{itinerary.name}</h2>
+                    </div>
+                    <div className="city-div-start-end-edit">
                         <div className="city-title-div-start-end">
                             <h1 className="city-title">{getCityName(itinerary.startCity)}</h1>
                         </div>
@@ -135,28 +138,28 @@ export const EditPage = (props) => {
                     {itinerary.middleCities.map(city => (
                         <div className="city-div" key={city.city}>
                             <div className="city-title-div">
-                                <h1 className="city-title">{getCityName(city.city)}</h1>
+                                <h2 className="city-title">{getCityName(city.city)}</h2>
                             </div>
                             <div className="a-h-f-div">
                                 <div className="activites-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'activities')}>Choose Activity</button>
+                                    <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'activities')}>Choose Activity</button>
                                 </div>
                                 <div className="hotel-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'hotels')}>Choose Hotel</button>
+                                    <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'hotels')}>Choose Hotel</button>
                                 </div>
                                 <div className="food-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'food')}>Choose food</button>
+                                    <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'food')}>Choose food</button>
                                 </div>
                             </div>
                         </div>
                     ))}
-                    <div className="city-div-start-end">
-                        <div className="city-title-div-start-end">
+                    <div className="city-div-start-end-edit">
+                        <div className="city-title-div-start-end-edit">
                             <h1 className="city-title">{getCityName(itinerary.endCity)}</h1>
                         </div>
                     </div>
                     <div className="update-button-div">
-                        <NavLink className="update-button" to={`/itinerary/${itinId}`} onClick={handleUpdate}>Update Itinerary</NavLink>
+                        <NavLink className="update-button-edit" to={`/itinerary/${itinId}`} onClick={handleUpdate}>Update Itinerary</NavLink>
                     </div>
                  </div>
                  <div className="yelp-div">
