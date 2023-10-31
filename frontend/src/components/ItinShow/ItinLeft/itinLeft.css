@@ -14,6 +14,17 @@
   flex-wrap: wrap;
 }
 
+.close-review-button{
+  display: block;
+  float: right;
+  position: absolute;
+  color: white;
+}
+.close-review-button:hover{
+  color: var(--yellow);
+  cursor: pointer;
+}
+
 .data-img {
   height: 100%;
   width: 150px;
@@ -50,7 +61,15 @@ p {
 }
 
 .data-words {
-  margin: 5px;
+  margin: 10px;
+
+}
+
+.data-review-words{
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .middle-route {
