@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCities } from "../../store/cities";
 import "./EditPage.css";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { fetchItin, getItin } from "../../store/itinerary";
+import { fetchItin, getItin, updateItinerary } from "../../store/itinerary";
 
 export const EditPage = (props) => {
     
@@ -15,6 +15,9 @@ export const EditPage = (props) => {
     const [citiesLoaded, setCitiesLoaded] = useState(false) //Will keep track of if cities loaded...this will help not crash
     
     window.yelpResults = yelpResults; //TODO DELETE
+
+    window.updateItinerary = updateItinerary;
+
     
     const {itinId} = useParams(); //This gets the itinerary ID in the url to load the proper itinerary
     
@@ -84,12 +87,41 @@ export const EditPage = (props) => {
         
         const cityIndex = updatedItinMiddleCities.findIndex(middleCity => getCityName(middleCity.city) === city);
         console.log("cityIndex", cityIndex);
+
+        console.log("result: ", result)
         
         if(cityIndex !== -1){
             const selectedMiddleCity = updatedItinMiddleCities[cityIndex];
             console.log("selectedMiddleCity", selectedMiddleCity);
+
+            selectedMiddleCity[selectedCategory][0] = {
+                name: result.name, 
+                busineesId: result.id,
+                displayAddress: result.location.display_address,
+                imageUrl: result.image_url,
+                rating: result.rating,
+                reviewCount: result.review_count,
+                title: result.categories[0].title
+            }
+
+            console.log("SelectedMiddleCityAfterUpdate", selectedMiddleCity)
+
+            updatedItinMiddleCities[cityIndex] = selectedMiddleCity;
+
+            setItinMiddleCities(updatedItinMiddleCities);
+
+
+            console.log("itinMiddleCities: ", itinMiddleCities)
         }
     }
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        console.log("ABOUT TO PASS IN THIS: ", itinMiddleCities)
+        dispatch(updateItinerary(itinId, itinMiddleCities))
+    }
+
+
     
     //The react component:
     return (itinerary && cities && citiesLoaded && itinerary.middleCities) ? (
@@ -125,7 +157,7 @@ export const EditPage = (props) => {
                         </div>
                     </div>
                     <div className="update-button-div">
-                        <button className="update-button">Update Itinerary</button>
+                        <button className="update-button" onClick={handleUpdate}>Update Itinerary</button>
                     </div>
                  </div>
                  <div className="yelp-div">

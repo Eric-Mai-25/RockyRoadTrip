@@ -56,14 +56,14 @@ export const createItinerary = (itinerary) => {
   }
 }
 
-export const updateItinerary = (itineraryId) => {
+export const updateItinerary = (itineraryId, itinMiddleCities) => {
   return async(dispatch) => {
     const res = await jwtFetch(`/api/itineraries/${itineraryId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       }, 
-      body: JSON.stringify(itineraryId)
+      body: JSON.stringify({middleCities: itinMiddleCities})
     })
     if(res.ok){
       const data = await res.json();
