@@ -246,7 +246,6 @@ function ItinLeft({ itin, cities }) {
                     <div className="data-review-words">
                       <p>{review.comment}</p>
                     </div>
-                      <button>Edit</button>
                   </div>
                 </>
               );
