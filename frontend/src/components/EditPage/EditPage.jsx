@@ -162,15 +162,20 @@ export const EditPage = (props) => {
                         <NavLink className="update-button-edit" to={`/itinerary/${itinId}`} onClick={handleUpdate}>Update Itinerary</NavLink>
                     </div>
                  </div>
-                 <div className="yelp-div">
+                 <div className="yelp-div-edit">
+                    <div>
+                        <h2>
+                            { selectedCity && selectedCategory ? `${selectedCity}: ${selectedCategory}` : 'Select a category!' }
+                        </h2>
+                    </div>
                     <div className="results-div">
                         {yelpResults.map(result => (
-                            <div className="result-div">
+                            <div className="result-div-edit">
                                 <div className="result-img-div">
                                     <img src={result.image_url} className="result-img"/>
                                 </div>
                                 <div className="result-info-div">
-                                    <h1 className="result-title">{result.name}</h1>
+                                    <h2 className="result-title-edit">{result.name}</h2>
                                     <div className="rating-div">
                                         <p className="result-rating">Rating: {result.rating}</p>
                                         <p>{result.review_count} Reviews</p>
@@ -179,7 +184,7 @@ export const EditPage = (props) => {
                                     <p>{result.location.display_address}</p>
                                     <div className="button-div">
                                         <button onClick={handleChoose(result, selectedCity)} className="choose-button">Choose Me!</button>
-                                        <a href={result.url} target="_blank">Check me out on Yelp!</a>
+                                        <a href={result.url} target="_blank" className="check-me-out">Check me out on Yelp!</a>
                                     </div>
                                 </div>
                             </div>
