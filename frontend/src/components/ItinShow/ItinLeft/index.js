@@ -12,8 +12,10 @@ import { Link } from "react-router-dom/cjs/react-router-dom";
 function ItinLeft({ itin, cities }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  console.log("itin in Itin Left: ", itin);
   const middle = itin.middleCities.map((currCity) => currCity.city);
   const itinStartToFin = [itin.startCity, ...middle, itin.endCity];
+
 
   let itinReview;
   let itinEdit;

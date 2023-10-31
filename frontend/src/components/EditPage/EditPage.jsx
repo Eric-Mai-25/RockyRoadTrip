@@ -1,9 +1,10 @@
+//All imports:
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCities } from "../../store/cities";
 import "./EditPage.css";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { fetchItin, getItin } from "../../store/itinerary";
+import { NavLink, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { fetchItin, getItin, updateItinerary } from "../../store/itinerary";
 
 export const EditPage = (props) => {
     
@@ -11,23 +12,35 @@ export const EditPage = (props) => {
     const [selectedCity, setSelectedCity] = useState(""); // Store the name of the city the user is currenlty interactring with.  
     const [selectedCategory, setSelectedCategory] = useState(""); // Store the currenlty selected category
     const [yelpResults, setYelpResults] = useState([]); //Will store the list of results fetched from the yelp API
-    const [citiesLoaded, setCitiesLoaded] = useState(false)
+    const [citiesLoaded, setCitiesLoaded] = useState(false) //Will keep track of if cities loaded...this will help not crash
+    
+    window.yelpResults = yelpResults; //TODO DELETE
 
-    const {itinId} = useParams();
+    window.updateItinerary = updateItinerary;
 
-    const cities = useSelector((state) => state.cities);
-    const itinerary = useSelector(getItin(itinId));
-
+    
+    const {itinId} = useParams(); //This gets the itinerary ID in the url to load the proper itinerary
+    
+    const cities = useSelector((state) => state.cities); //This gets all the citites in the store updated
+    
+    const [itinMiddleCities, setItinMiddleCities] = useState([]); //This gets the middle cities for an itinerary
+    
+    //This sets the city and category for when the category is selected
     const handleCategoryClick = (city, category) => {
         setSelectedCity(city);
         setSelectedCategory(category)
     }
 
+    //This gets the specific itinerary and fetches the cities, as well as sets citiesLoaded to true so loading goes smooothly
     useEffect(() => {
+        console.log("I AM NOW FETCHING THE ITINERAY")
         dispatch(fetchItin(itinId));
         dispatch(fetchCities()).then(() => setCitiesLoaded(true));
-    }, [])
-
+    }, [itinId])
+    
+    const itinerary = useSelector(getItin(itinId));
+    
+    //This fetches the yelp data using the city and category that was set when a user clicks on a activity
     const fetchYelpData = async () => {
         try{
             const response = await fetch(`/api/yelp/searchYelp?location=${selectedCity}&term=${selectedCategory}&limit=5`);
@@ -37,21 +50,79 @@ export const EditPage = (props) => {
             console.error("Error fetching Yelp data:", error);
         }
     }
-
+    
+    //This gets a cities name to display on the react componenet
     const getCityName = (cityId) => {
         const city = cities[cityId]
         return city ? city.name : "";
     }
-
+    
+    //This activiates the yelp API if a city and category are a thing
     useEffect(() => {
         if(selectedCity && selectedCategory) {
             fetchYelpData();
         }
     }, [selectedCity, selectedCategory])
+    
 
 
+    //This gets the middlecities of an itinerary
+    useEffect(() => {  
+        console.log("itinId: ", itinId)
+        console.log("Itinerary: ", itinerary)
+        if(itinerary){
+            const { middleCities } = itinerary;
+            
+            setItinMiddleCities(middleCities);
+            console.log("ItinMiddleCity: ", itinMiddleCities)
+        }
+    }, [itinerary, itinId]);
+    
+    //This fucntion will handle when a user selectes the button "choose me!" and will make that acitivity/food/hotel the one chosen to be updated
+    const handleChoose = (result, city) => (e) => {
+        e.preventDefault();
+        
+        const updatedItinMiddleCities = JSON.parse(JSON.stringify(itinMiddleCities));
+        console.log("updatedItinMiddleCities: ", updatedItinMiddleCities);
+        
+        const cityIndex = updatedItinMiddleCities.findIndex(middleCity => getCityName(middleCity.city) === city);
+        console.log("cityIndex", cityIndex);
+
+        console.log("result: ", result)
+        
+        if(cityIndex !== -1){
+            const selectedMiddleCity = updatedItinMiddleCities[cityIndex];
+            console.log("selectedMiddleCity", selectedMiddleCity);
+
+            selectedMiddleCity[selectedCategory][0] = {
+                name: result.name, 
+                busineesId: result.id,
+                displayAddress: result.location.display_address,
+                imageUrl: result.image_url,
+                rating: result.rating,
+                reviewCount: result.review_count,
+                title: result.categories[0].title
+            }
+
+            console.log("SelectedMiddleCityAfterUpdate", selectedMiddleCity)
+
+            updatedItinMiddleCities[cityIndex] = selectedMiddleCity;
+
+            setItinMiddleCities(updatedItinMiddleCities);
 
 
+            console.log("itinMiddleCities: ", itinMiddleCities)
+        }
+    }
+
+    const handleUpdate = (e) => {
+        console.log("ABOUT TO PASS IN THIS: ", itinMiddleCities)
+        dispatch(updateItinerary(itinId, itinMiddleCities))
+    }
+
+
+    
+    //The react component:
     return (itinerary && cities && citiesLoaded && itinerary.middleCities) ? (
         <>
             <div className="outer-show-div">
@@ -68,10 +139,10 @@ export const EditPage = (props) => {
                             </div>
                             <div className="a-h-f-div">
                                 <div className="activites-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'activity')}>Choose Activity</button>
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'activities')}>Choose Activity</button>
                                 </div>
                                 <div className="hotel-div">
-                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'hotel')}>Choose Hotel</button>
+                                    <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'hotels')}>Choose Hotel</button>
                                 </div>
                                 <div className="food-div">
                                     <button className="a-h-f-words" onClick={() => handleCategoryClick(getCityName(city.city), 'food')}>Choose food</button>
@@ -83,6 +154,9 @@ export const EditPage = (props) => {
                         <div className="city-title-div-start-end">
                             <h1 className="city-title">{getCityName(itinerary.endCity)}</h1>
                         </div>
+                    </div>
+                    <div className="update-button-div">
+                        <NavLink className="update-button" to={`/itinerary/${itinId}`} onClick={handleUpdate}>Update Itinerary</NavLink>
                     </div>
                  </div>
                  <div className="yelp-div">
@@ -101,7 +175,7 @@ export const EditPage = (props) => {
                                     <p>{result.categories[0].title}</p>
                                     <p>{result.location.display_address}</p>
                                     <div className="button-div">
-                                        <button>Choose Me!</button>
+                                        <button onClick={handleChoose(result, selectedCity)} className="choose-button">Choose Me!</button>
                                         <a href={result.url} target="_blank">Check me out on Yelp!</a>
                                     </div>
                                 </div>
@@ -117,5 +191,3 @@ export const EditPage = (props) => {
 }
 
 export default EditPage;
-
-// cities && Array.isArray(cities) ? cities.find(city => city._id === itinerary._id)?.name : 'City not found'

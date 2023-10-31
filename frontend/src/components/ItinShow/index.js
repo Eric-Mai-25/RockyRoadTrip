@@ -24,7 +24,9 @@ function ItinShow(props) {
     return null
   }
 
-  return Object.keys(itin).length && Object.keys(cities).length ? (
+  console.log("itin: ", itin)
+
+  return Object.keys(itin).length && Object.keys(cities).length && itin.middleCities ? (
     <>
       <div className="itin-show-box-left">
         <ItinLeft itin={itin} cities={cities} />
