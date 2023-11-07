@@ -1,7 +1,8 @@
 import "./itinLeft.css";
-import { AiFillStar, AiOutlineCaretDown } from "react-icons/ai";
+import { AiFillStar, AiOutlineEdit } from "react-icons/ai";
 import { CgArrowLongDownC } from "react-icons/cg";
-import { BiSolidFlag, BiTestTube } from "react-icons/bi";
+import { BiSolidFlag } from "react-icons/bi";
+import {MdPersonOutline} from "react-icons/md";
 
 import { useDispatch, useSelector } from "react-redux";
 import * as modalActions from "../../../store/modal";
@@ -11,6 +12,7 @@ import {deleteReview} from "../../../store/reviews"
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import {AiFillCloseSquare} from "react-icons/ai"
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { currentReview } from "../../../store/reviews";
 
 function ItinLeft({ itin, cities }) {
   const dispatch = useDispatch();
@@ -22,9 +24,14 @@ function ItinLeft({ itin, cities }) {
   let itinReview;
   let itinEdit;
 
-  const handleComment= e=>{
+  const handleComment = e=>{
     dispatch(addItin(itin._id))
     dispatch(modalActions.openModal("createReview"))
+  }
+
+  const handleEdit = review => {
+    dispatch(currentReview(review))
+    dispatch(modalActions.openModal("updateReview"))
   }
 
   const handleLogin = e =>{
@@ -32,8 +39,6 @@ function ItinLeft({ itin, cities }) {
   }
 
   const handleCopy = e =>{
-    
-    
     dispatch(addRoute(itin))
   }
 
@@ -45,11 +50,7 @@ function ItinLeft({ itin, cities }) {
   if (user) {
     itinReview = (
       <div className="review-create-button">
-        <button
-          onClick={handleComment}
-        >
-          Write a Comment
-        </button>
+        <button onClick={handleComment}> Write a Comment </button>
       </div>
     );
     if (itin.author._id === user._id) {
@@ -232,24 +233,28 @@ function ItinLeft({ itin, cities }) {
           {itin.reviews &&
             itin.reviews.map((review) => {
               return (
-                <>
-                  <div className="itin-data-info">
-                    <div>
-                  {user && user._id === review.author ? (<>
-                    <AiFillCloseSquare onClick={handleDelete(review._id)} className="close-review-button" size={"20px"} />
-                  </>): null}
+                  <div className="itin-data-review-info">
+                    <div className="review-user-info">
+                      <MdPersonOutline size={"50px"} color={"#FFFFFF"}/>
+                      <div>
+                        {review.author.email}
+                        <div className="review-rating-stars">
+                          {Array.from({length: review.rating}).map(() => <AiFillStar color={"#f6ae2d"}/>)}
+                        </div>
+                      </div>
+                      {user && user._id === review.author._id && 
+                        <div className="review-cta">
+                          <AiOutlineEdit onClick={ () => handleEdit(review)} className="edit-comment-button" size={"20px"}/> 
+                        </div>
+                      }
+                      {user && user._id === review.author._id && 
+                        <div className="review-cta">
+                          <AiFillCloseSquare onClick={handleDelete(review._id)} className="close-review-button" size={"20px"} />
+                        </div>
+                      }
                     </div>
-                    <div>
-                      <img
-                        className="prof-img"
-                        src={"https://xsgames.co/randomusers/avatar.php?g=male"}
-                      ></img>
-                    </div>
-                    <div className="data-review-words">
-                      <p>{review.comment}</p>
-                    </div>
+                    <div className="data-review-words">{review.comment}</div>
                   </div>
-                </>
               );
             })}
         </div>

@@ -28,7 +28,8 @@ for(let i=1; i<NUM_SEED_USERS; i++){
         new User({
             username: faker.internet.userName({ firstName, lastName }),
             email: faker.internet.email({firstName, lastName}),
-            hashedPassword: bcrypt.hashSync(faker.internet.password(), 10)
+            hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
+            imgUrl: faker.image.avatar()
         })
     )
 }
@@ -181,7 +182,7 @@ const insertSeeds = () => {
                 let itineraries = [];
 
                 let itinerary1 = new Itinerary({
-                    "name":"Itenerary1",
+                    "name":"Vegas to Dallas",
                     "startCity": NameToCity["Las Vegas"]._id,
                     "endCity": NameToCity["Dallas"]._id,
                     "middleCities":[{
@@ -232,7 +233,7 @@ const insertSeeds = () => {
                     "author": user1._id})
 
                 let itinerary2 = new Itinerary({
-                    "name":"Itenerary2",
+                    "name":"Salt lake city to Dallas",
                     "startCity": NameToCity["Salt Lake City"]._id,
                     "endCity": NameToCity["Dallas"]._id,
                     "middleCities":[{
@@ -283,7 +284,7 @@ const insertSeeds = () => {
 
 
                 let itinerary3 = new Itinerary({
-                    "name":"Itenerary3",
+                    "name":"Vegas to Dallas through Denver",
                     "startCity": NameToCity["Las Vegas"]._id,
                     "endCity": NameToCity["Dallas"]._id,
                     "middleCities":[{
@@ -336,7 +337,7 @@ const insertSeeds = () => {
 
 
                     let itinerary4 = new Itinerary({
-                        "name":"Itenerary4",
+                        "name":"Minn to Detroit",
                         "startCity": NameToCity["Minneapolis"]._id,
                         "endCity": NameToCity["Detroit"]._id,
                         "middleCities":[{
@@ -387,7 +388,7 @@ const insertSeeds = () => {
                         "author": user2._id})
 
                     let itinerary5 = new Itinerary({
-                        "name":"Itenerary5",
+                        "name":"Chicago to Philadelphia",
                         "startCity": NameToCity["Chicago"]._id,
                         "endCity": NameToCity["Washington, D.C. (DC)"]._id,
                         "middleCities":[{
@@ -438,7 +439,7 @@ const insertSeeds = () => {
                         "author": user2._id})
 
                     let itinerary6 = new Itinerary({
-                        "name":"Itenerary6",
+                        "name":"Miamiiiii",
                         "startCity": NameToCity["Houston"]._id,
                         "endCity": NameToCity["Miami"]._id,
                         "middleCities":[{
@@ -490,7 +491,7 @@ const insertSeeds = () => {
                         "author": user2._id})
 
                     let itinerary7 = new Itinerary({
-                        "name":"Itenerary7",
+                        "name":"Phoenix to New Orleans",
                         "startCity": NameToCity["Phoenix"]._id,
                         "endCity": NameToCity["Washington, D.C. (DC)"]._id,
                         "middleCities":[{
@@ -540,7 +541,7 @@ const insertSeeds = () => {
                         "author": user3._id})
 
                     let itinerary8 = new Itinerary({
-                        "name":"Itenerary8",
+                        "name":"Seattle to Portland",
                         "startCity": NameToCity["Seattle"]._id,
                         "endCity": NameToCity["San Francisco (SF)"]._id,
                         "middleCities":[{
@@ -593,7 +594,7 @@ const insertSeeds = () => {
 
 
                     let itinerary9 = new Itinerary({
-                        "name":"Itenerary9",
+                        "name":"SF to Salt lake City",
                         "startCity": NameToCity["San Francisco (SF)"]._id,
                         "endCity": NameToCity["Phoenix"]._id,
                         "middleCities":[{
@@ -658,7 +659,10 @@ const insertSeeds = () => {
                 let allItineraries = await Itinerary.find()
                 const reviews = [];
                 for (let i = 0; i < 20; i++) {
-                    const randomRating = Math.floor(Math.random() * 5) + 1; 
+                    let randomRating = Math.floor(Math.random() * 5) + 1; 
+                    if(randomRating === 0){
+                        randomRating = 1;
+                    }
                     const randomComment = faker.lorem.sentence();
                     const randomAuthor = users[Math.floor(Math.random() * users.length)]._id;
                     const randomItinerary = allItineraries[Math.floor(Math.random() * allItineraries.length)]._id; 

@@ -6,6 +6,7 @@ import ui from './ui';
 import routeSessionReducer from './routeSession';
 import citiesReducer from './cities';
 import itinReducer from './itinerary';
+import { currentReviewReducer } from './reviews';
 import reviewReducer from './reviews';
 import itinSessionReducer from './itinSession';
 
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   itineraries: itinReducer,
   itinSession: itinSessionReducer,
   reviews: reviewReducer,
+  currentReview: currentReviewReducer,
   ui: ui
 });
 

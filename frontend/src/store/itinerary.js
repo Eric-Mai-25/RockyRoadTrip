@@ -1,4 +1,5 @@
 import jwtFetch from "./jwt";
+import { receiveReviews } from "./reviews";
 
 export const RECEIVE_ITIN = "itineraries/RECEIVE_ITIN";
 export const RECEIVE_ITINS = "itineraries/RECEIVE_ITINS";
@@ -38,6 +39,7 @@ export const fetchItin = (itinId) => async dispatch => {
     if(res.ok) {
         const itin = await res.json()
         dispatch(recieveItin(itin))
+        dispatch(receiveReviews(itin.reviews || []))
     }
 };
 export const fetchItins = () => async dispatch => {
