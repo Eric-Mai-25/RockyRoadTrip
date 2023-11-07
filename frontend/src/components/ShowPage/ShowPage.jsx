@@ -22,12 +22,10 @@ export const ShowPage = (props) => {
   const routePreview = useSelector((state) => state.routePreview);
 
   useEffect(() => {
-    console.log(routePreview)
     let lsRoute = JSON.parse(localStorage.getItem("routePreview")) || {};
     if (!Object.keys(routePreview).length && lsRoute) {
       dispatch(addRoute(lsRoute));
     }
-    console.log(lsRoute)
     if (lsRoute.middleCities.length) {
       setSelectedCity(lsRoute.middleCities[0].name);
       setSelectedCategory("activity");

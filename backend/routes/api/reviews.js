@@ -50,9 +50,12 @@ router.patch('/:id', requireUser, validateReviewInput, async (req, res, next) =>
         err.errors = errors;
         return next(err);
     }
-
+    let body = {
+        rating: req.body.rating,
+        comment: req.body.comment,
+    }
     try {
-        const reviewUpdated = await Review.updateOne({_id: req.params.id}, req.body)
+        const reviewUpdated = await Review.updateOne({_id: req.params.id}, body)
         return res.json(reviewUpdated);
     } catch (err) {
         return next(err);
