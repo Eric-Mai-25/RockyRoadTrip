@@ -11,6 +11,7 @@ router.get('/', async(req, res) => {
         newCitiesObj[city._id] = city._doc
     })
 
+
     return res.json(newCitiesObj);
 })
 

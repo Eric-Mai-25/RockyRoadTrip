@@ -95,11 +95,11 @@ function SpashPage(props) {
                         <hr color="#86bbd8" className="route-line"></hr>
                       )}
                       <div className="route-line-content">
-                        <ul class="map-markers route-dot">
-                          <li class="map-marker route-map-marker">
+                        <ul className="map-markers route-dot">
+                          <li className="map-marker route-map-marker">
                             <a href="#">{city.name}</a>
-                            <div class="map-marker-info route-info">
-                              <div class="map-marker-info-inner animate-bounce-in">
+                            <div className="map-marker-info route-info">
+                              <div className="map-marker-info-inner animate-bounce-in">
                                 <header>
                                   <h2>{city.name}</h2>
                                 </header>
@@ -135,8 +135,8 @@ function SpashPage(props) {
 
   return cities ? (
     <>
-      <div class="big-image" id="big-image">
-        <div class="overlay">{currentImage}</div>
+      <div className="big-image" id="big-image">
+        <div className="overlay">{currentImage}</div>
       </div>
       {/* <div className="line">
         <hr color="#86bbd8" className="login-line"></hr>
