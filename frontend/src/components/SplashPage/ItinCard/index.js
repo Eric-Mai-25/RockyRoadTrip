@@ -29,7 +29,7 @@ const CITIES_CSS = {
   Atlanta: "atlanta",
 };
 
-function ItinCard({ cities }) {
+function ItinCard({cities }) {
   const dispatch = useDispatch();
   const itins = useSelector((state) => Object.values(state.itineraries));
 
@@ -37,7 +37,7 @@ function ItinCard({ cities }) {
     dispatch(fetchItins());
   }, [dispatch]);
 
-  return itins ? (
+  return itins && cities ? (
     <>
       {shuffleArray(itins)
         .slice(0, 6)

@@ -27,10 +27,10 @@ function MapMarker({ city , add}) {
 
   return (
     <>
-      <li onClick={add(city)} class={`map-marker map-marker-${CITIES_CSS[city.name]}`}>
+      <li onClick={add(city)} className={`map-marker map-marker-${CITIES_CSS[city.name]}`}>
         <a href="#">{city.name}</a>
-        <div class="map-marker-info">
-          <div class="map-marker-info-inner animate-bounce-in">
+        <div className="map-marker-info">
+          <div className="map-marker-info-inner animate-bounce-in">
             <header>
               <h2>{city.name}</h2>
             </header>

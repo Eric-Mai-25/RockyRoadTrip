@@ -103,8 +103,8 @@ function ItinLeft({ itin, cities }) {
                     <hr color="#86bbd8" className="route-line"></hr>
                   )}
                   <div className="route-line-content">
-                    <ul class="map-markers route-dot">
-                      <li class="map-marker route-map-marker">
+                    <ul className="map-markers route-dot">
+                      <li className="map-marker route-map-marker">
                         <a href="#">{city.name}</a>
                       </li>
                     </ul>
