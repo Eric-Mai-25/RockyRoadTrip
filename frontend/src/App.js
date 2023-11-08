@@ -17,6 +17,7 @@ import SplashPage from './components/SplashPage';
 import EditPage from './components/EditPage/EditPage';
 import { Route } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from './components/Footer/Footer';
+import UserProfile from './components/UserProfile';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -34,6 +35,7 @@ function App() {
         <Route exact path="/edit/:itinId" component={EditPage} />
         <Route exact path="/show" component={ShowPage} /> {/* TODO Will need to have id in route for specific itinerary, for now though we will not */}
         <Route exact path="/" component={SplashPage} />
+        <Route exact path="/user/:userId" component={UserProfile} />
       </Switch>
       <Footer />
     </>
