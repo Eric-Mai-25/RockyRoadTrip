@@ -22,17 +22,12 @@ router.get('/', async function(req, res, next) {
   }
 });
 
-router.get('/:id', requireUser, async function(req, res, next) {
-  const user = await User.findOne({_id: req.user._id}).select("-hashedPassword")
-  const itineraries = await Itinerary.find({author: req.user._id});
-  return res.json({...user._doc, ["itineraries"]: itineraries || []});
-});
 
 router.post('/register', validateRegisterInput, async (req, res, next) => {
   const user = await User.findOne({
-    $or: [{ email: req.body.email }, { username: req.body.username }]
+    $or: [{ email: req.body.email }, { username: req.body.username }] 
   });
-
+  
   if (user) {
     const err = new Error("Validation Error");
     err.statusCode = 400;
@@ -51,7 +46,7 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     username: req.body.username,
     email: req.body.email
   });
-
+  
   bcrypt.genSalt(10, (err, salt) => {
     if (err) throw err;
     bcrypt.hash(req.body.password, salt, async (err, hashedPassword) => {
@@ -95,6 +90,12 @@ router.get('/current', restoreUser, (req, res) => {
     username: req.user.username,
     email: req.user.email
   });
+});
+
+router.get('/:id', requireUser, async function(req, res, next) {
+  const user = await User.findOne({_id: req.user._id}).select("-hashedPassword")
+  const itineraries = await Itinerary.find({author: req.user._id});
+  return res.json({...user._doc, ["itineraries"]: itineraries || []});
 });
 
 module.exports = router;
