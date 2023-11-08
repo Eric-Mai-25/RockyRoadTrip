@@ -9,6 +9,7 @@ import itinReducer from './itinerary';
 import { currentReviewReducer } from './reviews';
 import reviewReducer from './reviews';
 import itinSessionReducer from './itinSession';
+import userReducer from './user';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   itinSession: itinSessionReducer,
   reviews: reviewReducer,
   currentReview: currentReviewReducer,
+  user: userReducer,
   ui: ui
 });
 
