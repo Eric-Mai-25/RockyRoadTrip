@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getItin, fetchItin } from "../../store/itinerary";
+import { fetchItin } from "../../store/itinerary";
 import ItinLeft from "./ItinLeft";
 import { fetchCities } from "../../store/cities";
 import ItinRight from "./ItinRight";
@@ -10,7 +10,6 @@ import "./ItinShow.css"
 function ItinShow(props) {
   const dispatch = useDispatch();
   const { itinId } = useParams();
-  const [itineraries, setItineraries] = useState("");
   const itin = useSelector((state) => state.itineraries[itinId]);
   const cities = useSelector((state) => state.cities);
 
@@ -23,8 +22,6 @@ function ItinShow(props) {
   if (!itin || !cities){
     return null
   }
-
-  console.log("itin: ", itin)
 
   return Object.keys(itin).length && Object.keys(cities).length && itin.middleCities ? (
     <>

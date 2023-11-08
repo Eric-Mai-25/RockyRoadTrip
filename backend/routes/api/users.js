@@ -4,9 +4,11 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
+const {requireUser} = require('../../config/passport');
 
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Itinerary = mongoose.model('Itinerary');
 
 const {loginUser, restoreUser} = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
@@ -18,6 +20,12 @@ router.get('/', async function(req, res, next) {
   } catch(err){
     return res.json([]);
   }
+});
+
+router.get('/:id', requireUser, async function(req, res, next) {
+  const user = await User.findOne({_id: req.user._id}).select("-hashedPassword")
+  const itineraries = await Itinerary.find({author: req.user._id});
+  return res.json({...user._doc, ["itineraries"]: itineraries || []});
 });
 
 router.post('/register', validateRegisterInput, async (req, res, next) => {

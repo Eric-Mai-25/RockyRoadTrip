@@ -7,6 +7,16 @@
   width: 400px;
 }
 
+.itin-data-review-info{
+  height: 150px;
+  background-color: #33658a;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  width: 400px;
+}
+
 .data-box {
   display: flex;
   flex-direction: row;
@@ -14,12 +24,34 @@
   flex-wrap: wrap;
 }
 
+.review-user-info {
+  display: flex;
+}
+
+.review-user-info > div {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2%;
+  padding-left: 5%;
+}
+
+.review-rating-stars {
+  padding-top: 2%;
+}
+
+.edit-comment-button {
+  color: white
+}
+
+.edit-comment-button:hover{
+  color: var(--yellow);
+  cursor: pointer;
+}
+
 .close-review-button{
-  display: block;
-  float: right;
-  position: absolute;
   color: white;
 }
+
 .close-review-button:hover{
   color: var(--yellow);
   cursor: pointer;
@@ -68,8 +100,8 @@ p {
 .data-review-words{
   margin: 1rem;
   display: flex;
-  justify-content: center;
   align-items: center;
+  color: white;
 }
 
 .middle-route {

@@ -32,6 +32,9 @@ function Modal(){
         case 'createReview':
             component = <ReviewForm/>
             break;
+        case 'updateReview':
+            component = <ReviewForm update={true}/>
+            break;
         default:
             return null;
     }
@@ -39,7 +42,8 @@ function Modal(){
     const headers = {
         "login": "On the Road to Something Great? Log In!",
         "signup": "Signup now to start your adventure!",
-        "createReview": itinerary.length ? `Leave a comment!` : ""
+        "createReview": itinerary.length ? "Leave a comment!" : "",
+        "updateReview": itinerary.length ? "Update your Comment!" : ""
     }
 
     return(

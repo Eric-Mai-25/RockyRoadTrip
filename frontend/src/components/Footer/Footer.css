@@ -1,0 +1,26 @@
+.footer {
+    background-color: #f88243;
+    width: 100%;
+    height: 100px;
+    color: #33658a;
+    display: flex;
+    justify-content: center;
+}
+
+.contributor-links {
+    display: flex;
+    justify-content: center;
+}
+
+.contributor-links > * {
+    margin: 3%;
+}
+
+.contributor-links > a > img {
+    width: 25px;
+    height: 25px;
+}
+
+.personal-links {
+    margin: 1.5%
+}

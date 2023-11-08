@@ -16,6 +16,7 @@ import { getCurrentUser } from './store/session';
 import SplashPage from './components/SplashPage';
 import EditPage from './components/EditPage/EditPage';
 import { Route } from 'react-router-dom/cjs/react-router-dom.min';
+import Footer from './components/Footer/Footer';
 import UserProfile from './components/UserProfile';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route exact path="/" component={SplashPage} />
         <Route exact path="/user/:userId" component={UserProfile} />
       </Switch>
+      <Footer />
     </>
   );
 }

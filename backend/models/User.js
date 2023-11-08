@@ -5,6 +5,7 @@ const userSchema = new Schema(
     {
         username: { type: String, required: true },
         email: { type: String, required: true, index: {unique: true} },
+        imgUrl: {type: String},
         hashedPassword: { type: String, required: true},
         itineraries: [{
             type: Schema.Types.ObjectId,

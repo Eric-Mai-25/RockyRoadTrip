@@ -22,7 +22,7 @@ router.get('/', async function(req, res, next) {
 router.get('/:id', async function(req, res, next) {
     try{
         const itinerary = await Itinerary.findOne({_id: req.params.id}).populate("author", "_id username");
-        const reviews = await Review.find({"itinerary": itinerary._id});
+        const reviews = await Review.find({"itinerary": itinerary._id}).populate("author", "_id username email");
         return res.json({...itinerary._doc, ["reviews"]: reviews || []});
     } catch(err){
         return res.json({});
