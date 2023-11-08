@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { updateReview, createReview } from "../../store/reviews";
 import * as modalActions from "../../store/modal";
+import "./review.css";
 
 function ReviewForm({update=false}) {
   const dispatch = useDispatch();
@@ -31,12 +32,12 @@ function ReviewForm({update=false}) {
   };
 
   return (
-    <form className="session-form" onSubmit={handleSubmit}>
+    <form className="review-form" onSubmit={handleSubmit}>
       <div>
         <div>
           <label>Comment:</label>
         </div>
-        <div>
+        <div className="review-comment">
           <textarea type="" value={comment} onChange={(e) => setComment(e.target.value)} />
         </div>
       </div>

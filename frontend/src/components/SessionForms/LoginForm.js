@@ -24,8 +24,11 @@ function LoginForm () {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password })); 
-    dispatch(closeModal());
+    dispatch(login({ email, password })).then((res) => {
+      if(res && res._id){
+        dispatch(closeModal());
+      }
+    }); 
   }
 
   const handleDemoClick = (e) => {

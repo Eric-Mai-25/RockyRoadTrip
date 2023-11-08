@@ -10,7 +10,7 @@ function SignupForm () {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
-  const errors = useSelector(state => state.errors.session);
+  const errors = useSelector(state => state.errors.session || {});
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -50,8 +50,11 @@ function SignupForm () {
       password
     };
 
-    dispatch(signup(user)); 
-    dispatch(closeModal());
+    dispatch(signup(user)).then((res) => {
+      if(res && res._id){
+        dispatch(closeModal());
+      }
+    }); 
   }
 
   return (

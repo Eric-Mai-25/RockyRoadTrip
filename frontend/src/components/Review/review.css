@@ -1,0 +1,16 @@
+.review-form {
+    width: 150%;
+}
+
+.review-form > *{
+    margin: 3% 0%;
+}
+
+.review-comment > textarea{
+    width: 100%;
+    height: 200%;
+}
+
+select {
+    margin: 1%;
+}

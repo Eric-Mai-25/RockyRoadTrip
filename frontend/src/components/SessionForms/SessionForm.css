@@ -1,4 +1,4 @@
-form > .errors {
+.errors {
     color: red;
     font-size: 0.875em;
     height: 15px;
@@ -37,6 +37,10 @@ form > .errors {
   font-family: "Bebas Neue";
   width: 5vw;
   font-size: medium;
+}
+
+.submit-button:disabled {
+  cursor: not-allowed;
 }
 
 .text-input-email{
