@@ -1,0 +1,25 @@
+.user-left{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--light-blue);
+    margin: 1rem;
+    border-radius: 10px;
+}
+
+.user-right{
+    width: 75%;
+    margin:1rem;
+}
+
+.user-box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-itin{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}

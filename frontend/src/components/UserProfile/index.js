@@ -1,36 +1,40 @@
-import { useParams } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
-import { fetchUser } from "../../store/user"
-import UserLeft from "./UserLeft"
-import UserRight from "./UserRight"
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchUser } from "../../store/user";
+import UserLeft from "./UserLeft";
+import UserRight from "./UserRight";
+import { fetchCities } from "../../store/cities";
+import "./UserProfile.css";
 
+function UserProfile(props) {
+  const dispatch = useDispatch();
+  const { userId } = useParams();
+  const userData = useSelector((state) => state.user[userId]);
+  const cities = useSelector((state) => state.cities);
 
-function UserProfile (props){   
-    const dispatch = useDispatch()
-    const {userId} = useParams()
-    // const itineraries = useSelector(state => state.itineraries)
-    // const userData = useSelector(state => state.user)
-    
-    useEffect(()=>{
-        // dispatch(fetchUser(userId))
-    }, [])
+  useEffect(() => {
+    dispatch(fetchUser(userId));
+    dispatch(fetchCities());
+  }, []);
 
-
-    return(
-        <>
-            <div>
-                <div className="user-left">
-                    <h2>Hi</h2>
-                    <UserLeft />
-                </div>
-                <div className="user-right">
-                    <UserRight />
-                </div>
-            </div>
-        </>
-    )
+  return userData && cities ? (
+    <>
+      <div className="user-box">
+        <div className="user-left">
+          <UserLeft user={userData} />
+        </div>
+        <div className="user-right">
+          <h2>My Itineraries</h2>
+          <div className="user-itin">
+            {userData.itineraries.map((itin) => {
+              return <UserRight itin={itin} cities={cities} />;
+            })}
+          </div>
+        </div>
+      </div>
+    </>
+  ) : null;
 }
 
-
-export default UserProfile
+export default UserProfile;

@@ -1,12 +1,18 @@
 
+import "./UserLeft.css"
 //Load user data
 
-function UserLeft(props) {
-  return (
+const  UserLeft = ({user}) =>{
+
+  return user? (
     <>
-      <div></div>
+      <div className="user-data">
+        <img  className="user-image" src={`${user.imgUrl}`}/>
+        <h2>{user.username}</h2>
+        <h5>{user.email}</h5>
+      </div>
     </>
-  );
+  ) : null;
 }
 
 export default UserLeft
