@@ -37,6 +37,7 @@
   font-family: "Bebas Neue";
   width: 5vw;
   font-size: medium;
+  margin: 1rem;
 }
 
 .submit-button:disabled {

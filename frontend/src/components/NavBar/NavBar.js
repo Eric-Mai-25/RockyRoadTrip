@@ -9,6 +9,7 @@ import * as routeSessionActions from "../../store/routeSession";
 function NavBar () {
   const history = useHistory();
   const loggedIn = useSelector(state => !!state.session.user);
+  const user = useSelector(state=> state.session.user)
   const dispatch = useDispatch();
   
   const logoutUser = e => {
@@ -22,6 +23,9 @@ function NavBar () {
     if (loggedIn) {
       return (
         <div className="links-nav">
+          <Link to={`/user/${user._id}`}>
+            <button className='submit-button'>Dashboard</button>
+          </Link>
           <button onClick={logoutUser} className='submit-button'>Logout</button>
         </div>
       );
