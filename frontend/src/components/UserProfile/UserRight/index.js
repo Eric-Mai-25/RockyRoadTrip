@@ -29,7 +29,6 @@ const CITIES_CSS = {
 };
 
 const UserRight = ({ itin, cities }) => {
-  console.log("here");
   const dispatch = useDispatch();
 
   const middle = itin.middleCities.map((currCity) => currCity.city);
