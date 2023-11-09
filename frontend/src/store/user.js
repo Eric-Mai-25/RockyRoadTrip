@@ -16,7 +16,6 @@ export const getUser = (userId) => (state) => {
 export const fetchUser = (userId) => async (dispatch) => {
   const res = await jwtFetch(`/api/users/${userId}`);
   if (res.ok) {
-    console.log(res)
     const user = await res.json();
     dispatch(receiveUser(user));
   }

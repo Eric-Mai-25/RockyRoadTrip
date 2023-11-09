@@ -77,7 +77,6 @@ export const updateItinerary = (itineraryId, itinMiddleCities) => {
     });
     if(res.ok){
       const data = await res.json();
-      console.log("data: ", data)
       dispatch(updateItin({ itinId: itineraryId, itin: itinMiddleCities }));
     }else{
       const errorMessage = await res.json();
@@ -96,7 +95,6 @@ const itinReducer = (state = {}, action) => {
     case RECEIVE_ITINS:
         return {...action.itins}
     case UPDATE_ITIN:
-      console.log("action.payload", action.payload)
       const {itinId, itin} = action.payload;
       const existingItin = nextState[itinId];
       if(existingItin) {
