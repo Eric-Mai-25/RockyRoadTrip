@@ -18,6 +18,9 @@ export const EditPage = (props) => {
 
     window.updateItinerary = updateItinerary;
 
+    const [showActivities, setShowActivities] = useState(false);
+    const [showHotels, setShowHotels] = useState(false);
+    const [showFood, setShowFood] = useState(false);
     
     const {itinId} = useParams(); //This gets the itinerary ID in the url to load the proper itinerary
     
@@ -29,16 +32,29 @@ export const EditPage = (props) => {
     const handleCategoryClick = (city, category) => {
         setSelectedCity(city);
         setSelectedCategory(category)
+        if (category === 'activities'){
+            setShowActivities(true);
+            setShowHotels(false);
+            setShowHotels(false);
+        }else if (category === 'hotels'){
+            setShowActivities(false);
+            setShowHotels(true);
+            setShowFood(false);
+        }else if (category === 'food'){
+            setShowActivities(false);
+            setShowHotels(false);
+            setShowFood(true);
+        }
     }
 
     //This gets the specific itinerary and fetches the cities, as well as sets citiesLoaded to true so loading goes smooothly
     useEffect(() => {
-        console.log("I AM NOW FETCHING THE ITINERAY")
         dispatch(fetchItin(itinId));
         dispatch(fetchCities()).then(() => setCitiesLoaded(true));
     }, [itinId])
     
     const itinerary = useSelector(getItin(itinId));
+
     
     //This fetches the yelp data using the city and category that was set when a user clicks on a activity
     const fetchYelpData = async () => {
@@ -68,13 +84,10 @@ export const EditPage = (props) => {
 
     //This gets the middlecities of an itinerary
     useEffect(() => {  
-        console.log("itinId: ", itinId)
-        console.log("Itinerary: ", itinerary)
         if(itinerary){
             const { middleCities } = itinerary;
             
             setItinMiddleCities(middleCities);
-            console.log("ItinMiddleCity: ", itinMiddleCities)
         }
     }, [itinerary, itinId]);
     
@@ -83,16 +96,11 @@ export const EditPage = (props) => {
         e.preventDefault();
         
         const updatedItinMiddleCities = JSON.parse(JSON.stringify(itinMiddleCities));
-        console.log("updatedItinMiddleCities: ", updatedItinMiddleCities);
         
         const cityIndex = updatedItinMiddleCities.findIndex(middleCity => getCityName(middleCity.city) === city);
-        console.log("cityIndex", cityIndex);
-
-        console.log("result: ", result)
         
         if(cityIndex !== -1){
             const selectedMiddleCity = updatedItinMiddleCities[cityIndex];
-            console.log("selectedMiddleCity", selectedMiddleCity);
 
             selectedMiddleCity[selectedCategory][0] = {
                 name: result.name, 
@@ -104,23 +112,22 @@ export const EditPage = (props) => {
                 title: result.categories[0].title
             }
 
-            console.log("SelectedMiddleCityAfterUpdate", selectedMiddleCity)
 
             updatedItinMiddleCities[cityIndex] = selectedMiddleCity;
 
             setItinMiddleCities(updatedItinMiddleCities);
 
 
-            console.log("itinMiddleCities: ", itinMiddleCities)
         }
     }
 
     const handleUpdate = (e) => {
-        console.log("ABOUT TO PASS IN THIS: ", itinMiddleCities)
         dispatch(updateItinerary(itinId, itinMiddleCities))
     }
 
+    console.log("itinMiddleCities: ", itinMiddleCities)
 
+    const selectedCityDetails = itinMiddleCities.find(city => getCityName(city.city) === selectedCity);
     
     //The react component:
     return (itinerary && cities && citiesLoaded && itinerary.middleCities) ? (
@@ -143,12 +150,36 @@ export const EditPage = (props) => {
                             <div className="a-h-f-div">
                                 <div className="activites-div">
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'activities')}>Choose Activity</button>
+                                    {console.log("SelectedCityDetails: ", selectedCityDetails)}
+                                    {console.log("Show Activities: ", showActivities)}
+                                    {console.log("selectedCityDetails.activities", selectedCityDetails.activities)}
+                                    {showActivities && selectedCityDetails && selectedCityDetails.activities.map(activity => {
+                                        return(
+                                            <div key={activity.busineesId}>
+                                                <p>{activity.name}</p>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                                 <div className="hotel-div">
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'hotels')}>Choose Hotel</button>
+                                    {showHotels && selectedCityDetails && selectedCityDetails.hotels.map(hotel => {
+                                        return(
+                                            <div key={hotel.busineesId}>
+                                                <p>{hotel.name}</p>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                                 <div className="food-div">
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'food')}>Choose food</button>
+                                    {showFood && selectedCityDetails && selectedCityDetails.food.map(food => {
+                                        return(
+                                            <div key={food.busineesId}>
+                                                <p>{food.name}</p>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
                         </div>
