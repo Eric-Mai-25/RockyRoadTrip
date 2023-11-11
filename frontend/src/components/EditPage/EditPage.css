@@ -115,6 +115,7 @@
     align-items: center;
     align-content: center;
     border-left: 1px solid var(--yellow);
+    overflow-y: auto;
 }
 
 .results-div{
@@ -133,8 +134,8 @@
     justify-content: flex-start;
     height: 30%;
     border-radius: 20px;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 10%;
+    margin-bottom: 10%;
 }
 
 .result-img-div{
