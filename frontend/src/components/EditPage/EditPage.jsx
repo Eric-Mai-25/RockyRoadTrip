@@ -7,7 +7,6 @@ import { NavLink, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { fetchItin, getItin, updateItinerary } from "../../store/itinerary";
 
 export const EditPage = (props) => {
-    
     const dispatch = useDispatch();
     const [selectedCity, setSelectedCity] = useState(""); // Store the name of the city the user is currenlty interactring with.  
     const [selectedCategory, setSelectedCategory] = useState(""); // Store the currenlty selected category
@@ -35,7 +34,7 @@ export const EditPage = (props) => {
         if (category === 'activities'){
             setShowActivities(true);
             setShowHotels(false);
-            setShowHotels(false);
+            setShowFood(false);
         }else if (category === 'hotels'){
             setShowActivities(false);
             setShowHotels(true);
@@ -126,6 +125,8 @@ export const EditPage = (props) => {
     }
 
     console.log("itinMiddleCities: ", itinMiddleCities)
+    console.log("SelectedCity: ", selectedCity)
+    console.log("middleCitites: ", itinerary.middleCities)
 
     const selectedCityDetails = itinMiddleCities.find(city => getCityName(city.city) === selectedCity);
     
@@ -149,10 +150,8 @@ export const EditPage = (props) => {
                             </div>
                             <div className="a-h-f-div">
                                 <div className="activites-div">
+                                    {console.log("getCityName: ", getCityName(city.city))}
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'activities')}>Choose Activity</button>
-                                    {console.log("SelectedCityDetails: ", selectedCityDetails)}
-                                    {console.log("Show Activities: ", showActivities)}
-                                    {console.log("selectedCityDetails.activities", selectedCityDetails.activities)}
                                     {showActivities && selectedCityDetails && selectedCityDetails.activities.map(activity => {
                                         return(
                                             <div key={activity.busineesId}>
