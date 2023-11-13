@@ -32,19 +32,6 @@ export const EditPage = (props) => {
     const handleCategoryClick = (city, category) => {
         setSelectedCity(city);
         setSelectedCategory(category)
-        if (category === 'activities'){
-            setShowActivities(true);
-            setShowHotels(false);
-            setShowHotels(false);
-        }else if (category === 'hotels'){
-            setShowActivities(false);
-            setShowHotels(true);
-            setShowFood(false);
-        }else if (category === 'food'){
-            setShowActivities(false);
-            setShowHotels(false);
-            setShowFood(true);
-        }
     }
 
     //This gets the specific itinerary and fetches the cities, as well as sets citiesLoaded to true so loading goes smooothly
@@ -150,36 +137,12 @@ export const EditPage = (props) => {
                             <div className="a-h-f-div">
                                 <div className="activites-div">
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'activities')}>Choose Activity</button>
-                                    {console.log("SelectedCityDetails: ", selectedCityDetails)}
-                                    {console.log("Show Activities: ", showActivities)}
-                                    {console.log("selectedCityDetails.activities", selectedCityDetails.activities)}
-                                    {showActivities && selectedCityDetails && selectedCityDetails.activities.map(activity => {
-                                        return(
-                                            <div key={activity.busineesId}>
-                                                <p>{activity.name}</p>
-                                            </div>
-                                        )
-                                    })}
                                 </div>
                                 <div className="hotel-div">
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'hotels')}>Choose Hotel</button>
-                                    {showHotels && selectedCityDetails && selectedCityDetails.hotels.map(hotel => {
-                                        return(
-                                            <div key={hotel.busineesId}>
-                                                <p>{hotel.name}</p>
-                                            </div>
-                                        )
-                                    })}
                                 </div>
                                 <div className="food-div">
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'food')}>Choose food</button>
-                                    {showFood && selectedCityDetails && selectedCityDetails.food.map(food => {
-                                        return(
-                                            <div key={food.busineesId}>
-                                                <p>{food.name}</p>
-                                            </div>
-                                        )
-                                    })}
                                 </div>
                             </div>
                         </div>
