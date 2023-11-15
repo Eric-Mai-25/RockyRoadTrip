@@ -12,10 +12,6 @@ export const EditPage = (props) => {
     const [selectedCategory, setSelectedCategory] = useState(""); // Store the currenlty selected category
     const [yelpResults, setYelpResults] = useState([]); //Will store the list of results fetched from the yelp API
     const [citiesLoaded, setCitiesLoaded] = useState(false) //Will keep track of if cities loaded...this will help not crash
-    
-    window.yelpResults = yelpResults; //TODO DELETE
-
-    window.updateItinerary = updateItinerary;
 
     const [showActivities, setShowActivities] = useState(false);
     const [showHotels, setShowHotels] = useState(false);
@@ -124,10 +120,6 @@ export const EditPage = (props) => {
         dispatch(updateItinerary(itinId, itinMiddleCities))
     }
 
-    console.log("itinMiddleCities: ", itinMiddleCities)
-    console.log("SelectedCity: ", selectedCity)
-    console.log("middleCitites: ", itinerary.middleCities)
-
     const selectedCityDetails = itinMiddleCities.find(city => getCityName(city.city) === selectedCity);
     
     //The react component:
@@ -150,10 +142,8 @@ export const EditPage = (props) => {
                             </div>
                             <div className="a-h-f-div">
                                 <div className="activites-div">
-                                    {console.log("getCityName: ", getCityName(city.city))}
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'activities')}>Choose Activity</button>
                                     {showActivities && selectedCityDetails && selectedCityDetails.activities.map(activity => {
-                                        {console.log("activity: ", activity)}
                                         return(
                                             <div key={activity.busineesId} className="chosenDiv">
                                                 <div className="chosenPicDiv">
