@@ -7,15 +7,17 @@ import { NavLink, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { fetchItin, getItin, updateItinerary } from "../../store/itinerary";
 
 export const EditPage = (props) => {
+    
     const dispatch = useDispatch();
     const [selectedCity, setSelectedCity] = useState(""); // Store the name of the city the user is currenlty interactring with.  
     const [selectedCategory, setSelectedCategory] = useState(""); // Store the currenlty selected category
     const [yelpResults, setYelpResults] = useState([]); //Will store the list of results fetched from the yelp API
     const [citiesLoaded, setCitiesLoaded] = useState(false) //Will keep track of if cities loaded...this will help not crash
+    
+    window.yelpResults = yelpResults; //TODO DELETE
 
-    const [showActivities, setShowActivities] = useState(false);
-    const [showHotels, setShowHotels] = useState(false);
-    const [showFood, setShowFood] = useState(false);
+    window.updateItinerary = updateItinerary;
+
     
     const {itinId} = useParams(); //This gets the itinerary ID in the url to load the proper itinerary
     
@@ -27,19 +29,6 @@ export const EditPage = (props) => {
     const handleCategoryClick = (city, category) => {
         setSelectedCity(city);
         setSelectedCategory(category)
-        if (category === 'activities'){
-            setShowActivities(true);
-            setShowHotels(false);
-            setShowFood(false);
-        }else if (category === 'hotels'){
-            setShowActivities(false);
-            setShowHotels(true);
-            setShowFood(false);
-        }else if (category === 'food'){
-            setShowActivities(false);
-            setShowHotels(false);
-            setShowFood(true);
-        }
     }
 
     //This gets the specific itinerary and fetches the cities, as well as sets citiesLoaded to true so loading goes smooothly
@@ -49,7 +38,6 @@ export const EditPage = (props) => {
     }, [itinId])
     
     const itinerary = useSelector(getItin(itinId));
-
     
     //This fetches the yelp data using the city and category that was set when a user clicks on a activity
     const fetchYelpData = async () => {
@@ -93,6 +81,7 @@ export const EditPage = (props) => {
         const updatedItinMiddleCities = JSON.parse(JSON.stringify(itinMiddleCities));
         
         const cityIndex = updatedItinMiddleCities.findIndex(middleCity => getCityName(middleCity.city) === city);
+
         
         if(cityIndex !== -1){
             const selectedMiddleCity = updatedItinMiddleCities[cityIndex];
@@ -120,7 +109,7 @@ export const EditPage = (props) => {
         dispatch(updateItinerary(itinId, itinMiddleCities))
     }
 
-    const selectedCityDetails = itinMiddleCities.find(city => getCityName(city.city) === selectedCity);
+
     
     //The react component:
     return (itinerary && cities && citiesLoaded && itinerary.middleCities) ? (
@@ -143,48 +132,12 @@ export const EditPage = (props) => {
                             <div className="a-h-f-div">
                                 <div className="activites-div">
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'activities')}>Choose Activity</button>
-                                    {showActivities && selectedCityDetails && selectedCityDetails.activities.map(activity => {
-                                        return(
-                                            <div key={activity.busineesId} className="chosenDiv">
-                                                <div className="chosenPicDiv">
-                                                    <img src={activity.imageUrl} alt="" className="chosenPic" />
-                                                </div>
-                                                <div className="chosenInfo">
-                                                    <p>{activity.name}</p>
-                                                </div>
-                                            </div>
-                                        )
-                                    })}
                                 </div>
                                 <div className="hotel-div">
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'hotels')}>Choose Hotel</button>
-                                    {showHotels && selectedCityDetails && selectedCityDetails.hotels.map(hotel => {
-                                        return(
-                                            <div key={hotel.busineesId} className="chosenDiv">
-                                                <div className="chosenPicDiv">
-                                                    <img src={hotel.imageUrl} alt="" className="chosenPic" />
-                                                </div>
-                                                <div className="chosenInfo">
-                                                    <p>{hotel.name}</p>
-                                                </div>
-                                            </div>
-                                        )
-                                    })}
                                 </div>
                                 <div className="food-div">
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'food')}>Choose food</button>
-                                    {showFood && selectedCityDetails && selectedCityDetails.food.map(food => {
-                                        return(
-                                            <div key={food.busineesId} className="chosenDiv">
-                                                <div className="chosenPicDiv">
-                                                    <img src={food.imageUrl} alt="" className="chosenPic" />
-                                                </div>
-                                                <div className="chosenInfo">
-                                                    <p>{food.name}</p>
-                                                </div>
-                                            </div>
-                                        )
-                                    })}
                                 </div>
                             </div>
                         </div>
