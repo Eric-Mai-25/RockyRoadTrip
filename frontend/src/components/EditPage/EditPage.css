@@ -453,3 +453,41 @@
     line-height: 50px;
     text-align: center;
   }
+
+  .chosenDiv{
+    background-color: #33658A;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    width: 15vw;
+    height: 15vh;
+    overflow: hidden;
+    border-radius: 10%;
+  }
+
+  .chosenPic{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10%;
+  }
+
+  .chosenInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-start;
+    align-content: flex-start;
+    margin-left: 0.5vw;
+    height: 100%;
+    width: 100%;
+  }
+
+  .chosenPicDiv{
+    width: 9vw;
+    height: 10vw;
+    background-color: red;
+  }
