@@ -153,9 +153,15 @@ export const EditPage = (props) => {
                                     {console.log("getCityName: ", getCityName(city.city))}
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'activities')}>Choose Activity</button>
                                     {showActivities && selectedCityDetails && selectedCityDetails.activities.map(activity => {
+                                        {console.log("activity: ", activity)}
                                         return(
-                                            <div key={activity.busineesId}>
-                                                <p>{activity.name}</p>
+                                            <div key={activity.busineesId} className="chosenDiv">
+                                                <div className="chosenPicDiv">
+                                                    <img src={activity.imageUrl} alt="" className="chosenPic" />
+                                                </div>
+                                                <div className="chosenInfo">
+                                                    <p>{activity.name}</p>
+                                                </div>
                                             </div>
                                         )
                                     })}
@@ -164,8 +170,13 @@ export const EditPage = (props) => {
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'hotels')}>Choose Hotel</button>
                                     {showHotels && selectedCityDetails && selectedCityDetails.hotels.map(hotel => {
                                         return(
-                                            <div key={hotel.busineesId}>
-                                                <p>{hotel.name}</p>
+                                            <div key={hotel.busineesId} className="chosenDiv">
+                                                <div className="chosenPicDiv">
+                                                    <img src={hotel.imageUrl} alt="" className="chosenPic" />
+                                                </div>
+                                                <div className="chosenInfo">
+                                                    <p>{hotel.name}</p>
+                                                </div>
                                             </div>
                                         )
                                     })}
@@ -174,8 +185,13 @@ export const EditPage = (props) => {
                                     <button className="a-h-f-words-edit" onClick={() => handleCategoryClick(getCityName(city.city), 'food')}>Choose food</button>
                                     {showFood && selectedCityDetails && selectedCityDetails.food.map(food => {
                                         return(
-                                            <div key={food.busineesId}>
-                                                <p>{food.name}</p>
+                                            <div key={food.busineesId} className="chosenDiv">
+                                                <div className="chosenPicDiv">
+                                                    <img src={food.imageUrl} alt="" className="chosenPic" />
+                                                </div>
+                                                <div className="chosenInfo">
+                                                    <p>{food.name}</p>
+                                                </div>
                                             </div>
                                         )
                                     })}
