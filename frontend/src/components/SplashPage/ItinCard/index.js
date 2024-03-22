@@ -37,7 +37,7 @@ function ItinCard({cities}) {
     dispatch(fetchItins());
   }, [dispatch]);
 
-  return itins.length > 1 && cities ? (
+  return itins.length > 1 && Object.keys(cities).length ? (
     <>
       {shuffleArray(itins)
         .slice(0, 6)
